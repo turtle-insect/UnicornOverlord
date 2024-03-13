@@ -1,0 +1,86 @@
+﻿<Window x:Class="UnicornOverlord.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UnicornOverlord"
+        mc:Ignorable="d"
+		WindowStartupLocation="CenterScreen"
+        Title="Unicorn Overlord(Nintendo Switch)" Height="400" Width="600">
+	<Window.Resources>
+		<local:ItemIDConverter x:Key="ItemIDConverter"/>
+	</Window.Resources>
+	<Window.DataContext>
+		<local:ViewModel/>
+	</Window.DataContext>
+	<DockPanel>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="File">
+				<MenuItem Header="Open" Command="{Binding OpenFileCommand}"/>
+				<MenuItem Header="Save" Command="{Binding SaveFileCommand}"/>
+			</MenuItem>
+		</Menu>
+		<TabControl>
+			<TabItem Header="Basic">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition Width="5"/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+						<RowDefinition Height="10*"/>
+					</Grid.RowDefinitions>
+					<Label Content="Money"/>
+					<TextBox Grid.Column="1" Text="{Binding Basic.Money, UpdateSourceTrigger=PropertyChanged}"/>
+					<Label Grid.Row="1" Content="Fame"/>
+					<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Basic.Fame, UpdateSourceTrigger=PropertyChanged}"/>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Item">
+				<DockPanel>
+					<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendItemCommand}"/>
+					<ListBox ItemsSource="{Binding Items}">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal">
+									<Label Content="Count"/>
+									<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+									<Button Content=" ... "
+									Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceItemCommand}"
+									CommandParameter="{Binding}"/>
+									<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</DockPanel>
+			</TabItem>
+			<TabItem Header="Equipment">
+				<DockPanel>
+					<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendEquipmentCommand}"/>
+					<ListBox ItemsSource="{Binding Equipments}">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal">
+									<Label Content="???1"/>
+									<Label Content="{Binding Equipment1}" Width="30"/>
+									<Label Content="???2"/>
+									<Label Content="{Binding Equipment2}" Width="30"/>
+									<Button Content=" ... "
+									Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceItemCommand}"
+									CommandParameter="{Binding}"/>
+									<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</DockPanel>
+			</TabItem>
+		</TabControl>
+	</DockPanel>
+</Window>
