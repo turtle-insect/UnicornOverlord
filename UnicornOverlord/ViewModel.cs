@@ -83,6 +83,7 @@ namespace UnicornOverlord
 			var item = AppendItem();
 			if (item == null) return;
 
+			item.Status = 2;
 			item.Count = 1;
 			Items.Add(item);
 		}
@@ -92,6 +93,7 @@ namespace UnicornOverlord
 			var item = AppendItem();
 			if (item == null) return;
 
+			item.Status = 3;
 			Equipments.Add(item);
 		}
 
@@ -105,7 +107,6 @@ namespace UnicornOverlord
 			var item = new Item(0xA0 + index * 20);
 			item.ID = dlg.ID;
 			item.Index = index + 1;
-			item.Status = 2;
 			return item;
 		}
 	}
