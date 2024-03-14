@@ -22,6 +22,7 @@ namespace UnicornOverlord
 		public ICommand AppendEquipmentCommand { get; set; }
 
 		public Basic Basic { get; set; } = new Basic();
+		public ObservableCollection<Character> Characters { get; set; } = new ObservableCollection<Character>();
 		public ObservableCollection<Item> Items { get; set; } = new ObservableCollection<Item>();
 		public ObservableCollection<Item> Equipments { get; set; } = new ObservableCollection<Item>();
 
@@ -36,8 +37,17 @@ namespace UnicornOverlord
 
 		private void Initialize()
 		{
+			Characters.Clear();
 			Items.Clear();
 			Equipments.Clear();
+
+			// counter ??
+			for(uint i = 0; i < 32; i++)
+			{
+				var ch = new Character(0x2AF40 + i * 464);
+				Characters.Add(ch);
+			}
+
 			for (uint i = 0; i < 3500; i++)
 			{
 				var item = new Item(0xA0 + i * 20);

@@ -41,6 +41,29 @@
 					<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Basic.Fame, UpdateSourceTrigger=PropertyChanged}"/>
 				</Grid>
 			</TabItem>
+			<TabItem Header="Character">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<ListBox Name="ListBoxCharacter" ItemsSource="{Binding Characters}"/>
+					<Grid Grid.Column="1">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition Height="10*"/>
+						</Grid.RowDefinitions>
+						<Label Content="Exp"/>
+						<TextBox Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Exp, UpdateSourceTrigger=PropertyChanged}"/>
+					</Grid>
+				</Grid>
+			</TabItem>
 			<TabItem Header="Item">
 				<DockPanel>
 					<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendItemCommand}"/>

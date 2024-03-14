@@ -18,8 +18,8 @@ namespace UnicornOverlord
 
 		public uint Exp
 		{
-			get => SaveData.Instance().ReadNumber(mAddress, 4);
-			set => SaveData.Instance().WriteNumber(mAddress, 4, value);
+			get => SaveData.Instance().ReadNumber(mAddress + 56, 4);
+			set => SaveData.Instance().WriteNumber(mAddress + 56, 4, value);
 		}
 	}
 }
