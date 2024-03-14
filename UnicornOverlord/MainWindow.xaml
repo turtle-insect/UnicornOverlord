@@ -45,10 +45,27 @@
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition/>
-						<ColumnDefinition/>
-						<ColumnDefinition/>
+						<ColumnDefinition Width="2*"/>
 					</Grid.ColumnDefinitions>
-					<ListBox Name="ListBoxCharacter" ItemsSource="{Binding Characters}"/>
+					<DockPanel>
+						<Grid DockPanel.Dock="Bottom">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition/>
+								<ColumnDefinition/>
+								<ColumnDefinition/>
+							</Grid.ColumnDefinitions>
+							<Button Content="Export"
+									Command="{Binding ExportCharacterCommand}"
+									CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedIndex}"/>
+							<Button Grid.Column="1" Content="Import"
+									Command="{Binding ImportCharacterCommand}"
+									CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedIndex}"/>
+							<Button Grid.Column="2" Content="Insert"
+									Command="{Binding InsertCharacterCommand}"
+									CommandParameter="{Binding ElementName=ListBoxCharacter, Path=Items.Count}"/>
+						</Grid>
+						<ListBox Name="ListBoxCharacter" ItemsSource="{Binding Characters}"/>
+					</DockPanel>
 					<Grid Grid.Column="1">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition/>
@@ -57,10 +74,41 @@
 						<Grid.RowDefinitions>
 							<RowDefinition/>
 							<RowDefinition/>
-							<RowDefinition Height="10*"/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
 						</Grid.RowDefinitions>
-						<Label Content="Exp"/>
-						<TextBox Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Exp, UpdateSourceTrigger=PropertyChanged}"/>
+						<Label Content="Use"/>
+						<CheckBox Grid.Column="1" IsChecked="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Use}" VerticalAlignment="Center"/>
+						<Label Grid.Row="1" Content="Exp"/>
+						<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Exp, UpdateSourceTrigger=PropertyChanged}"/>
+						<Label Grid.Row="2" Content="HPPlus"/>
+						<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.HPPlus, UpdateSourceTrigger=PropertyChanged}"/>
+						<Label Grid.Row="3" Content="AttackPlus"/>
+						<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.AttackPlus, UpdateSourceTrigger=PropertyChanged}"/>
+						<Label Grid.Row="4" Content="DefensePlus"/>
+						<TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.DefensePlus, UpdateSourceTrigger=PropertyChanged}"/>
+						<Label Grid.Row="5" Content="MagicAttackPlus"/>
+						<TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.MagicAttackPlus, UpdateSourceTrigger=PropertyChanged}"/>
+						<Label Grid.Row="6" Content="MagicDefensePlus"/>
+						<TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.MagicDefensePlus, UpdateSourceTrigger=PropertyChanged}"/>
+						<Label Grid.Row="7" Content="HitRatePlus"/>
+						<TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.HitRatePlus, UpdateSourceTrigger=PropertyChanged}"/>
+						<Label Grid.Row="8" Content="AVoidPlus"/>
+						<TextBox Grid.Row="8" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.AVoidPlus, UpdateSourceTrigger=PropertyChanged}"/>
+						<Label Grid.Row="9" Content="CriticalPlus"/>
+						<TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.CriticalPlus, UpdateSourceTrigger=PropertyChanged}"/>
+						<Label Grid.Row="10" Content="GuardPlus"/>
+						<TextBox Grid.Row="10" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.GuardPlus, UpdateSourceTrigger=PropertyChanged}"/>
+						<Label Grid.Row="11" Content="SpeedPlus"/>
+						<TextBox Grid.Row="11" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.SpeedPlus, UpdateSourceTrigger=PropertyChanged}"/>
 					</Grid>
 				</Grid>
 			</TabItem>

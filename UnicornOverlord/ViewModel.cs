@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -20,6 +21,9 @@ namespace UnicornOverlord
 		public ICommand ChoiceItemCommand { get; set; }
 		public ICommand AppendItemCommand { get; set; }
 		public ICommand AppendEquipmentCommand { get; set; }
+		public ICommand ImportCharacterCommand { get; set; }
+		public ICommand ExportCharacterCommand { get; set; }
+		public ICommand InsertCharacterCommand { get; set; }
 
 		public Basic Basic { get; set; } = new Basic();
 		public ObservableCollection<Character> Characters { get; set; } = new ObservableCollection<Character>();
@@ -33,6 +37,9 @@ namespace UnicornOverlord
 			ChoiceItemCommand = new ActionCommand(ChoiceItem);
 			AppendItemCommand = new ActionCommand(AppendItem);
 			AppendEquipmentCommand = new ActionCommand(AppendEquipment);
+			ImportCharacterCommand = new ActionCommand(ImportCharacter);
+			ExportCharacterCommand = new ActionCommand(ExportCharacter);
+			InsertCharacterCommand = new ActionCommand(InsertCharacter);
 		}
 
 		private void Initialize()
@@ -42,9 +49,11 @@ namespace UnicornOverlord
 			Equipments.Clear();
 
 			// counter ??
-			for(uint i = 0; i < 32; i++)
+			for(uint i = 0; i < 500; i++)
 			{
 				var ch = new Character(0x2AF40 + i * 464);
+				if (ch.ID == 0xFFFFFFFF) break;
+
 				Characters.Add(ch);
 			}
 
@@ -118,6 +127,90 @@ namespace UnicornOverlord
 			item.ID = dlg.ID;
 			item.Index = index + 1;
 			return item;
+		}
+
+		private void ImportCharacter(object? parameter)
+		{
+			if (parameter == null) return;
+
+			int index = Convert.ToInt32(parameter);
+			if (index == -1) return;
+
+			var dlg = new OpenFileDialog();
+			dlg.Filter = "Unicorn Overlord Character's Dump|*.uocd";
+			if (dlg.ShowDialog() == false) return;
+
+			Byte[] buffer = System.IO.File.ReadAllBytes(dlg.FileName);
+			if (buffer.Length != 464) return;
+
+			uint address = 0x2AF40 + (uint)index * 464;
+
+			uint id = SaveData.Instance().ReadNumber(0x63980, 4) + 1;
+			Array.Copy(BitConverter.GetBytes(id), buffer, 4);
+			SaveData.Instance().WriteValue(address, buffer);
+
+			SaveData.Instance().WriteNumber(0x63980, 4, id);
+		}
+
+		private void ExportCharacter(object? parameter)
+		{
+			if (parameter == null) return;
+
+			int index = Convert.ToInt32(parameter);
+			if (index == -1) return;
+
+			var dlg = new SaveFileDialog();
+			dlg.Filter = "Unicorn Overlord Character's Dump|*.uocd";
+			if (dlg.ShowDialog() == false) return;
+
+			uint address = 0x2AF40 + (uint)index * 464;
+			Byte[] buffer = SaveData.Instance().ReadValue(address, 464);
+
+			// initialize
+			// formation
+			Array.Copy(BitConverter.GetBytes(0xFFFFFFFF), 0, buffer, 4, 4);
+			buffer[32] = 0xFF;
+			// equipment
+			Array.Copy(BitConverter.GetBytes(0), 0, buffer, 76, 4);
+			Array.Copy(BitConverter.GetBytes(0), 0, buffer, 80, 4);
+			Array.Copy(BitConverter.GetBytes(0), 0, buffer, 84, 4);
+			Array.Copy(BitConverter.GetBytes(0), 0, buffer, 88, 4);
+
+			System.IO.File.WriteAllBytes(dlg.FileName, buffer);
+		}
+
+		private void InsertCharacter(object? parameter)
+		{
+			if (parameter == null) return;
+
+			uint count = Convert.ToUInt32(parameter);
+			if (count >= 500) return;
+
+			var dlg = new OpenFileDialog();
+			dlg.Filter = "Unicorn Overlord Character's Dump|*.uocd";
+			if (dlg.ShowDialog() == false) return;
+
+			Byte[] buffer = System.IO.File.ReadAllBytes(dlg.FileName);
+			if (buffer.Length != 464) return;
+
+			uint id = SaveData.Instance().ReadNumber(0x63980, 4) + 1;
+			Array.Copy(BitConverter.GetBytes(id), buffer, 4);
+
+			uint address = 0x2AF40 + count * 464;
+			SaveData.Instance().WriteValue(address, buffer);
+
+			SaveData.Instance().WriteNumber(0x63980, 4, id);
+			SaveData.Instance().WriteNumber(0x63984, 4, count + 1);
+
+			/*
+			for (int index = 0; index < count + 1; index++)
+			{
+				address = 0x2AF40 + (uint)index * 464;
+				SaveData.Instance().WriteNumber(address + 456, 2, (uint)count + 2);
+				SaveData.Instance().WriteNumber(address + 458, 2, (uint)count + 2);
+			}
+			*/
+			Initialize();
 		}
 	}
 }
