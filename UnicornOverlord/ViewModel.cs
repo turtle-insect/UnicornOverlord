@@ -167,14 +167,26 @@ namespace UnicornOverlord
 			Byte[] buffer = SaveData.Instance().ReadValue(address, 464);
 
 			// initialize
-			// formation
+			// -------------------------------------------------------------------------
+			// id
+			uint id = SaveData.Instance().ReadNumber(0x63980, 4) + 1;
+			Array.Copy(BitConverter.GetBytes(id), buffer, 4);
+			// formation clear
 			Array.Copy(BitConverter.GetBytes(0xFFFFFFFF), 0, buffer, 4, 4);
 			buffer[32] = 0xFF;
-			// equipment
-			Array.Copy(BitConverter.GetBytes(0), 0, buffer, 76, 4);
-			Array.Copy(BitConverter.GetBytes(0), 0, buffer, 80, 4);
-			Array.Copy(BitConverter.GetBytes(0), 0, buffer, 84, 4);
-			Array.Copy(BitConverter.GetBytes(0), 0, buffer, 88, 4);
+			// buffer[460]
+			// character's status
+			// 3Bit => join
+			// 4Bit => formation join
+			// 5Bit => use
+			buffer[460] = 0x08;
+
+			// equipment clear
+			// elements => 4Byte
+			// count => 4
+			// (or Append Item)
+			Array.Clear(buffer, 76, 16);
+			// -------------------------------------------------------------------------
 
 			System.IO.File.WriteAllBytes(dlg.FileName, buffer);
 		}
@@ -193,23 +205,18 @@ namespace UnicornOverlord
 			Byte[] buffer = System.IO.File.ReadAllBytes(dlg.FileName);
 			if (buffer.Length != 464) return;
 
-			uint id = SaveData.Instance().ReadNumber(0x63980, 4) + 1;
-			Array.Copy(BitConverter.GetBytes(id), buffer, 4);
-
 			uint address = 0x2AF40 + count * 464;
 			SaveData.Instance().WriteValue(address, buffer);
 
 			SaveData.Instance().WriteNumber(0x63980, 4, id);
 			SaveData.Instance().WriteNumber(0x63984, 4, count + 1);
 
-			/*
-			for (int index = 0; index < count + 1; index++)
+			for (uint index = 0; index < count + 1; index++)
 			{
-				address = 0x2AF40 + (uint)index * 464;
-				SaveData.Instance().WriteNumber(address + 456, 2, (uint)count + 2);
-				SaveData.Instance().WriteNumber(address + 458, 2, (uint)count + 2);
+				address = 0x2AF40 + index * 464;
+				SaveData.Instance().WriteNumber(address + 456, 2, count + 2);
+				SaveData.Instance().WriteNumber(address + 458, 2, count + 2);
 			}
-			*/
 			Initialize();
 		}
 	}
