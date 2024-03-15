@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -19,6 +20,7 @@ namespace UnicornOverlord
 		public ICommand OpenFileCommand { get; set; }
 		public ICommand SaveFileCommand { get; set; }
 		public ICommand ChoiceItemCommand { get; set; }
+		public ICommand ChoiceClassCommand { get; set; }
 		public ICommand AppendItemCommand { get; set; }
 		public ICommand AppendEquipmentCommand { get; set; }
 		public ICommand ImportCharacterCommand { get; set; }
@@ -35,6 +37,7 @@ namespace UnicornOverlord
 			OpenFileCommand = new ActionCommand(OpenFile);
 			SaveFileCommand = new ActionCommand(SaveFile);
 			ChoiceItemCommand = new ActionCommand(ChoiceItem);
+			ChoiceClassCommand = new ActionCommand(ChoiceClass);
 			AppendItemCommand = new ActionCommand(AppendItem);
 			AppendEquipmentCommand = new ActionCommand(AppendEquipment);
 			ImportCharacterCommand = new ActionCommand(ImportCharacter);
@@ -95,6 +98,18 @@ namespace UnicornOverlord
 			dlg.ID = item.ID;
 			dlg.ShowDialog();
 			item.ID = dlg.ID;
+		}
+
+		private void ChoiceClass(object? parameter)
+		{
+			Character? ch = parameter as Character;
+			if (ch == null) return;
+
+			var dlg = new ChoiceWindow();
+			dlg.Type = ChoiceWindow.eType.eClass;
+			dlg.ID = ch.Class;
+			dlg.ShowDialog();
+			ch.Class = dlg.ID;
 		}
 
 		private void AppendItem(object? parameter)
@@ -168,12 +183,10 @@ namespace UnicornOverlord
 
 			// initialize
 			// -------------------------------------------------------------------------
-			// id
-			uint id = SaveData.Instance().ReadNumber(0x63980, 4) + 1;
-			Array.Copy(BitConverter.GetBytes(id), buffer, 4);
 			// formation clear
 			Array.Copy(BitConverter.GetBytes(0xFFFFFFFF), 0, buffer, 4, 4);
 			buffer[32] = 0xFF;
+
 			// buffer[460]
 			// character's status
 			// 3Bit => join
@@ -208,6 +221,8 @@ namespace UnicornOverlord
 			uint address = 0x2AF40 + count * 464;
 			SaveData.Instance().WriteValue(address, buffer);
 
+			uint id = SaveData.Instance().ReadNumber(0x63980, 4) + 1;
+			Array.Copy(BitConverter.GetBytes(id), buffer, 4);
 			SaveData.Instance().WriteNumber(0x63980, 4, id);
 			SaveData.Instance().WriteNumber(0x63984, 4, count + 1);
 

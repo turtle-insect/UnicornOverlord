@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.SymbolStore;
 using System.Linq;
 using System.Text;
@@ -7,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace UnicornOverlord
 {
-	internal class Character
+	internal class Character : INotifyPropertyChanged
 	{
+		public event PropertyChangedEventHandler? PropertyChanged;
+
 		private readonly uint mAddress;
 
 		public Character(uint address)
@@ -21,10 +24,14 @@ namespace UnicornOverlord
 			get => SaveData.Instance().ReadNumber(mAddress, 4);
 		}
 
-		public bool Use
+		public uint Class
 		{
-			get => !SaveData.Instance().ReadBit(mAddress + 460, 5);
-			set => SaveData.Instance().WriteBit(mAddress + 460, 5, !value);
+			get => SaveData.Instance().ReadNumber(mAddress + 40, 1);
+			set
+			{
+				SaveData.Instance().WriteNumber(mAddress + 40, 1, value);
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Class)));
+			}
 		}
 
 		public uint Exp
@@ -91,6 +98,12 @@ namespace UnicornOverlord
 		{
 			get => SaveData.Instance().ReadNumber(mAddress + 73, 1);
 			set => SaveData.Instance().WriteNumber(mAddress + 73, 1, value);
+		}
+
+		public bool Use
+		{
+			get => !SaveData.Instance().ReadBit(mAddress + 460, 5);
+			set => SaveData.Instance().WriteBit(mAddress + 460, 5, !value);
 		}
 	}
 }

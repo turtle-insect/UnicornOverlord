@@ -19,7 +19,14 @@ namespace UnicornOverlord
 	/// </summary>
 	public partial class ChoiceWindow : Window
 	{
+		public enum eType
+		{
+			eItem,
+			eClass,
+		};
+
 		public uint ID { get; set; }
+		public eType Type { get; set; } = eType.eItem;
 		public ChoiceWindow()
 		{
 			InitializeComponent();
@@ -61,6 +68,7 @@ namespace UnicornOverlord
 		{
 			ListBoxItem.Items.Clear();
 			List<NameValueInfo> items = Info.Instance().Item;
+			if(Type == eType.eClass) items = Info.Instance().Class;
 
 			foreach (var item in items)
 			{
