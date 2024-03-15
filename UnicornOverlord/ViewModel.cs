@@ -160,6 +160,9 @@ namespace UnicornOverlord
 
 			uint address = 0x2AF40 + (uint)index * 464;
 
+			// buffer[456 ~ 464] use original
+			buffer = Util.Resize(buffer, 456);
+
 			uint id = SaveData.Instance().ReadNumber(0x63980, 4) + 1;
 			Array.Copy(BitConverter.GetBytes(id), buffer, 4);
 			SaveData.Instance().WriteValue(address, buffer);
