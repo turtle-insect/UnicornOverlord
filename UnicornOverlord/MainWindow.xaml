@@ -62,8 +62,7 @@
 									Command="{Binding ImportCharacterCommand}"
 									CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedIndex}"/>
 							<Button Grid.Column="2" Content="Insert"
-									Command="{Binding InsertCharacterCommand}"
-									CommandParameter="{Binding ElementName=ListBoxCharacter, Path=Items.Count}"/>
+									Command="{Binding InsertCharacterCommand}"/>
 						</Grid>
 						<ListBox Name="ListBoxCharacter" ItemsSource="{Binding Characters}"/>
 					</DockPanel>
@@ -161,6 +160,20 @@
 						</ListBox.ItemTemplate>
 					</ListBox>
 				</DockPanel>
+			</TabItem>
+			<TabItem Header="Unit">
+				<ListBox ItemsSource="{Binding Units}" d:ItemsSource="{d:SampleData}">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal">
+								<Label Content="Valid"/>
+								<CheckBox IsChecked="{Binding Valid}" VerticalAlignment="Center"/>
+								<Label Content="Count"/>
+								<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
 			</TabItem>
 		</TabControl>
 	</DockPanel>
