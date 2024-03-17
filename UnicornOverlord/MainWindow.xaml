@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnicornOverlord"
+		xmlns:prop="clr-namespace:UnicornOverlord.Properties"
         mc:Ignorable="d"
 		WindowStartupLocation="CenterScreen"
         Title="Unicorn Overlord(Nintendo Switch)" Height="450" Width="700">
@@ -21,6 +22,13 @@
 				<MenuItem Header="Save" Command="{Binding SaveFileCommand}"/>
 			</MenuItem>
 		</Menu>
+		<ToolBar DockPanel.Dock="Top">
+			<Label Content="Language"/>
+			<ComboBox Width="50" SelectedIndex="{Binding Source={x:Static prop:Settings.Default}, Path=Language}">
+				<ComboBoxItem Content="en"/>
+				<ComboBoxItem Content="jp"/>
+			</ComboBox>
+		</ToolBar>
 		<TabControl>
 			<TabItem Header="Basic">
 				<Grid>

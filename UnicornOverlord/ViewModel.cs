@@ -193,6 +193,7 @@ namespace UnicornOverlord
 
 			Byte[] buffer = System.IO.File.ReadAllBytes(dlg.FileName);
 			if (buffer.Length != 464) return;
+			buffer = ProcessingCharacter(buffer);
 
 			uint address = 0x2AF40 + (uint)index * 464;
 
@@ -215,26 +216,6 @@ namespace UnicornOverlord
 			uint address = 0x2AF40 + (uint)index * 464;
 			Byte[] buffer = SaveData.Instance().ReadValue(address, 464);
 
-			// initialize
-			// -------------------------------------------------------------------------
-			// formation clear
-			Array.Copy(BitConverter.GetBytes(0xFFFFFFFF), 0, buffer, 4, 4);
-			buffer[32] = 0xFF;
-
-			// buffer[460]
-			// character's status
-			// 3Bit => join
-			// 4Bit => formation join
-			// 5Bit => use
-			buffer[460] = 0x08;
-
-			// equipment clear
-			// elements => 4Byte
-			// count => 4
-			// (or Append Item)
-			Array.Clear(buffer, 76, 16);
-			// -------------------------------------------------------------------------
-
 			System.IO.File.WriteAllBytes(dlg.FileName, buffer);
 		}
 
@@ -250,6 +231,7 @@ namespace UnicornOverlord
 			Byte[] buffer = System.IO.File.ReadAllBytes(dlg.FileName);
 			if (buffer.Length != 464) return;
 
+			buffer = ProcessingCharacter(buffer);
 			uint id = SaveData.Instance().ReadNumber(0x63980, 4) + 1;
 			Array.Copy(BitConverter.GetBytes(id), buffer, 4);
 			uint address = 0x2AF40 + count * 464;
@@ -262,6 +244,28 @@ namespace UnicornOverlord
 			InsertFriendship(id);
 
 			Initialize();
+		}
+
+		private Byte[] ProcessingCharacter(Byte[] buffer)
+		{
+			// formation clear
+			Array.Copy(BitConverter.GetBytes(0xFFFFFFFF), 0, buffer, 4, 4);
+			buffer[32] = 0xFF;
+
+			// buffer[460]
+			// character's status
+			// 1Bit => formation join
+			// 3Bit => join
+			// 4Bit => mercenary?
+			// 5Bit => use
+			buffer[460] &= 0xFE;
+
+			// equipment clear
+			// elements => 4Byte
+			// count => 4
+			// (or Append Item)
+			Array.Clear(buffer, 76, 16);
+			return buffer;
 		}
 
 		private void InsertFriendship(uint id)
