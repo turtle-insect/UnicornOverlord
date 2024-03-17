@@ -54,11 +54,36 @@ namespace UnicornOverlord
 			Equipments.Clear();
 			Units.Clear();
 
+			// create bond
+			var bondDictionary = new Dictionary<uint, ObservableCollection<Bond>>();
+			for (uint index = 0; index < 164; index++)
+			{
+				uint baseAddress = 0x1B5830 + index * 1316;
+				uint id = SaveData.Instance().ReadNumber(baseAddress, 4);
+				if (id == 0xFFFFFFFF) break;
+
+				var bonds = new ObservableCollection<Bond>();
+				bondDictionary.Add(id, bonds);
+				for (uint count = 0; count < 164; count++)
+				{
+					uint address = baseAddress + 4 + count * 8;
+					id = SaveData.Instance().ReadNumber(address, 4);
+					if (id == 0xFFFFFFFF) break;
+
+					bonds.Add(new Bond(address));
+				}
+			}
+
 			// counter ??
 			for (uint i = 0; i < 500; i++)
 			{
 				var ch = new Character(0x2AF40 + i * 464);
 				if (ch.ID == 0xFFFFFFFF) break;
+
+				if(bondDictionary.ContainsKey(ch.ID))
+				{
+					ch.Bonds = bondDictionary[ch.ID];
+				}
 
 				Characters.Add(ch);
 			}
@@ -142,11 +167,13 @@ namespace UnicornOverlord
 
 		private Item? AppendItem()
 		{
+			uint index = (uint)(Items.Count + Equipments.Count);
+			if (index >= 3800) return null;
+
 			var dlg = new ChoiceWindow();
 			dlg.ShowDialog();
 			if (dlg.ID == 0) return null;
 
-			uint index = (uint)(Items.Count + Equipments.Count);
 			var item = new Item(0xA0 + index * 20);
 			item.ID = dlg.ID;
 			item.Index = index + 1;

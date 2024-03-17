@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.SymbolStore;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace UnicornOverlord
 	internal class Character : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler? PropertyChanged;
+
+		public ObservableCollection<Bond>? Bonds {  get; set; }
 
 		private readonly uint mAddress;
 
