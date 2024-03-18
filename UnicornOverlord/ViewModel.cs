@@ -168,28 +168,37 @@ namespace UnicornOverlord
             var dlg = new ChoiceWindow();
             dlg.ShowDialog();
             if (dlg.ID == 0) return;
+            var selectedItems = dlg.ListBoxItem.SelectedItems.Count == 1 ? new List<NameValueInfo> { dlg.ListBoxItem.SelectedItem as NameValueInfo } : dlg.ListBoxItem.SelectedItems;
 
-            uint count = uint.Parse(dlg.TextBoxCount.Text);
+            uint count = dlg.Count;
             switch (type)
             {
                 case 0:
-                    var item1 = new Item(0xA0 + index * 20);
-                    item1.Status = 2;
-                    item1.ID = dlg.ID;
-                    item1.Index = index + 1;
-                    item1.Count = count;
-                    Items.Add(item1);
-                    break;
-                case 1:
-                    for (int i = 0; i < count - 1; i++)
+                    for (int i = 0; i < selectedItems.Count; i++)
                     {
                         index = (uint)(Items.Count + Equipments.Count);
                         if (index >= 3800) return;
-                        var itemtemp = new Item(0xA0 + index * 20);
-                        itemtemp.Status = 3;
-                        itemtemp.ID = dlg.ID;
-                        itemtemp.Index = index + 1;
-                        Equipments.Add(itemtemp);
+                        var item1 = new Item(0xA0 + index * 20);
+                        item1.Status = 2;
+                        item1.ID = ((NameValueInfo)selectedItems[i]).Value;
+                        item1.Index = index + 1;
+                        item1.Count = count;
+                        Items.Add(item1);
+                    }
+                    break;
+                case 1:
+                    for (int i = 0; i < selectedItems.Count; i++)
+                    {
+                        for (int j = 0; j < count; j++)
+                        {
+                            index = (uint)(Items.Count + Equipments.Count);
+                            if (index >= 3800) return;
+                            var itemtemp = new Item(0xA0 + index * 20);
+                            itemtemp.Status = 3;
+                            itemtemp.ID = ((NameValueInfo)selectedItems[i]).Value;
+                            itemtemp.Index = index + 1;
+                            Equipments.Add(itemtemp);
+                        }
                     }
                     break;
                 default:

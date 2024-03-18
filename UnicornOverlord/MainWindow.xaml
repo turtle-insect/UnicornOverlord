@@ -153,8 +153,8 @@
                     <ListBox x:Name="ListBoxItem" ItemsSource="{Binding Items}" SelectionMode="Extended">
                         <ListBox.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="EditCount" 
-                                          Click="EditItemCount"/>
+                                <MenuItem Header="EditItem" 
+                                          Click="EditItem"/>
                                 <MenuItem Header="DeleteItem" 
                                           Click="DeleteItem"/>
                             </ContextMenu>
@@ -180,8 +180,10 @@
                     <ListBox x:Name="ListBoxEquipment" ItemsSource="{Binding Equipments}" SelectionMode="Extended">
                         <ListBox.ContextMenu>
                             <ContextMenu>
+                                <MenuItem Header="EditEquipment" 
+                                          Click="EditEquipment"/>
                                 <MenuItem Header="DeleteEquipment" 
-                                          Click="DeleteItem"/>
+                                          Click="DeleteEquipment"/>
                             </ContextMenu>
                         </ListBox.ContextMenu>
                         <ListBox.ItemTemplate>
