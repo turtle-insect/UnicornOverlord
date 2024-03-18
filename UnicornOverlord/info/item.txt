@@ -1,0 +1,843 @@
+# File Format is TSV(Tab Separated Value)
+# If you want to add more languages, add elements separated by tabs.
+# ID	Name(en)	            Name(jp)	Name(cn)
+3	    Medals	勲章	勋章
+4	    Coliseum Coin	コロシアムコイン	斗技硬币
+5	    Divine Shard	天のかけら	天之碎片
+6	    Hallowed Corne Ash	コルヌの聖灰	克尔努的圣灰
+7	    Luminous Corne Ash	コルヌの光灰	克尔努的光灰
+8	    Healing Tonic (S)	ヒールポーションS	疗愈药剂S
+9	    Healing Tonic (M)	ヒールポーションM	疗愈药剂M
+10	    Healing Tonic (L)	ヒールポーションL	疗愈药剂L
+11	    Healing Font (S)	ヒールボトルS	疗愈药瓶S
+12	    Healing Font (M)	ヒールボトルM	疗愈药瓶M
+13	    Healing Font (L)	ヒールボトルL	疗愈药瓶L
+14	    Revival Orb (S)	リザレクトオーブS	复生宝珠S
+15	    Revival Orb (M)	リザレクトオーブM	复生宝珠M
+16	    Revival Orb (L)	リザレクトオーブL	复生宝珠L
+17	    Elixir	エリクシール	甘霖
+18	    Smoked Nuts	スモークナッツ	烟熏坚果
+19	    Hot Cross Buns	ホットクロスパン	暖暖十字包
+20	    Grilled Steak	グリルステーキ	烤牛排
+21	    Silver Hourglass	銀の砂時計	银之沙漏
+22	    Gold Hourglass	金の砂時計	金之沙漏
+23	    Stardust Hourglass	星屑の砂時計	群星沙漏
+24	    Camping Set (S)	キャンプセットS	宿营套装S
+25	    Camping Set (M)	キャンプセットM	宿营套装M
+26	    Camping Set (L)	キャンプセットL	宿营套装L
+27	    Empowering Draught	パワーリキュール	力量利口酒
+28	    Defensive Draught	ガードリキュール	抵御利口酒
+29	    Liquid Fortune	リキッドラック	瓶装好运
+30	    Light Feather	軽身の羽	身轻之羽
+31	    Light Tailfeather	軽身の尾羽	身轻之尾羽
+32	    Beckoning Bell	引き寄せの鈴	诱敌铃铛
+33	    Beckoning Chime	引き寄せの大鈴	诱敌响铃
+34	    Wind Faerie's Charm	風精の守り石	风灵的守护石
+35	    Holy Herb	ホーリーハーブ	神圣香草
+36	    Concealing CLoak	ハイドクローク	隐遁斗篷
+37	    GIant's Canopy	巨人の天蓋	巨人华盖
+38	    Farsight Crystal	遠見の水晶	远见水晶
+39	    Conveyance Stone	テレポートストーン	传送石
+40	    Conveyance Crystal	テレポートクリスタル	传送水晶
+41	    Dream Blossom	まどろみの花	假寐花
+42	    Barricade Kit	バリケードキット	路障箱
+43	    Mantlet Kit	防盾キット	防盾箱
+44	    Steel Trap	トラバサミ	捕兽夹
+45	    Magick Mie	マジックマイン	魔法地雷
+46	    Magick Bomb	マジックボム	魔法炸弹
+47	    Novice Military Treatise	初級指導書	初级指南
+48	    Standard Military Treatise	中級指導書	中级指南
+49	    Expert  Military Treatise	上級指導書	高级指南
+50	    Master Military Treatise	特急指導書	特殊指南
+51	    Supreme Military Treatise	最上級指導書	卓越指南
+52	    Miracle Fruit	奇跡の果実	奇迹果实
+53	    Dew of Vitality	生命の雫	生命之露
+54	    Dew of Strength	腕力の雫	力量之露
+55	    Dew of Protection	防御の雫	防御之露
+56	    Dew of Knowledge	知力の雫	智慧之露
+57	    Dew of Warding	加護の雫	加护之露
+58	    Dew of Skill	技量の雫	技艺之露
+59	    Dew of Acuity	見切の雫	洞察之露
+60	    Dew of Keenness	必殺の雫	必杀之露
+61	    Dew of Parrrying	堅守の雫	坚守之露
+62	    Dew of Agility	敏捷の雫	敏捷之露
+63	    Dew of Illusion	幻の雫	幻之露
+64	    	隕鉄石	陨铁石
+65	    	フェブライト	铁矿石
+66	    Idealist's Handmirror	イデアの手鏡	理想手镜
+67	    Goat Biscuit	ゴートクッキー	山羊曲奇
+68	    Free Meal Ticket	無料食事券	免费餐券
+69	    Free Mining Pass	無料採掘権	免费采掘券
+70	    Black Market Permit	漆黒の交易許可証	漆黑的交易许可证
+71	    Bastorias Blue	バストリアスブルー	巴斯托里亚蓝
+72	    Orphanage Key	孤児院の鍵	孤儿院钥匙
+73	    Juicy Aged Meat Steak	熟成肉のジューシーステーキ	鲜嫩肉眼牛排
+74	    Mellow Cheese Hamburger	まろやかチーズのハンバーグ	醇厚芝士汉堡
+75	    Rich Pot-Grilled Doria	濃厚鍋焼きドリア	丰盛锅烤多利亚
+76	    Fluffy Egg Omelet	ふわふわ卵のオムライス	松软鸡蛋卷
+77	    Seafood Paella	海の幸のパエリア	海鲜烩饭
+78	    White Fish Aqua Pazza	白身魚のアクアパッツァ	白鱼清炖
+79	    Plump Oyster Ajillo	プリプリ牡蠣のアヒージョ	鲜嫩牡蛎烩
+80	    Eggplant And Tomato Pasta	茄子とトマトのパスタ	茄子番茄意面
+81	    Beef Pot-Au-Feu With Chunky Vegetables	ごろごろ野菜のビーフポトフ	带有粗糙蔬菜的牛肉炖
+82	    Guinea Chicken Grilled With Herbs	ほろほろチキンの香草焼き	香草烤几内亚鸡
+83	    Basil And Fish Carpaccio	バジルと魚のカルパッチョ	罗勒和鱼薄片
+84	    Fresh Tomato Margherita	フレッシュトマトのマルゲリータ	新鲜番茄玛格丽塔
+85	    Creamy Eggs Benedict	クリーミーエッグベネディクト	奶油鸡蛋班尼迪克特
+86	    Soft-Boiled Egg And Bacon Galette	半熟卵とベーコンのガレット	软煮鸡蛋和培根薄煎饼
+87	    Crispy Lettuce Baguette Sandwich	パリパリレタスのバゲットサンド	脆生菜法棍三明治
+88	    Exquisite Strawberry Freisier	ストロベリィの絶品フレジェ	精致草莓费尔泽
+89	    Dense Apple Tarte Tatin	密りんごのタルトタタン	浓郁苹果塔坦
+90	    Cornut Lumber	コルナット材	角形木材
+91	    Dracia Lumber 	ドラシア材	德拉西亚木材
+92	    Elgrove Lumber	エルグローブ材	埃尔格罗夫木材
+93	    Baspine Lumber	バスパイン材	巴斯派恩木材
+94	    Albirch Lumber	アルバーチ材	奥尔麦木材
+95	    Corsite Stone	コルサイト石	钙石
+96	    Sedranite Stone	セドラナイト石	锡德拉石
+97	    Felcite Stone	フェルカイト石	费尔克石
+98	    Bastrite Stone	バースライト石	贝斯赖石
+99	    Alcedony Stone	アルセドニー石	蓝玉石
+100	    Corvia Herb	コルビア草	科比亚草
+101	    Holdra Herb	ガードラ草	加德拉草
+102	    Elweiss Herb	エルワイス草	艾尔薇丝草
+103	    Bascaria Herb	バスカリア草	巴斯卡利亚草
+104	    Althus Herb	アルサス草	阿尔苏斯草
+105	    Cornian Sardine	コルニアサーディン	科尔尼亚沙丁鱼
+106	    Draken Sea Bream	ドラゴンシーブリーム	龙鲷鱼
+107	    Elheim Mullet	エルヘイムマレット	艾尔海姆木材
+108	    Bastroian Salmon	バストリアスサーモン	巴斯特利亚斯鲑鱼
+109	    Albion Herring	アルビオンヘリング	阿尔比昂鲱鱼
+110	    Cornian Trout	コルニアトラウト	科尔尼亚鳟鱼
+111	    Draken Tilapia	ドラゴンティラピア	龙吴郊鱼
+112	    Elheim Pirarucu	エルヘイムピラクル	艾尔海姆皮拉克
+113	    Bastorian Smelt	バストリアススメルト	巴斯特利亚斯银鱼
+114	    Albion Pike	アルビオンパイク	阿尔比昂梭子鱼
+115	    Iron Ore	鉄鉱石	铁矿石
+116	    Copper Ore	銅鉱石	铜矿石
+117	    Silver Ore	銀鉱石	银矿石
+118	    Gold Ore	金鉱石	金矿石
+119	    Platinum Ore	白金石	铂金石
+120	    Honey Apple	熟成リンゴ	成熟苹果
+121	    Ancient Dragon Skull	古代竜の骨	古龙骨
+122	    Throney Vine	茨材	荆棘木
+123	    Ice Crystal	氷瀑結晶	冰瀑水晶
+124	    Goat Milk	ゴートミルク	山羊奶
+125	    Meager Timber	小さな端材	小布料
+126	    Unsullied Timber	きれいな端材	美丽布料
+127	    Sturdy Timber	頑丈な端材	结实布料
+128	    Meager Scrap Metal 	小さな鉄片	小铁片
+129	    Unsullied Scrap Metal 	きれいな鉄片	美丽铁片
+130	    Sturdy Scrap Metal	頑丈な鉄片	结实铁片
+133	    Secular Literature	世俗文学書	世俗文学
+134	    Palevian Scriptures	パレヴィア教典	帕莱维亚经文
+135	    History Of Febris	フェブリス史	费布里斯历史
+136	    Sectrieve Rock Salt	セクトリーブ岩塩	赛克特里夫岩盐
+137	    Wilter Herb	ヴィルターハーブ	维尔特草
+138	    Warnby Pepper	ワーンビー胡椒	沃恩比胡椒
+139	    Imitation Sword	模造刀	仿制剑
+140	    Music Box	オルゴール	音乐盒
+141	    Extravagant Vase	豪勢な壺	奢华花瓶
+142	    Gray Jewel	グレージュエール	灰色宝石
+143	    Zagavona Wine	ザガヴォーナワイン	扎加沃纳葡萄酒
+144	    Merietella Brandy	メリエテラブランデー	梅里泰拉白兰地
+145	    Soap	石鹸	肥皂
+146	    Perfume	香水	香水
+147	    Face Powder	フェイスパウダー	蜜粉
+148	    Cut Flowers	切り花	鲜花
+149	    Pressed Flowers	押し花	压花
+150	    Bouquet	花束	花束
+151	    Franc	フラン	法郎
+152	    Blancmange	ブランマンジェ	白莫斯
+153	    Galette	ガレット	盖莱特
+154	    Pro Set	プロセット	专业套装
+155	    Cutting Board	カッティングボード	切菜板
+156	    Viking Knife	バイキングナイフ	维京刀
+157	    Cup And Saucer	カップアンドソーサー	杯子和茶碟
+158	    Teapot 	ティーポット	茶壶
+159	    Snack Tray	スナックトレイ	小吃托盘
+160	    Dice	ダイス	骰子
+161	    Cards 	カード	卡牌
+162	    Board Game	ボードゲーム	棋盘游戏
+163	    Surcaut 	シュールコー	苏尔科特
+164	    Cotto 	コット	科托
+165	    Chemise 	シュミーズドレス	衬衫
+166	    Pencil 	鉛筆	铅笔
+167	    Paints 	絵具	颜料
+168	    Easel 	イーゼル	画架
+169	    Lapis Lazuli 	ラピスラズリ	青金石
+170	    Ruby	ルビー	红宝石
+171	    Black Diamond	ブラックダイヤ	黑钻石
+172	    	グラフスタート	
+173	    Cornia Treasure Map 1	コルニア地図1	科尔尼亚藏宝图1
+174	    Cornia Treasure Map 2	コルニア地図2	科尔尼亚藏宝图2
+175	    Cornia Treasure Map 3	コルニア地図3	科尔尼亚藏宝图3
+176	    Cornia Treasure Map 4	コルニア地図4	科尔尼亚藏宝图4
+177	    Cornia Treasure Map 5	コルニア地図5	科尔尼亚藏宝图5
+178	    Cornia Treasure Map 6	コルニア地図6	科尔尼亚藏宝图6
+179	    Drakenhold Treasure Map 1	ドラケンガルド地図1	德拉肯加德藏宝图1
+180	    Drakenhold Treasure Map 2	ドラケンガルド地図2	德拉肯加德藏宝图2
+181	    Drakenhold Treasure Map 3	ドラケンガルド地図3	德拉肯加德藏宝图3
+182	    Drakenhold Treasure Map 4	ドラケンガルド地図4	德拉肯加德藏宝图4
+183	    Drakenhold Treasure Map 5	ドラケンガルド地図5	德拉肯加德藏宝图5
+184	    Drakenhold Treasure Map 6	ドラケンガルド地図6	德拉肯加德藏宝图6
+185	    Elheim Treasure Map 1	エルヘイム地図1	艾尔海姆藏宝图1
+186	    Elheim Treasure Map 2	エルヘイム地図2	艾尔海姆藏宝图2
+187	    Elheim Treasure Map 3	エルヘイム地図3	艾尔海姆藏宝图3
+188	    Elheim Treasure Map 4	エルヘイム地図4	艾尔海姆藏宝图4
+189	    Elheim Treasure Map 5	エルヘイム地図5	艾尔海姆藏宝图5
+190	    Elheim Treasure Map 6	エルヘイム地図6	艾尔海姆藏宝图6
+191	    Bastorias Treasure Map 1	バストリアス地図1	巴斯托利亚斯藏宝图1
+192	    Bastorias Treasure Map 2	バストリアス地図2	巴斯托利亚斯藏宝图2
+193	    Bastorias Treasure Map 3	バストリアス地図3	巴斯托利亚斯藏宝图3
+194	    Bastorias Treasure Map 4	バストリアス地図4	巴斯托利亚斯藏宝图4
+195	    Bastorias Treasure Map 5	バストリアス地図5	巴斯托利亚斯藏宝图5
+196	    Bastorias Treasure Map 6	バストリアス地図6	巴斯托利亚斯藏宝图6
+197	    Albion Treasure Map 1	アルビオン地図1	阿尔比昂藏宝图1
+198	    Albion Treasure Map 2	アルビオン地図2	阿尔比昂藏宝图2
+199	    Albion Treasure Map 3	アルビオン地図3	阿尔比昂藏宝图3
+200	    Albion Treasure Map 4	アルビオン地図4	阿尔比昂藏宝图4
+201	    Albion Treasure Map 5	アルビオン地図5	阿尔比昂藏宝图5
+202	    Albion Treasure Map 6	アルビオン地図6	阿尔比昂藏宝图6
+203	    Emblem Start	紋章スタート	纹章部分开始
+204	    Coat Of Arms Of Cornia	コルニアの紋章	科尔尼亚纹章
+205	    Coat Of Arms Of Drakengard	ドラケンガルドの紋章	德拉肯加德纹章
+206	    Coat Of Arms Of Elheim	エルヘイムの紋章	艾尔海姆纹章
+207	    Coat Of Arms Of Bastorias	バストリアスの紋章	巴斯特利亚斯纹章
+208	    Coat Of Arms Of Albion	アルビオンの紋章	阿尔比昂纹章
+209	    Coat Of Arms Of Zenoira	ゼノイラの紋章	泽诺伊拉纹章
+210	    Coat Of Arms Of The Liberation Army	解放軍の紋章	解放军的纹章
+211	    Coat Of Arms Of The Swamp Witch	沼地の魔女の紋章	沼泽女巫纹章
+212	    Coat Of Arms Of House Obry	オブリー家の紋章	奥布里家族纹章
+213	    Coat Of Arms Of The Cornianvolunteers	コルニア義勇軍の紋章	科尔尼亚志愿军纹章
+214	    Gray-Blue Knight Group Emblem	灰青騎士団の紋章	灰蓝骑士团纹章
+215	    Triangular Beast Mercenary Emblem	三角獣傭兵団の紋章	三角兽佣兵纹章
+216	    Iron Helmet Mercenary Emblem	鉄兜傭兵団の紋章	铁头盔佣兵纹章
+217	    Celestial Wolf Mercenary Emblem	天狼傭兵団の紋章	天狼佣兵纹章
+218	    Black Claw Thieves Emblem	黒爪盗賊団の紋章	黑爪盗贼纹章
+219	    Order Of The Rose Emblem	薔薇騎士団の紋章	蔷薇骑士团纹章
+220	    Meyer Family Emblem	メイエ家の紋章	迈耶家族纹章
+221	    Nordheim Family Emblem	ノルトハイム家の紋章	诺德海姆家族纹章
+222	    Schuv Family Emblem Crest	シュヴ家の紋章	舒夫家族纹章
+223	    Sechhelm Family Crest	ゼクスヘルム家の紋章	赛赫尔姆家族纹章
+224	    Three Poison Mercenaries Crest	三毒傭兵団の紋章	三毒佣兵纹章
+225	    Crimson Dragon Knights Crest	紅龍騎士団の紋章	红龙骑士纹章
+226	    Sand Scorpion Thieves Crest	砂蠍盗賊団の紋章	沙蝎盗贼纹章
+227	    Golden Goat Knights Crest	金羊騎士団の紋章	金羊骑士纹章
+228	    Arena Gladiator Crest	闘技場剣闘士の紋章	竞技场角斗士纹章
+229	    Hulth Volunteers Crest	フルス義勇軍の紋章	胡尔斯志愿者纹章
+230	    Cock-Crown Knights Emblem	鶏冠騎士団の紋章	雄鸡冠骑士团纹章
+231	    Elheim Resistance Army Emblem	エルヘイム抵抗軍の紋章	艾尔海姆抵抗军纹章
+232	    Black Swan Knights Emblem	黒鳥騎士団の紋章	黑天鹅骑士团纹章
+233	    Flame Lance Knights Emblem	炎槍騎士団の紋章	烈焰长枪骑士团纹章
+234	    Spirit Knights Emblem	精霊騎士団の紋章	灵魂骑士团纹章
+235	    Thorn thorn Knights Emblem 	茨棘騎士団の紋章	荆棘骑士团纹章
+236	    Fox Clan Emblem	狐族の紋章	狐狸族纹章
+237	    Owl Clan Emblem 	梟族の紋章	猫头鹰族纹章
+238	    Wolf Clan Emblem 	狼族の紋章	狼族纹章
+239	    Bear Clan Emblem 	熊族の紋章	熊族纹章
+240	    Exorcism Knights Emblem 	退魔騎士団の紋章	驱魔骑士团纹章
+241	    Ice Octopus Pirates Emblem 	氷蛸海賊団の紋章	冰章鱼海盗纹章
+242	    Parevia Orthodox Church Emblem 	パレヴィア正教の紋章	帕雷维亚正教会纹章
+243	    Knights Of The Sacred Heart emblem	聖心騎士団の紋章	圣心骑士团纹章
+244	    Heavenly Winged Knights Emblem 	天翼騎士団の紋章	天翼骑士团纹章
+245	    White Shark Knights Emblem 	白鮫騎士団の紋章	白鲨骑士团纹章
+246	    Demonic Knights Emblem 	魔克騎士団の紋章	恶魔骑士团纹章
+247	    Albion Alliance Emblem 	アルビオン諸候同盟の紋章	阿尔比昂联盟纹章
+248	    Robed Knight Emblem 	法衣騎士の紋章	长袍骑士团纹章
+249	    Dead Spirit Corps Emblem 	死靈兵団の紋章	亡灵军团纹章
+250	    Rock Rats Emblem 	岩鼠団の紋章	岩鼠纹章
+251	    Ruins Investigation Team emblem	遺跡調査団の紋章	废墟调查队纹章
+252	    Vigilante Emblem 	自警団の紋章	义军纹章
+253	    Thieves Emblem 	盗賊団の紋章	盗贼纹章
+254	    Mercenary Corps Emblem 	傭兵団の紋章	佣兵军团纹章
+255	    New Cornia Emblem 	新生コルニアの紋章	新科尔尼亚纹章
+256	    Elion Emblem 	エリオンの紋章	埃利翁纹章
+257	    Hydeland Emblem 	ハイドランドの紋章	海德兰纹章
+258	    Sakura High School Emblem	咲良高等学校の紋章	樱花高中纹章
+259	    Emblem End	紋章エンド	纹章部分结束
+260	    Faded Note 1 	色褪せた手記1	
+261	    Faded Note 2 	色褪せた手記2	
+262	    Faded Note 3 	色褪せた手記3	
+263	    Faded Note 4 	色褪せた手記4	
+264	    Faded Note 5	色褪せた手記5	
+265	    Dig time Extensions (S)	ディグゲーム時間延長S	挖掘时间延长（小） 
+266	    Dig time Extensions (M)	ディグゲーム時間延長M	挖掘时间延长（中）
+267	    Dig time Extensions (L)	ディグゲーム時間延長L	挖掘时间延长（大）
+268	    False Death Potion 	仮死薬　デバック用	假死药水(用于调试)
+269	    Damage Potion 000	ダメージポーション000	伤害药水000
+282	    Bronze Sword	青銅の剣	青铜剑
+283	    Recruit's Shortsword	新米兵の短剣	新兵短剑
+284	    Baroque Sword	バロックソード	巴洛克剑
+286	    Iron Sword	鉄の剣	铁剑
+287	    Black-Iron Sword	黒鉄の剣	黑铁剑
+288	    Carnat Sword	カルナットソード	卡尔纳特剑
+289	    Greatwood Sword	大樹の剣	大树剑
+290	    Steel Sword	銅の剣	青铜剑
+291	    Spellsteel Sword	魔鉄の剣	魔铁剑
+292	    Vorpal Sword	ヴォーパルソード	斩首剑
+296	    Dragonbone Blade	大竜骨の剣	大龙骨剑
+297	    Thorn Blade	茨の棘剣	荆棘剑
+298	    Icefall Blade	氷瀑剣	冰瀑剑
+299	    Wingcrest Blade	翼紋章の剣	翼纹章剑
+301	    Templar's Sword	神殿騎士の剣	神殿骑士剑
+302	    Phantom Knight's Sword	幻影騎士の剣	幻影骑士剑
+303	    Zenoiran Sword	ゼノイラ兵の剣	泽诺伊拉士兵剑
+304	    Zenoiran Knight's Sword	ゼノイラ騎士の剣	泽诺伊拉骑士剑
+305	    Heavenswing Sword	天翼騎士の剣	天翼骑士剑
+307	    Obsidian Sword	黒曜の剣	黑曜剑
+308	    Nameless Greatsword	無名の体験	无名大剑
+309	    Veteran's Sword	老兵の古剣	老兵古剑
+310	    Hunter's Claymore	猟兵のクレイモア	猎兵双刃大剑
+311	    Hallowed Blade	祝福の直剣	祝福直剑
+312	    Carnelian Blade	闘神の緋石剣	斗神绯石剑
+313	    Meteorite Sword	メテオライトソード	陨石剑
+315	    Viperfang	毒蛇の剣	毒蛇剑
+316	    Scorpion's Sting	蠍の刺剣	蝎刺剑
+317	    Searing Rapier	灼熱の細剣	灼热细剑
+318	    Flamberge	フランベルジュ	焰形剑
+319	    Barbarian's Might	蛮族の剣	蛮族剑
+320	    Dancer's Delight	踊り子の曲剣	舞女弯刀
+321	    Crimson Sword	深紅の突剣	深红刺剑
+322	    Mist Scimitar	ミストシミター	薄雾弯刀
+323	    Sylph's Bane	風断ちの刃	破风刀
+324	    Galecutter	風断のファルシオン	破风砍刀
+325	    Hailstorm Edge	氷雨の直剣	冰雨直剑
+326	    Pursuant's Blade	追撃者の刺剣	追击者刺剑
+327	    Cutthroat's Boon	暗殺者の利刃	暗杀者利刃
+328	    Moonlight Rapier	月光のレイピア	月光刺剑
+329	    Sanguine Blade	ブラッドソード	鲜血剑
+330	    Runic Sword	ルーンソード	符文剑
+332	    Wyvern Razor	飛竜の細剣	飞龙细剑
+333	    Stingray	スティングレイ	刺鳐
+334	    Rose Knight Sword	薔薇騎士の剣	蔷薇骑士剑
+335	    Bandit Longsword	盗賊騎士の大剣	盗贼骑士大剑
+336	    Royal Saber	王家のサーベル	王室佩剑
+337	    Greatsword	グレートソード	重剑
+338	    Cursed Blade Of The Abyss	深淵の呪剣	深渊咒剑
+339	    Cursed Blade Of The Abyss	深淵の呪剣	深渊重剑
+340	    Greatsword Of The Abyss	深淵のグレートソード	深渊重剑
+341	    Red Rose	レットローズ	莱特罗斯
+342	    Blue Rose	ブルーローズ	蓝蔷薇
+344	    Kingsblade Cornix	王剣コルニクス	王剑科尼克斯
+345	    Notos's Sword	風剣ノトス	风剑诺托斯
+346	    Rosularis Sword	ロスラリスの花剣	宝石花剑
+347	    Sacral Sword	セイクリットソード	圣崇剑
+348	    Holy Unicorn Blade	一角獣の聖剣	独角兽圣剑
+349	    Bronze Spear	青銅の槍	青铜枪
+350	    Recruit's Shortspear	新兵の短槍	新兵短枪
+351	    Baroque Spear	バロックスピア	巴洛克枪
+353	    Iron Spear	鉄の槍	铁枪
+354	    Black-Iron Spear	黒鉄の槍	黑铁枪
+355	    Carnat Spear	カルナットスピア	卡尔纳特枪
+356	    Greatwood Spear	大樹の槍	大树枪
+357	    Steel Spear	銅の槍	钢枪
+358	    Spellsteel Spear	魔鉄の槍	魔铁枪
+359	    Vorpal Spear	ヴォーパルスピア	斩首枪
+363	    Dragonbone Spear	大竜骨の槍	大龙骨枪
+364	    Thorn Spear	茨の棘槍	荆棘枪
+365	    Icefall Spear	氷爆槍	冰枪
+366	    Wingcrest Spear	翼紋章の槍	翼纹章枪
+367	    Watchman's Longspear	塔守の長槍	守塔长枪
+368	    Nameless Guard's Spear	名もなき塔守の槍	无名守塔枪
+370	    Templar's Spear	神殿騎士の槍	神殿骑士枪
+371	    Phantom Knight's Spear	幻影騎士の槍	幻影骑士枪
+372	    Zenoiran Spear	ゼノイラ兵の槍	泽诺伊拉士兵枪
+373	    Zenoiran Knight's Spear	ゼノイラ騎士の槍	泽诺伊拉骑士枪
+374	    Salamander Spear	紅龍騎士の槍	红龙骑士枪
+375	    Sacred Heart Spear	聖心騎士の槍	圣心骑士枪
+377	    Obsidian Spear	黒曜の槍	黑曜枪
+378	    Nameless Greatspear	無名の大槍	无名大枪
+379	    Veteran's Pike	老兵の古槍	老兵古枪
+380	    Glaive	猟兵のグレイブ	猎人薙刀
+381	    Adept's Shortspear	技巧者の短槍	娴熟者短枪
+382	    Astral Pike	夜天の長槍	夜天长枪
+383	    Carnelian Spear	闘神の緋石槍	斗神绯石枪
+384	    Meteorite Lance	メテオライトランス	陨石骑枪
+386	    Unwavering Spear	トゥルースピア	真实之枪
+387	    Storm Of Hail	氷雨の直槍	冰雨直枪
+388	    Corroded Spear	錆びた黒槍	生锈的黑枪
+389	    Valkyrie's Partisan	戦姫のパルチザン	战姬阔头枪
+390	    Surging Shortspear	突撃兵の槍	突击兵短枪
+391	    Usurper's Spear	簒奪者の槍	篡夺者之枪
+392	    Elfeater	エルフイーター	精灵吞噬者
+393	    General's Pike	名将の長槍	名将长枪
+394	    Canyon Lance	キャニオンランス	峡谷骑枪
+395	    Helix Spear	大旋槍	大旋枪
+396	    Dragoon's Warspear	竜騎士の戦槍	龙骑士战枪
+397	    Bloody Spear	ブラットスピア	鲜血枪
+398	    Runic Spear	ルーンスピア	符文枪
+400	    Twinned Bough	霊樹の双子槍	灵树双子枪（冰冻）
+401	    Twinned Bough	霊樹の双子槍	灵树双子枪（雷霆）
+402	    Silver Trident	白銀のトライデント	白银三叉戟
+403	    Crimson Sarissa	血濡れのサリッサ	染血长矛
+404	    Flame Javelin	炎魔石の手槍	炎魔石短枪
+405	    Death Pillar	デスピラー	死之刺
+406	    Cursed Lance Of The Abyss	深淵の呪槍	深渊咒枪（22攻击）
+407	    Cursed Lance Of The Abyss	深淵の呪槍	深渊咒枪（25攻击）
+408	    Testarossa	テスタロッサ	赤翎
+410	    Kingslance Elhal	王槍エルヘリム	王枪艾尔海利姆
+411	    Zephyros's Spear	風槍ゼピュロス	风枪萨菲罗斯
+412	    Orchis Spear	オーキスの花槍	红门兰花枪
+413	    Sacral Spear	セイクリッドスピア	圣崇长枪
+414	    Lance Of Devotion	ランスオブデヴォーション	忠胆骑枪
+415	    Bronze Axe	青銅の斧	青铜斧
+416	    Recruit's Handaxe	新兵の手斧	新兵手斧
+417	    Baroque Axe	バロックアクス	巴洛克斧
+419	    Iron Axe	鉄の斧	铁斧
+420	    Black-Iron Axe	黒鉄の斧	黑铁斧
+421	    Carnat Axe	カルナットアックス	卡尔纳特斧
+422	    Greatwood Axe	大樹の斧	大树斧
+423	    Steel Axe	鉄の斧	钢斧
+424	    Spellsteel Axe	魔鉄の斧	魔铁斧
+425	    Vorpal Axe	ヴォーパルアクス	斩首斧
+429	    Dragonbone Axe	大竜骨の斧	大龙骨斧
+430	    Thorn Axe	茨の棘斧	荆棘斧
+431	    Icefall Axe	氷瀑斧	冰瀑斧
+432	    Wingcrest Axe	翼紋章の斧	翼纹章斧
+434	    Templar's Axe	神殿騎士の斧	神殿骑士斧
+435	    Phantom Knight's Axe	幻影騎士の斧	幻影骑士斧
+436	    Zenoiran Axe	ゼノイラ兵の斧	泽诺伊拉士兵斧
+437	    Zenoiran Knight Axe	ゼノイラ騎士の斧	泽诺伊拉骑士斧
+438	    Bandit's Handaxe	盗賊騎士の手斧	盗贼骑士手斧
+439	    Golden Ram Axe	金羊騎士の斧	金羊骑士斧
+441	    Obsidian Axe	黒曜の斧	黑曜斧
+442	    Nameless Greataxe	無名の大斧	无名大斧
+443	    Veteran's Axe	老兵の古斧	老兵古斧
+444	    Hunter's Halberd	猟兵のハルバード	猎人斧枪
+445	    Knot Of Ruin	破滅の黒塊	破灭之黑块
+446	    Carnelian Axe	闘神の緋石斧	斗神绯石斧
+447	    Meteorite Axe	メテオライトアックス	陨石斧
+449	    Crushing Axe	クラッシュアックス	破坏之斧
+450	    Hoarfrost Axe	樹氷の斧	雾凇斧
+451	    Frozen Battleaxe	凍てついた戦斧	冰封战斧
+452	    Barbarian's Axe	蛮族の斧	蛮族斧
+453	    Mason's Hammer	石工の槌	石工锤
+454	    Spiked Hammer	スパイクハンマー	钉锤
+455	    Headsman's Axe	処刑人の断斧	刽子手的断斧
+456	    Eliminator	エリミネーター	清道夫
+457	    Morningstar	グッドモーニングスター	启明星
+458	    Silvermoon Axe	銀月の斧	银月斧
+459	    Giant's Greataxe	巨人の大斧	巨人大斧
+460	    Banishing Hammer	バニッシュハンマー	湮灭之锤
+461	    Dark Knight Cleaver	暗黒騎士の戦斧	黑暗骑士战斧
+462	    Berserker's Battleaxe	狂戦士の戦斧	狂战士战斧
+463	    Sanguine Axe	ブラッドアックス	鲜血斧
+464	    Runic Axe	ルーンアックス	符文斧
+466	    Rose Knight Axe	薔薇騎士の斧	蔷薇骑士斧
+467	    Rose Knight Hammer	薔薇騎士の槌	蔷薇骑士锤
+468	    Labrys	ラブリュス	双刃斧
+469	    Warhammer	ウォーハンマー	战锤
+470	    Black Axe Of The Abyss 1	深淵の黒斧	深渊黑斧（13攻击）
+471	    Black Axe Of The Abyss 2	深淵の黒斧	深渊黑斧（25攻击）
+472	    Cursed Axe Of The Abyss 1	深淵の呪斧	深渊咒斧（20攻击）
+473	    Cursed Axe Of The Abyss 2	深淵の呪斧	深渊咒斧（25攻击）
+474	    Juggernaut	ジャガーノート	无坚不摧
+476	    Kingsaxe Drakenash	王斧ドランガッシュ	王斧德拉恩加修
+477	    Boreas's Axe	風斧ボレアス	风斧波瑞阿斯
+478	    Helleborus Axe	ヘレボルスの花斧	铁筷子花斧
+479	    Sacral Axe	セイクリッドアクス	圣崇斧
+481	    Bronze Bow	青銅の弓	青铜弓
+482	    Recruit's Shortbow	新兵の短弓	新兵短弓
+483	    Baroque Bow	バロックボウ	巴洛克弓
+485	    Iron Bow	鉄の弓	铁弓
+486	    Black-Iron Bow	黒鉄の弓	黑铁弓
+487	    Carnat Bow	カルナットボウ	卡尔纳特弓
+488	    Greatwood Bow	大樹の弓	大树弓
+489	    Steel Bow	鉄の弓	钢弓
+490	    Spellsteel Bow	魔鉄の弓	魔铁弓
+491	    Vorpal Bow	ヴォーパルボウ	斩首弓
+495	    Dragonbone Bow	大竜骨の弓	大龙骨弓
+496	    Thorn Bow	茨の棘弓	荆棘弓
+497	    Icefall Bow	氷瀑弓	冰瀑弓
+498	    Wingcrest Bow	翼紋章の弓	翼纹章弓
+499	    Watchman's Longbow	塔守の長弓	守塔长弓
+500	    Nameless Guard's Bow	名もなき塔守の弓	无名守塔弓
+502	    Templar's Bow	神殿騎士の弓	神殿骑士弓
+503	    Phantom Knight's Bow	幻影騎士の弓	幻影骑士弓
+504	    Zenoiran Bow	ゼノイラ兵の弓	泽诺伊拉士兵弓
+505	    Zenoiran Knight's Bow	ゼノイラ騎士の弓	泽诺伊拉骑士弓
+506	    Magebane Bow	魔克騎士の弓	克魔骑士之弓
+508	    Nameless Greatbow	無名の大弓	无名大弓
+509	    Obsidian Bow	黒曜の弓	黑曜弓
+510	    Carnelian Bow	闘神の明石弓	斗神绯石弓
+511	    Meteorite Bow	メテオライトボウ	陨石弓
+512	    Infamous Bow	名射手の古弓	名射手古弓
+513	    Veteran's Bow	老兵の弓	老兵古弓
+515	    Viper Bow	毒蛇の弓	毒蛇弓
+516	    Flame Bow	フレイムボウ	烈火弓
+517	    Salamander Greatbow	火竜の大弓	火龙大弓
+518	    Starless Bow	暗夜の弓	暗夜弓
+519	    Thundering Bow	轟きの弓	轰鸣弓
+520	    Thundering Strongbow	轟きの剛弓	轰鸣刚弓
+521	    Piercing Bow	貫きの弓	贯穿弓
+522	    Piercing Strongbow	貫きの剛弓	贯穿刚弓
+523	    Spellseal Bow	魔封じの弓	封魔弓
+524	    Pheasant Bow	フェザントボウ	雉鸡弓
+525	    Interrogator's Bow	異端審問官の弓	异端审判官弓
+526	    The Inquisitor	インクイジター	审讯官
+527	    Bow Of Swiftness	ラピットボウ	极速弓
+528	    Silvermoon Bow	銀月の弓	银月弓
+529	    General's Longbow	名将の長弓	名将长弓
+530	    Crane Bow	クレインボウ	鹤弓
+531	    Trapper's Warbow	狩人の戦弓	猎人战弓
+532	    Gallian Crossbow	ガリアクロスボウ	高卢弩弓
+533	    Sanguine Bow	ブラッドボウ	鲜血弓
+534	    Runic Bow	ルーンボウ	符文弓
+536	    Greatwood Spiritbow	大樹の霊弓	大树灵弓
+537	    Desert Bow	デザートボウ	沙漠弓
+538	    Frostbloom Bow	雪花弓	雪花弓
+539	    Woodpecker	ウッドペッカー	啄木鸟
+540	    Replica Alminster	贋作アルミ二スタ	赝品阿尔米尼斯塔
+542	    Kingsbow Bastorik	王弓場ストリーク	王弓巴斯特利克
+543	    Apeliotes's Bow	風弓アペリオテス	风弓阿珀利俄忒斯
+544	    Quince Bow	クインスの花弓	榅桲花弓
+545	    Sacral Bow	セイクリッドボウ	圣崇弓
+546	    Alminster	アルミニスタ	阿尔米尼斯塔
+547	    Bronze Staff	青銅の杖	青铜杖
+548	    Recruit's Staff	新兵の杖	新兵杖
+549	    Baroque Rod	バロックロッド	巴洛克杖
+551	    Iron Staff	鉄の杖	铁杖
+552	    Black-Iron Staff	黒鉄の杖	黑铁杖
+553	    Carnat Rod	カルナットロッド	卡尔纳特杖
+554	    Greatwood Staff	大樹の杖	大树杖
+555	    Steel Staff	鉄の杖	钢杖
+556	    Spellsteel Staff	魔鉄の杖	魔铁杖
+557	    Vorpal Rod	ヴォーパルロッド	斩首杖
+561	    Dragonbone Staff	大竜骨の杖	大龙骨杖
+562	    Thorn Staff	茨の棘杖	荆棘杖
+563	    Icefall Staff	氷瀑杖	冰瀑杖
+564	    Wingcrest Staff	翼紋章の杖	翼纹章杖
+566	    Templar's Staff	神殿騎士の杖	神殿骑士杖
+567	    Phantom Knight's Staff	幻影騎士の杖	幻影骑士杖
+568	    Zenoiran Staff	ゼノイラ兵の杖	泽诺伊拉士兵杖
+569	    Zenoiran Knight's Staff	ゼノイラ騎士の杖	泽诺伊拉骑士杖
+570	    Raven Staff	黒鳥騎士の杖	黑鸟骑士杖
+571	    Twilight Staff	退魔騎士の杖	逢魔骑士杖
+573	    Warding Staff	魔障壁の杖	魔化壁杖
+574	    Nameless Greatstaff	無名の大杖	无名大杖
+575	    Obsidian Staff	黒曜の杖	黑曜杖
+576	    Carnelian Staff	闘神の紅石杖	斗神绯石杖
+577	    Meteorite Rod	メテオライトロッド	陨石杖
+578	    Veteran's Staff	老兵の古杖	老兵古杖
+582	    Thawing Scepter	メルトセプター	消融权杖
+583	    Pestilent Staff	病毒の黒杖	病毒黑杖
+584	    Bloodmoon Rod	血月のロッド	血月杖
+585	    Wind Scepter	ウインドセプター	疾风权杖
+586	    Telluric Staff	大地の石杖	大地石杖
+587	    Grand Magus Staff	大魔術師の杖	大魔法师之杖
+588	    Icestorm Staff	氷嵐の杖	冰岚杖
+589	    Quartz Rod	クォーツロッド	石英杖
+591	    Defender's Mace	守護のメイス	守护锤杖
+592	    Cleric's Cane	聖職者の守杖	圣职者守杖
+593	    Lyrical Wand	リリックワンド	抒情魔杖
+594	    Hallowed Mace	祝福のメイス	祝福锤杖
+595	    Staff Of Succor	双癒の杖	双愈杖
+596	    Ringed Staff	円燐の杖	圆磷杖
+597	    Phosphorescent Staff	光輝の杖	光磷杖
+598	    Precious Rod	プレシャスロッド	珍宝杖
+599	    Lifeblood Staff	生命の杖	生命之杖
+600	    Purifier	ピュリファイアー	净化者
+602	    Liberator's Staff	解放者の秘杖	解放者秘杖
+603	    Speed-Hex Staff	呪速の枝杖	咒速枝杖
+604	    Poison-Hex Staff	呪毒の枝杖	咒毒枝杖
+605	    Flame-Hex Staff	呪炎の枝杖	咒火枝杖
+606	    Dustbound Staff	砂麈の杖	沙岩杖
+607	    Shaman's Bonestaff	呪術師の骨杖	咒术师骨杖
+608	    Gleaming Mace	閃光のメイス	闪光锤杖
+610	    Chiropteran Staff	蝙蝠の杖	蝙蝠杖
+611	    Mother Laelia's Staff	レリア司祭の儀仗	莉莉亚祭司的仪杖
+612	    Red-Bark Staff	イチイの賢杖	紫杉贤杖
+613	    Chlorotic	クロロティック	萎黄焦枯
+614	    Undead Staff	死者の杖	亡者之杖
+615	    Ein Seeker	アインシーカー	寻目者
+616	    Heavenswing Staff	天翼の儀仗	天翼仪杖
+617	    Sanguis Mea	サングイスメア	血魔
+618	    Cursed Staff Of The Abyss	深淵の呪杖	深渊咒杖（20攻击）
+619	    Cursed Staff Of The Abyss	深淵の呪杖	深渊咒杖（25攻击）
+620	    Millenium Scepter	サウザンドセプター	千年权杖
+621	    Libera	リベールライト	自由之光
+622	    Cardinal's Mace	カーディナルメイス	枢机锤矛
+624	    Kingstaff Albiore	王杖アルビオール	王杖阿尔比奥
+625	    Euros's Staff	風杖エウロス	风杖欧洛斯
+626	    Lupinus Staff	ルピナスの花杖	鲁冰花杖
+627	    Sacral Rod	セイクリッドロッド	圣崇杖
+628	    Papal Crosier	教皇の権杖	教皇权杖
+642	    Bronze Shield	青銅の盾	青铜盾
+643	    Recruit's Shield	新兵の盾	新兵盾
+644	    Baroque Shield	バロックシールド	巴洛克盾
+645	    Battler's Shield	バトルシールド	战盾
+646	    Iron Shield	鉄の盾	铁盾
+647	    Black-Iron Shield	黒鉄の盾	黑铁盾
+648	    Carnat Shield	カルナットシールド	卡尔纳特盾
+649	    Greatwood Shield	大樹の盾	大树盾
+650	    Steel Shield	鉄の盾	钢盾
+651	    Spellsteel Shield	魔鉄の盾	魔铁盾
+652	    Vorpal Shield	ヴォーパルシールド	斩首盾
+656	    Dragonbone Shield	大竜骨の盾	大龙骨盾
+657	    Thorn Shield	茨の棘盾	荆棘盾
+658	    Icefall Shield	氷瀑盾	冰瀑盾
+659	    Wingcrest Shield	翼紋章の盾	翼纹章盾
+660	    Watchman's Buckler	塔守の小谷	守塔小盾
+661	    Nameless Guard's Shield	名もなき塔守の盾	无名守塔盾
+663	    Templar's Shield	神殿騎士の盾	神殿骑士盾
+664	    Phantom Knight's Shield	幻影騎士の盾	幻影骑士盾
+665	    Zenoiran Shield	ゼノイラ兵の盾	泽诺伊拉士兵盾
+666	    Zenoiran Knight's Shield	ゼノイラ騎士の盾	泽诺伊拉骑士盾
+667	    Golden Ram Shield	金羊騎士の盾	金山羊骑士盾
+668	    Heavenswing Shield	天翼騎士の盾	天翼骑士盾
+670	    Obsidian Shield	黒曜の盾	黑曜盾
+671	    Azure Crest Shield	蒼紋の盾	苍纹盾
+672	    Scarlet Crest Shield	緋紋の盾	绯纹盾
+673	    Hunter's Buckler	猟兵のバックラー	猎兵小圆盾
+674	    Blessed Roundshield	祝福の円盾	祝福圆盾
+676	    Viper Shield	毒蛇の盾	毒蛇盾
+677	    Searing Shield	灼熱の盾	灼热盾
+678	    Hoarfrost Shield	樹氷の盾	雾凇盾
+679	    Luminous Shield	光輝の盾	光辉盾
+680	    Twin Dragon Shield	双竜紋の盾	双龙纹盾
+681	    Unfettered Shield	アンフェッター	断镣之盾
+682	    Chivalric Shield	ナイツシールド	骑士盾
+684	    Guard's Shield	衛兵の盾	卫兵盾
+685	    Mercenary's Shield	傭兵のウッドシールド	佣兵木盾
+686	    Holy Knight's Shield	聖騎士の盾	圣骑士盾
+687	    Cavalry Hunter's Buckler	騎馬狩りの小盾	猎骑小盾
+688	    Angel Hunter's Buckler	羽狩りの小盾	猎羽小盾
+689	    Beast Hunter's Buckler	獣狩りの小盾	猎兽小盾
+690	    Moonlight Shield	月光の盾	月光盾
+691	    Unyielding Shield	不屈の盾	不屈盾
+692	    Squire's Shield	従騎士の盾	见习骑士盾
+693	    Arrowshield	アローシールド	箭盾
+694	    Ironclad Buckler	鉄盾のバックラー	铁壁小圆盾
+695	    Manalith Buckler	魔石のバックラー	魔石小圆盾
+696	    Parrying Shield	パリングシールド	闪避盾
+697	    White Knight's Shield	白騎士の盾	白骑士盾
+699	    Blue Rose Shield	青薔薇の盾	蓝蔷薇之盾
+700	    White Rider's Shield	白馬の騎士の盾	白马骑士盾
+705	    Kaikias's Shield	風盾のカイキアス	风盾凯基亚斯
+706	    Holy Unicorn Shield	一角獣の聖盾	独角兽圣盾
+710	    Bronze Greatshield	青銅の大盾	青铜大盾
+711	    Recruit's Greatshield	新兵の大盾	新兵大盾
+712	    Baroque Greatshield	バロックラージシールド	巴洛克大盾
+713	    Conveyable Greatshield	ライトラージシールド	光明大盾
+714	    Iron Greatshield	鉄の大盾	铁大盾
+715	    Black-Iron Greatshield	黒鉄の大盾	黑铁大盾
+716	    Carnat Greatshield	カルナットラージシルド	卡尔纳特大盾
+717	    Greatwood Greatshield	大樹の大盾	大树大盾
+718	    Steel Greatshield	鉄の大盾	钢大盾
+719	    Spellsteel Greatshield	魔鉄の大盾	魔铁大盾
+720	    Vorpal Greatshield	ヴォーパルラージシールド	斩首大盾
+724	    Dragonbone Greatshield	大竜骨の大盾	大龙骨大盾
+725	    Thorn Greatshield	茨の大棘盾	荆棘之盾
+726	    Icefall Greatshield	大氷爆盾	大冰爆盾
+727	    Wingcrest Greatshield	翼紋章の大盾	翼纹章大盾
+729	    Templar's Greatshield	神殿騎士の大盾	神殿骑士大盾
+730	    Phantom Knight's Greatshield	幻影騎士の大盾	幻影骑士大盾
+731	    Zenoiran Greatshield	ゼノイラ兵の大盾	泽诺伊拉士兵大盾
+732	    Zenoiran Knight's Greatshield	ゼノイラ騎士の大盾	泽诺伊拉骑士大盾
+733	    Feathered Crest Greatshield	鶏冠騎士の大盾	鸡冠骑士大盾
+734	    Heavenswing Greatshield	天翼騎士の大盾	天翼骑士大盾
+736	    Obsidian Greatshield	黒曜の大盾	黑曜大盾
+737	    Azure Crest Greatshield	蒼紋の大盾	苍纹大盾
+739	    Mirage Greatshield	蜃気楼の大盾	海市蜃楼大盾
+742	    Viper Greatshield	毒蛇の大盾	毒蛇大盾
+743	    Searing Greatshield	灼熱の大盾	灼热大盾
+744	    Hoarfrost Greatshield	樹氷の大盾	雾凇大盾
+745	    Luminous Greatshield	光輝の大盾	光辉大盾
+747	    Citadel Guard's Greatshield	城塞兵の大盾	要塞兵大盾
+748	    Moonlight Greatshield	月光の大盾	月光大盾
+749	    Unyielding Greatshield	不屈の大盾	不屈大盾
+750	    Horsekiller Greatshield	騎馬狩りの大盾	猎骑大盾
+751	    Wingclipper Greatshield	羽狩りの大盾	猎羽大盾
+752	    Beastslayer Greatshield	獣狩りの大盾	猎兽大盾
+753	    Squire's Greatshield	従騎士の大盾	见习骑士大盾
+754	    Panoplied Greatshield	重装歩兵の大盾	重装步兵大盾
+755	    Ironclad Towershield	鉄壁のタワーシールド	铁壁塔盾
+756	    Bulwark Towershield	巨壁のタワーシールド	巨壁塔盾
+757	    White Knight's Greatshield	白騎士の大盾	白骑士大盾
+758	    Blacksilver Pavise	黒銀のパビス	黑银方盾
+761	    Heaven's Mirror Greatshield	天鏡の大盾	天镜大盾
+762	    Drakestone Iceshield	竜岩の氷盾	龙岩冰盾
+763	    Greatshield Of The Abyss	深淵の大盾	深渊大盾（13防御）
+764	    Greatshield Of The Abyss	深淵の大盾	深渊大盾（16防御）
+766	    Skiron's Greatshield	風大盾スキーローン	风大盾斯喀戎
+767	    Hero's Greatshield	英雄の大盾	英雄大盾
+768	    Champion's Towershield	王者のタワーシールド	王者塔盾
+769	    Gran Baris	グラン・バリス	巨大重盾
+784	    Carnelian Pendant	緋石のペンダント	绯石吊坠
+785	    Ruby Pendant	緋晶石のペンダント	绯晶石吊坠
+786	    Lapis Pendant	蒼石のペンダント	苍石吊坠
+787	    Sapphire Pendant	蒼晶石のペンダント	苍晶石吊坠
+788	    Amethyst Pendant	紫晶石のペンダント	紫晶石吊坠
+789	    Onyx Pendant	黒晶石のペンダント	黑晶石吊坠
+790	    Bronze Bangle	ブロンズバングル	青铜手环
+791	    Silver Bangle	シルバーバングル	银手环
+792	    Gold Bangle	ゴールドバングル	金手环
+793	    Bronze Circlet	ブロンズサークレット	青铜头环
+794	    Silver Circlet	シルバーサークレット	银头环
+795	    Gold Circlet	ゴールドサークレット	金头环
+796	    Brown Beret	ブラウンベレー	棕色贝雷帽
+797	    Green Beret	グリーンベレー	绿色贝雷帽
+798	    Elite Beret	エリートベレー	精英贝雷帽
+799	    Leather Hood	レザーフード	皮革兜帽
+800	    Silk Hood	シルクフード	丝绸兜帽
+801	    Sage's Hood	セイジフード	贤者兜帽
+802	    Vitality Talisman	命のタリスマン	生命护符
+803	    Lifeblood Talisman	生命のタリスマン	生机护符
+804	    Ervã©Lda's Talisman	神樹のタリスマン	神树护符
+805	    Dove Plume	白鳥の羽飾り	白天鹅羽饰
+806	    Raven Plume	黒鳥の羽飾り	黑天鹅羽饰
+807	    Angel Plume	天使の羽飾り	天使羽饰
+808	    Iron Shackles	鉄の足枷	铁镣
+809	    Prisoner's Shackles	狂人の足枷	狂人镣铐
+810	    Daemon's Shackles	悪魔の足枷	恶魔镣铐
+811	    Blue Spectacles	ブルーグラス	蓝色眼镜
+812	    Mirrored Spectacles	ミラードグラス	米勒德眼镜
+813	    Silken Scarf	シルフスカーフ	丝绸围巾
+814	    Royal Scarf	ロイヤルスカーフ	皇家围巾
+815	    Mercenary's Eyepatch	傭兵の眼帯	佣兵眼罩
+816	    Veteran's Eyepatch	猛者の眼帯	勇士眼罩
+817	    Lucky Coin	幸運のコイン	幸运硬币
+818	    Gauntlets	ガントレット	手铠
+819	    Cloth Gauntlets	クロスガントレット	十字手铠
+820	    Leaf Broach	リーフシンボル	树叶徽章
+821	    Rose Broach	ローズシンボル	蔷薇徽章
+822	    Holy Broach	ホーリーシンボル	神圣徽章
+823	    Sacral Broach	セイクリッドシンボル	圣崇徽章
+824	    White Ribbon	純白のリボン	纯白缎带
+825	    Verdant Ribbon	翠緑のリボン	翠绿缎带
+826	    Scarlett's Ribbon	スカーレットのリボン	斯嘉丽的缎带
+827	    Bloodstained Ribbon	血塗られたリボン	染血的缎带
+828	    Warrior's Medallion	戦士のメダリオン	战士勋章
+829	    Sorcerer's Medallion	魔術師のメダリオン	魔法师勋章
+830	    Knight's Medallion	重装兵のメダリオン	重装兵勋章
+831	    Cleric's Medallion	神官のメダリオン	神官勋章
+832	    Hero's Medallion	英雄のメダリオン	英雄勋章
+833	    Charm Of Land & Sea	大地と海のチャーム	海陆之饰
+834	    Charm Of Sun & Moon	太陽と月のチャーム	日月之饰
+835	    Lionheart	ライオンハート	狮心
+836	    Mistletoe Charm	宿り木のチャーム	寄生木饰物
+837	    Lamplight Ring	灯火の指輪	灯火戒指
+838	    Watchman's Lantern	塔守のランタン	守塔提灯
+839	    Watchman's Horn	塔守の角笛	守塔号角
+840	    Gravekeeper Lantern	墓守のランタン	守墓提灯
+841	    Gravekeeper Boots	墓守のブーツ	守墓长靴
+842	    Undead Ring	死者の指輪	死者戒指
+843	    Necromancer's Lantern	死靈術師のランタン	死灵术士提灯
+844	    Bloodmoon Earrings	血月のイヤリング	血月耳环
+845	    Retaliation Earrings	反撃のイヤリング	反击耳环
+846	    Earrings Of Pursuit	追撃のイヤリング	追击耳环
+848	    Tailwind Cape	追い風のケープ	乘风披肩
+849	    Lips's Ring	リプスの風環	利普斯风环
+850	    Gust Bracelet	疾風のブレスレット	疾风手链
+851	    Squall Bracelet	突風のブレスレット	狂风手链
+852	    Crude Tasset	荒くれのタセット	狂野腰带
+853	    Defender's Ring	堅盾の指輪	坚盾戒指
+854	    Acrobat's Shoes	曲芸師の靴	杂耍师之靴
+855	    Battleline Standard	戦列の軍旗	战阵军旗
+856	    Wingline Standard	翼列の軍旗	翼阵军旗
+857	    Elite Standard	精鋭の軍旗	精锐军旗
+858	    Wolfpack Gauntlets	群狼の篭手	群狼护臂
+859	    Badger Gauntlets	穴熊のガントレット	狗獾手铠
+861	    First Aid Kit	エイドキット	急救箱
+862	    Medical Kit	メディカルキット	医疗箱
+863	    Large Aid Kit	ラージエイドキット	大急救箱
+864	    Shawl Of Repose	休息のショール	休憩披巾
+866	    Defensive Ring	守りの指輪	守护戒指
+867	    Aurora Ring	極光の指輪	极光戒指
+868	    Charm Of Warding	魔除けのチャーム	驱魔之饰
+869	    Wind Faerie's Bell	風精の鈴	风精铃铛
+870	    Thief's Bell	盗賊の鈴	盗贼铃铛
+871	    Flamebrand Tome	炎剣の術書	炎剑术之书
+872	    Frostbrand Tome	氷剣の術書	冰剑术之书
+873	    Thunderbrand Tome	雷鳴の指輪	雷剑术之书
+874	    Bloodbrand Tome	血剣の術書	血剑术之书
+875	    Glory Sash	栄光のサッシュ	荣光腰饰
+876	    Dancer's Bracelet	踊り子の腕輪	舞女手环
+877	    Gambler's Coin	賭博師のコイン	赌徒硬币
+878	    Dirty Gambler's Coin	色褪せた賭博師のコイン	褪色的赌徒硬币
+879	    Familiar's Choker	使い魔のチョーカー	使魔项圈
+880	    Truestrike Star	必中の星章	必中星章
+881	    Sage Owl's Shawl	賢梟のショール	贤枭披巾
+883	    Sniper's Lens	狙撃手のレンズ	狙击手透镜
+884	    Sniper's Amber Lens	狙撃手のアンバーレンズ	狙击手琥珀透镜
+885	    Wyvern Reins	飛竜の手綱	飞龙缰绳
+886	    Heavenwyvern Reins	神竜の手綱	神龙缰绳
+887	    Armored Gauntlets	重騎士の篭手	重战士臂甲
+889	    Pursuant's Bracelet	追撃者の腕輪	追击者手环
+890	    Liberator's Bracelet	解放者の腕輪	解放者手环
+891	    Outlaw's Bracelet	無法者の腕輪	亡命者手环
+892	    Wolf Fang Bracelet	狼牙の腕輪	狼牙手环
+893	    Cleric's Bracelet	聖職者の腕輪	圣职者手环
+894	    Counter Belt	カウンターベルト	反击腰带
+895	    Riot Belt	ライオットベルト	暴乱腰带
+896	    Wyvern Claw	飛竜の爪	飞龙之爪
+897	    Mage's Gloves	メイジグローブ	学者手套
+898	    Liberator's Belt	解放者の帯革	解放者皮带
+899	    Monk's Mitre	修道士の聖帽	修道士神帽
+900	    Archbishop's Mitre	大司教の聖帽	大主教圣帽
+901	    Spirit's Necklace	精霊の首飾り	精魂项链
+902	    Self-Aid Kit	セルフキット	自救箱
+903	    Lapis Bell	蒼石の鈴	苍石铃铛
+904	    Dancer's Anklet	踊り子の足環	舞女脚环
+905	    Dawn Robes	陽光のローブ	阳光长袍
+906	    Dusk Robes	月光のローブ	月光长袍
+908	    Power Belt	マッスルベルト	肌肉腰带
+909	    Defensive Gauntlets	守りの籠手	守护臂甲
+910	    Thief's Mantle	盗賊のマント	盗贼披风
+911	    Twilight Cloak	宵闇のマント	宵暗披风
+912	    Illusory Cloak	幻影のマント	幻影披风
+913	    Courser's Reins	駿馬の手綱	骏马缰绳
+914	    Heavensteed Reins	神馬の手綱	神马缰绳
+915	    Old Witch's Ring	老魔女の指輪	老魔女戒指
+917	    Master's Gauntlets	達人の篭手	大人臂甲
+918	    Guardian Gloves	ガーディアングローブ	守卫手套
+919	    Vengeful Caligae	復讐鬼のカリガ	复仇鬼战靴
+920	    Citadel Guard's Sabatons	城塞兵のサバント	要塞兵铠靴
+921	    Druid's Robes	ドルイドロープ	德鲁伊长袍
+922	    Sorcerer's Gauntlets	魔術師のガントレット	魔法师手铠
+923	    Soothing Plume	癒しの羽飾り	治愈羽饰
+924	    Phoenix's Plume	不死鳥の花飾り	不死鸟羽饰
+926	    Detoxifying Amulet	解毒のアミレット	解毒护符
+927	    Quenching Amulet	火消のアミレット	灭火护符
+928	    Defrosting Amulet	氷解のアミレット	融冰护符
+929	    Awakening Amulet	気付けのアミレット	觉察护符
+930	    Clearsight Amulet	可視のアミレット	可视护符
+931	    Parrying Amulet	封防のアミレット	封防护符
+932	    Skillful Amulet	封技のアミレット	封技护符
+933	    Holy Unicorn Signet	一角獣の聖印	独角兽圣印
+934	    Salamander Ring	火竜の指輪	火龙戒指
+935	    Glacial Ring	氷雪の指輪	冰雪戒指
+936	    Thunderclap Ring	雷鳴の指輪	雷鸣戒指
+937	    Cooling Bandana	ひんやりバンダナ	清凉头巾
+938	    Barbed Ribbon	とげとげリボン	刺刺缎带
+939	    Wooly Mittens	もこもこミトン	蓬蓬手套
+940	    Fluffy Cape	ふんわりケープ	轻柔披肩
+942	    Chloe's Charm	クロエのお守り	克洛伊的护身符
+943	    Rookie Egg	ルーキーエッグ	新秀蛋
+944	    Golden Egg	ゴールデンエッグ	黄金蛋
+945	    Miser's Bracelet	守銭奴の腕輪	守财奴手环
+946	    Silver Goblet	銀のゴブレット	银高脚杯
+947	    Gold Goblet	金のゴブレット	金高脚杯
+948	    Gauntlets Of The Abyss	深淵の篭手	深渊臂甲
+949	    Crown Of The Abyss	深淵の王冠	深渊王冠
+950	    Talisman Of The Abyss	深淵のタリスマン	深渊护符
+951	    Celestial Talisman	星辰のタリスマン	星辰护符
+952	    Magia Soul	マギアソウル	魔魂
+953	    Magia Heart	マギアハーツ	魔心
+954	    White Cat-Ear Hood	白ネコミミフード	白猫耳兜帽
+955	    Black Cat-Ear Hood	黒ネコミミフード	黑猫耳兜帽
+956	    Dream Crown	夢幻の王冠	梦幻王冠
+957	    Ancient Crown	古代の王冠	古代王冠
+959	    Ring Of The Unicorn	一角獣の指輪	独角兽之戒（觉醒前）
+960	    Ring Of The Unicorn	一角獣の指輪	独角兽之戒（AP+1,全能力+5）
+961	    Ring Of The Unicorn	一角獣の指輪	独角兽之戒（星辰一剑）
+962	    Ring Of The Maiden	乙女の指輪	少女戒指（觉醒前）
+963	    Ring Of The Maiden	乙女の指輪	少女戒指（PP+1,全能力+5）
+964	    Ring Of The Maiden	乙女の指輪	少女戒指（天穹之光）
+965	    Hp +50	HP＋50	HP＋50
+966	    Hp +200	HP＋100	HP＋200
+967	    Str +100	STR＋100	STR＋100
+968	    Physical Attack +	物理攻撃力＋	物理攻击力＋
+969	    Magical Attack +	魔法攻撃力＋	魔法攻击力＋
+970	    Critical Damage +	会心ダメージ＋	暴击伤害＋

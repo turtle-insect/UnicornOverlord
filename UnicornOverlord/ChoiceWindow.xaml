@@ -10,7 +10,9 @@
 	<DockPanel>
 		<DockPanel DockPanel.Dock="Top">
 			<Label Content="Filter"/>
-			<TextBox x:Name="TextBoxFilter" TextChanged="TextBoxFilter_TextChanged" TabIndex="0"/>
+            <TextBox x:Name="TextBoxFilter" TextChanged="TextBoxFilter_TextChanged" TabIndex="0" Width="130"/>
+            <Label Content="Count"/>
+            <TextBox x:Name="TextBoxCount" TabIndex="1" Text="1"/>
 		</DockPanel>
 		<Grid DockPanel.Dock="Bottom">
 			<Grid.ColumnDefinitions>
