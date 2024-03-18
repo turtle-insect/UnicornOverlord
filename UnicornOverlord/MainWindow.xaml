@@ -27,6 +27,7 @@
 			<ComboBox Width="50" SelectedIndex="{Binding Source={x:Static prop:Settings.Default}, Path=Language}">
 				<ComboBoxItem Content="en"/>
 				<ComboBoxItem Content="jp"/>
+				<ComboBoxItem Content="cn"/>
 			</ComboBox>
 		</ToolBar>
 		<TabControl>
