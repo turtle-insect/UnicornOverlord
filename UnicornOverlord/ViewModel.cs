@@ -172,6 +172,8 @@ namespace UnicornOverlord
                 case 0:
                     var item1 = new Item(0xA0 + index * 20);
                     item1.Status = 2;
+                    item1.ID = dlg.ID;
+                    item1.Index = index + 1;
                     item1.Count = count;
                     Items.Add(item1);
                     break;
@@ -181,9 +183,9 @@ namespace UnicornOverlord
                         index = (uint)(Items.Count + Equipments.Count);
                         if (index >= 3800) return;
                         var itemtemp = new Item(0xA0 + index * 20);
+                        itemtemp.Status = 3;
                         itemtemp.ID = dlg.ID;
                         itemtemp.Index = index + 1;
-                        itemtemp.Status = 3;
                         Equipments.Add(itemtemp);
                     }
                     break;
