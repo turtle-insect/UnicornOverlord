@@ -18,6 +18,16 @@ namespace UnicornOverlord
 			mAddress = address;
 		}
 
+		public void Delete()
+		{
+			this.ID = 0;
+			this.Index = 0;
+			this.Count = 0;
+			this.Equipment1 = 0;
+			this.Equipment2 = 0;
+			this.Status = 0;
+        }
+
 		public uint ID
 		{
 			get => SaveData.Instance().ReadNumber(mAddress, 4);
@@ -43,12 +53,14 @@ namespace UnicornOverlord
 		public uint Equipment1
 		{
 			get => SaveData.Instance().ReadNumber(mAddress + 11, 1);
-		}
+			set => SaveData.Instance().WriteNumber(mAddress + 11, 1, value);
+        }
 
 		public uint Equipment2
 		{
 			get => SaveData.Instance().ReadNumber(mAddress + 12, 1);
-		}
+			set => SaveData.Instance().WriteNumber(mAddress + 12, 1, value);
+        }
 
 		public uint Status
 		{
