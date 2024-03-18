@@ -8,199 +8,213 @@
         mc:Ignorable="d"
 		WindowStartupLocation="CenterScreen"
         Title="Unicorn Overlord(Nintendo Switch)" Height="450" Width="700">
-	<Window.Resources>
-		<local:ItemIDConverter x:Key="ItemIDConverter"/>
-		<local:ClassIDConverter x:Key="ClassIDConverter"/>
-	</Window.Resources>
-	<Window.DataContext>
-		<local:ViewModel/>
-	</Window.DataContext>
-	<DockPanel>
-		<Menu DockPanel.Dock="Top">
-			<MenuItem Header="File">
-				<MenuItem Header="Open" Command="{Binding OpenFileCommand}"/>
-				<MenuItem Header="Save" Command="{Binding SaveFileCommand}"/>
-			</MenuItem>
-		</Menu>
-		<ToolBar DockPanel.Dock="Top">
-			<Label Content="Language"/>
-			<ComboBox Width="50" SelectedIndex="{Binding Source={x:Static prop:Settings.Default}, Path=Language}">
-				<ComboBoxItem Content="en"/>
+    <Window.Resources>
+        <local:ItemIDConverter x:Key="ItemIDConverter"/>
+        <local:ClassIDConverter x:Key="ClassIDConverter"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:ViewModel/>
+    </Window.DataContext>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Command="{Binding OpenFileCommand}"/>
+                <MenuItem Header="Save" Command="{Binding SaveFileCommand}"/>
+            </MenuItem>
+        </Menu>
+        <ToolBar DockPanel.Dock="Top">
+            <Label Content="Language"/>
+            <ComboBox Width="50" SelectedIndex="{Binding Source={x:Static prop:Settings.Default}, Path=Language}">
+                <ComboBoxItem Content="en"/>
                 <ComboBoxItem Content="jp"/>
                 <ComboBoxItem Content="cn"/>
             </ComboBox>
-		</ToolBar>
-		<TabControl>
-			<TabItem Header="Basic">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition/>
-						<ColumnDefinition/>
-						<ColumnDefinition Width="5"/>
-						<ColumnDefinition/>
-						<ColumnDefinition/>
-					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition/>
-						<RowDefinition/>
-						<RowDefinition Height="12*"/>
-					</Grid.RowDefinitions>
-					<Label Content="Money"/>
-					<TextBox Grid.Column="1" Text="{Binding Basic.Money, UpdateSourceTrigger=PropertyChanged}"/>
-					<Label Grid.Row="1" Content="Fame"/>
-					<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Basic.Fame, UpdateSourceTrigger=PropertyChanged}"/>
-				</Grid>
-			</TabItem>
-			<TabItem Header="Character">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition/>
-						<ColumnDefinition/>
-						<ColumnDefinition/>
-					</Grid.ColumnDefinitions>
-					<DockPanel>
-						<Grid DockPanel.Dock="Bottom">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition/>
-								<ColumnDefinition/>
-								<ColumnDefinition/>
-							</Grid.ColumnDefinitions>
-							<Button Content="Export"
+        </ToolBar>
+        <TabControl>
+            <TabItem Header="Basic">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="12*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Money"/>
+                    <TextBox Grid.Column="1" Text="{Binding Basic.Money, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Label Grid.Row="1" Content="Fame"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Basic.Fame, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Character">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DockPanel>
+                        <Grid DockPanel.Dock="Bottom">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Export"
 									Command="{Binding ExportCharacterCommand}"
 									CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedIndex}"/>
-							<Button Grid.Column="1" Content="Import"
+                            <Button Grid.Column="1" Content="Import"
 									Command="{Binding ImportCharacterCommand}"
 									CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedIndex}"/>
-							<Button Grid.Column="2" Content="Insert"
+                            <Button Grid.Column="2" Content="Insert"
 									Command="{Binding InsertCharacterCommand}"/>
-						</Grid>
-						<ListBox Name="ListBoxCharacter" ItemsSource="{Binding Characters}" DisplayMemberPath="ID"/>
-					</DockPanel>
-					<Grid Grid.Column="1">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition/>
-							<ColumnDefinition/>
-						</Grid.ColumnDefinitions>
-						<Grid.RowDefinitions>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-						</Grid.RowDefinitions>
-						<Label Content="Use"/>
-						<CheckBox Grid.Column="1" IsChecked="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Use}" VerticalAlignment="Center"/>
-						<Label Grid.Row="1" Content="Class"/>
-						<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-							<Button Content=" ... "
+                        </Grid>
+                        <ListBox Name="ListBoxCharacter" ItemsSource="{Binding Characters}" DisplayMemberPath="ID"/>
+                    </DockPanel>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Use"/>
+                        <CheckBox Grid.Column="1" IsChecked="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Use}" VerticalAlignment="Center"/>
+                        <Label Grid.Row="1" Content="Class"/>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                            <Button Content=" ... "
 									Command="{Binding ChoiceClassCommand}"
 									CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedItem}"/>
-							<Label Content="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Class, Converter={StaticResource ClassIDConverter}}"/>
-						</StackPanel>
-						<Label Grid.Row="2" Content="Exp"/>
-						<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Exp, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="3" Content="HPPlus"/>
-						<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.HPPlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="4" Content="AttackPlus"/>
-						<TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.AttackPlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="5" Content="DefensePlus"/>
-						<TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.DefensePlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="6" Content="MagicAttackPlus"/>
-						<TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.MagicAttackPlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="7" Content="MagicDefensePlus"/>
-						<TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.MagicDefensePlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="8" Content="HitRatePlus"/>
-						<TextBox Grid.Row="8" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.HitRatePlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="9" Content="AVoidPlus"/>
-						<TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.AVoidPlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="10" Content="CriticalPlus"/>
-						<TextBox Grid.Row="10" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.CriticalPlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="11" Content="GuardPlus"/>
-						<TextBox Grid.Row="11" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.GuardPlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="12" Content="SpeedPlus"/>
-						<TextBox Grid.Row="12" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.SpeedPlus, UpdateSourceTrigger=PropertyChanged}"/>
-					</Grid>
-					<TabControl Grid.Column="2">
-						<TabItem Header="Bond">
-							<ListBox ItemsSource="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Bonds}">
-								<ListBox.ItemTemplate>
-									<DataTemplate>
-										<StackPanel Orientation="Horizontal">
-											<Label Content="ID"/>
-											<Label Content="{Binding ID}"/>
-											<Label Content="Value"/>
-											<TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-										</StackPanel>
-									</DataTemplate>
-								</ListBox.ItemTemplate>
-							</ListBox>
-						</TabItem>
-					</TabControl>
-				</Grid>
-			</TabItem>
-			<TabItem Header="Item">
-				<DockPanel>
-					<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendItemCommand}"/>
-					<ListBox ItemsSource="{Binding Items}">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<StackPanel Orientation="Horizontal">
-									<Label Content="Count"/>
-									<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-									<Button Content=" ... "
+                            <Label Content="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Class, Converter={StaticResource ClassIDConverter}}"/>
+                        </StackPanel>
+                        <Label Grid.Row="2" Content="Exp"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Exp, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="3" Content="HPPlus"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.HPPlus, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="4" Content="AttackPlus"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.AttackPlus, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="5" Content="DefensePlus"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.DefensePlus, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="6" Content="MagicAttackPlus"/>
+                        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.MagicAttackPlus, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="7" Content="MagicDefensePlus"/>
+                        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.MagicDefensePlus, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="8" Content="HitRatePlus"/>
+                        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.HitRatePlus, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="9" Content="AVoidPlus"/>
+                        <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.AVoidPlus, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="10" Content="CriticalPlus"/>
+                        <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.CriticalPlus, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="11" Content="GuardPlus"/>
+                        <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.GuardPlus, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Grid.Row="12" Content="SpeedPlus"/>
+                        <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.SpeedPlus, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                    <TabControl Grid.Column="2">
+                        <TabItem Header="Bond">
+                            <ListBox ItemsSource="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Bonds}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="ID"/>
+                                            <Label Content="{Binding ID}"/>
+                                            <Label Content="Value"/>
+                                            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Item">
+                <DockPanel>
+                    <Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendItemCommand}"/>
+                    <ListBox x:Name="ListBoxItem" ItemsSource="{Binding Items}" SelectionMode="Extended">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="EditCount" 
+                                          Click="EditItemCount"/>
+                                <MenuItem Header="DeleteItem" 
+                                          Click="DeleteItem"/>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Count"/>
+                                    <TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                                    <Button Content=" ... "
 									Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceItemCommand}"
 									CommandParameter="{Binding}"/>
-									<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
-								</StackPanel>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
-				</DockPanel>
-			</TabItem>
-			<TabItem Header="Equipment">
-				<DockPanel>
-					<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendEquipmentCommand}"/>
-					<ListBox ItemsSource="{Binding Equipments}">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<StackPanel Orientation="Horizontal">
-									<Label Content="???1"/>
-									<Label Content="{Binding Equipment1}" Width="50"/>
-									<Label Content="???2"/>
-									<Label Content="{Binding Equipment2}" Width="50"/>
-									<Button Content=" ... "
+                                    <Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Equipment">
+                <DockPanel>
+                    <Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendEquipmentCommand}"/>
+                    <ListBox x:Name="ListBoxEquipment" ItemsSource="{Binding Equipments}" SelectionMode="Extended">
+                        <ListBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="DeleteEquipment" 
+                                          Click="DeleteItem"/>
+                            </ContextMenu>
+                        </ListBox.ContextMenu>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="???1"/>
+                                    <Label Content="{Binding Equipment1}" Width="50"/>
+                                    <Label Content="???2"/>
+                                    <Label Content="{Binding Equipment2}" Width="50"/>
+                                    <Button Content=" ... "
 									Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceItemCommand}"
 									CommandParameter="{Binding}"/>
-									<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
-								</StackPanel>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
-				</DockPanel>
-			</TabItem>
-			<TabItem Header="Unit">
-				<ListBox ItemsSource="{Binding Units}" d:ItemsSource="{d:SampleData}">
-					<ListBox.ItemTemplate>
-						<DataTemplate>
-							<StackPanel Orientation="Horizontal">
-								<Label Content="Valid"/>
-								<CheckBox IsChecked="{Binding Valid}" VerticalAlignment="Center"/>
-								<Label Content="Count"/>
-								<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-							</StackPanel>
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
-			</TabItem>
-		</TabControl>
-	</DockPanel>
+                                    <Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Unit">
+                <ListBox ItemsSource="{Binding Units}" d:ItemsSource="{d:SampleData}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Valid"/>
+                                <CheckBox IsChecked="{Binding Valid}" VerticalAlignment="Center"/>
+                                <Label Content="Count"/>
+                                <TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>

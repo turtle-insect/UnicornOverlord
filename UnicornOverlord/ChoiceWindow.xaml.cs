@@ -26,7 +26,8 @@ namespace UnicornOverlord
         };
 
         public uint ID { get; set; }
-        public uint Count { get; set; }
+        public uint Count { get; private set; }
+
         public eType Type { get; set; } = eType.eItem;
         public ChoiceWindow()
         {
@@ -55,12 +56,13 @@ namespace UnicornOverlord
 
         private void ListBoxItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ButtonDecision.IsEnabled = ListBoxItem.SelectedIndex >= 0;
+            ButtonDecision.IsEnabled = ListBoxItem.SelectedIndex >= 0 || ListBoxItem.SelectedItems.Count > 0;
         }
 
         private void ButtonDecision_Click(object sender, RoutedEventArgs e)
         {
             if (ListBoxItem.SelectedItem is not NameValueInfo info) return;
+            if (ListBoxItem.SelectedItems.Count == 0) return;
             ID = info.Value;
             Count = uint.Parse(TextBoxCount.Text);
             Close();
