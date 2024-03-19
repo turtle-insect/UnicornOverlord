@@ -47,7 +47,11 @@ namespace UnicornOverlord
 		public uint Count
 		{
 			get => SaveData.Instance().ReadNumber(mAddress + 8, 3);
-			set => SaveData.Instance().WriteNumber(mAddress + 8, 3, value);
+            set
+            {
+                SaveData.Instance().WriteNumber(mAddress + 8, 3, value);
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+            }
 		}
 
 		public uint Equipment1

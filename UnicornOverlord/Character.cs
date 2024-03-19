@@ -43,7 +43,13 @@ namespace UnicornOverlord
 			set => SaveData.Instance().WriteNumber(mAddress + 56, 4, value);
 		}
 
-		public uint HPPlus
+        public uint Lv
+        {
+            get => SaveData.Instance().ReadNumber(mAddress + 60, 2);
+            set => SaveData.Instance().WriteNumber(mAddress + 60, 2, value);
+        }
+
+        public uint HPPlus
 		{
 			get => SaveData.Instance().ReadNumber(mAddress + 64, 1);
 			set => SaveData.Instance().WriteNumber(mAddress + 64, 1, value);

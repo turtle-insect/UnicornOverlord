@@ -31,6 +31,7 @@ namespace UnicornOverlord
         public ICommand ImportCharacterCommand { get; set; }
         public ICommand ExportCharacterCommand { get; set; }
         public ICommand InsertCharacterCommand { get; set; }
+        public ICommand ChangeItemCountMaxCommand { get; set; }
 
         public Basic Basic { get; set; } = new Basic();
         public ObservableCollection<Character> Characters { get; set; } = new ObservableCollection<Character>();
@@ -49,6 +50,7 @@ namespace UnicornOverlord
             ImportCharacterCommand = new ActionCommand(ImportCharacter);
             ExportCharacterCommand = new ActionCommand(ExportCharacter);
             InsertCharacterCommand = new ActionCommand(InsertCharacter);
+            ChangeItemCountMaxCommand = new ActionCommand(ChangeItemCountMax);
         }
 
         private void Initialize()
@@ -272,6 +274,15 @@ namespace UnicornOverlord
             InsertFriendship(id);
 
             Initialize();
+        }
+
+        private void ChangeItemCountMax(object? parameter)
+        {
+            foreach (var item in Items)
+            {
+                if (item.ID <= 4) continue;
+                item.Count = 99;
+            }
         }
 
         private Byte[] ProcessingCharacter(Byte[] buffer)
