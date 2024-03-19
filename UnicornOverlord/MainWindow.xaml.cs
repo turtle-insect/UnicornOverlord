@@ -23,11 +23,13 @@ namespace UnicornOverlord
         {
             InitializeComponent();
             (DataContext as ViewModel).OpenFileCommand.Execute(this);
+            (DataContext as ViewModel).ReadLanguageSetting();
         }
 
         private void ChangeLanguage(object sender, SelectionChangedEventArgs e)
         {
             (DataContext as ViewModel).ChangeLanguage(sender, e);
+
             ListBoxItem.ItemsSource = (DataContext as ViewModel).Items;
             ListBoxEquipment.ItemsSource = (DataContext as ViewModel).Equipments;
             ListBoxCharacter.ItemsSource = (DataContext as ViewModel).Characters;

@@ -68,7 +68,6 @@ namespace UnicornOverlord
             Items.Clear();
             Equipments.Clear();
             Units.Clear();
-            Languages.Clear();
 
             // create bond
             var bondDictionary = new Dictionary<uint, ObservableCollection<Bond>>();
@@ -121,14 +120,14 @@ namespace UnicornOverlord
                 Units.Add(unit);
             }
 
-            readLanguage();
-
             OnPropertyChanged(nameof(Basic));
             OnPropertyChanged(nameof(Languages));
         }
 
-        private void readLanguage()
+        public void ReadLanguageSetting()
         {
+            Languages.Clear();
+
             foreach (var languageOption in Info.Instance().Languages)
             {
                 Languages.Add(languageOption);
@@ -512,7 +511,7 @@ namespace UnicornOverlord
         public void ChangeLanguage(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboBox = (ComboBox)sender;
-            var selectedItem = comboBox.SelectedItem.ToString();
+            var selectedItem = comboBox.SelectedItem?.ToString();
             if (Languages.Contains(selectedItem))
             {
                 Info.Instance().CurrentSelectedLanguage = Languages.IndexOf(selectedItem);

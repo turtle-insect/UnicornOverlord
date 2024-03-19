@@ -74,7 +74,7 @@
                             <Button Grid.Column="2" Content="Insert"
 									Command="{Binding InsertCharacterCommand}"/>
                         </Grid>
-                        <ListBox Name="ListBoxCharacter" ItemsSource="{Binding Characters}" DisplayMemberPath="ID"/>
+                        <ListBox Name="ListBoxCharacter" ItemsSource="{Binding Characters, Mode=TwoWay}" DisplayMemberPath="ID"/>
                     </DockPanel>
                     <Grid Grid.Column="1">
                         <Grid.ColumnDefinitions>
@@ -153,7 +153,7 @@
                 <DockPanel>
                     <Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendItemCommand}"/>
                     <Button DockPanel.Dock="Top" Content="Count Max" Command="{Binding ChangeItemCountMaxCommand}"/>
-                    <ListBox x:Name="ListBoxItem" ItemsSource="{Binding Items}" SelectionMode="Extended">
+                    <ListBox x:Name="ListBoxItem" ItemsSource="{Binding Items, Mode=TwoWay}" SelectionMode="Extended">
                         <ListBox.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Edit" 
@@ -184,7 +184,7 @@
             <TabItem Header="Equipment">
                 <DockPanel>
                     <Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendEquipmentCommand}"/>
-                    <ListBox x:Name="ListBoxEquipment" ItemsSource="{Binding Equipments}" SelectionMode="Extended">
+                    <ListBox x:Name="ListBoxEquipment" ItemsSource="{Binding Equipments, Mode=TwoWay}" SelectionMode="Extended">
                         <ListBox.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Edit" 
