@@ -11,6 +11,7 @@ namespace UnicornOverlord
 		private static Info mThis = new Info();
 		public List<NameValueInfo> Item { get; private set; } = new List<NameValueInfo>();
 		public List<NameValueInfo> Class { get; private set; } = new List<NameValueInfo>();
+		public List<NameValueInfo> Name { get; private set; } = new List<NameValueInfo>();
 
 		private Info() { }
 
@@ -28,6 +29,7 @@ namespace UnicornOverlord
 		{
 			AppendList("info\\item.txt", Item);
 			AppendList("info\\class.txt", Class);
+			AppendList("info\\name.txt", Name);
 		}
 
 		public NameValueInfo? Search<Type>(List<Type> list, uint id)
