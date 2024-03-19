@@ -15,7 +15,7 @@ namespace UnicornOverlord
         {
             get
             {
-                var index = Properties.Settings.Default.Language;
+                var index = Info.Instance().CurrentSelectedLanguage;
                 if (index >= mNames.Count) index = 0;
 
                 var value = mNames[index];

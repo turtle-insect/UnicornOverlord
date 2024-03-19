@@ -18,13 +18,13 @@ namespace UnicornOverlord
 			mAddress = address;
 		}
 
-		public void Delete()
+		public void Empty()
 		{
 			this.ID = 0;
 			this.Index = 0;
 			this.Count = 0;
-			this.Equipment1 = 0;
-			this.Equipment2 = 0;
+			this.Equipment1 = 255;
+			this.Equipment2 = 255;
 			this.Status = 0;
         }
 

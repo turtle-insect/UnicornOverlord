@@ -27,7 +27,7 @@ namespace UnicornOverlord
 
         public uint ID { get; set; }
         public uint Count { get; private set; }
-
+        public bool Confirmed { get; set; }
         public eType Type { get; set; } = eType.eItem;
         public ChoiceWindow()
         {
@@ -65,6 +65,7 @@ namespace UnicornOverlord
             if (ListBoxItem.SelectedItems.Count == 0) return;
             ID = info.Value;
             Count = uint.Parse(TextBoxCount.Text);
+            Confirmed = true;
             Close();
         }
 
@@ -81,6 +82,12 @@ namespace UnicornOverlord
                     ListBoxItem.Items.Add(item);
                 }
             }
+        }
+
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Confirmed = false;
+            Close();
         }
     }
 }

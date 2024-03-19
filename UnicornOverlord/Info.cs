@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OfficeOpenXml;
+
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using OfficeOpenXml;
-
-using static OfficeOpenXml.ExcelErrorValue;
 
 namespace UnicornOverlord
 {
@@ -16,8 +9,8 @@ namespace UnicornOverlord
         private static Info mThis = new Info();
         public List<NameValueInfo> Item { get; private set; } = new List<NameValueInfo>();
         public List<NameValueInfo> Class { get; private set; } = new List<NameValueInfo>();
-
-        private Info() { }
+        public List<string> Languages { get; private set; } = new List<string>();
+        public int CurrentSelectedLanguage { get; internal set; }
 
         static Info()
         {
@@ -36,22 +29,42 @@ namespace UnicornOverlord
             var classSheet = package.Workbook.Worksheets["class"];
             var itemSheet = package.Workbook.Worksheets["item"];
 
+            int totalColumns = itemSheet.Columns.Count();
+
+            Languages = new List<string>();
+            for (int column = 2; column <= totalColumns; column++)
+            {
+                // 获取第一行第column列的值
+                var cellValue = itemSheet.Cells[1, column].Value;
+                if (cellValue != null)
+                {
+                    Languages.Add(cellValue.ToString());
+                }
+            }
             //Handle class data
+
             for (int row = 2; row <= classSheet.Dimension.End.Row; row++)
             {
                 var id = Convert.ToUInt32(classSheet.Cells[row, 1].Value.ToString());
                 if (id == 0)
                     continue;
-                var nameEn = classSheet.Cells[row, 2].Value.ToString();
-                var nameJp = classSheet.Cells[row, 3].Value.ToString();
-                var nameCn = classSheet.Cells[row, 4].Value.ToString();
+
+                List<string> nameTranslation = new List<string>();
+                for (int i = 2; i < Languages.Count + 2; i++)
+                {
+                    if (classSheet.Cells[row, i].Value == null)
+                        break;
+                    var name = classSheet.Cells[row, i].Value.ToString();
+                    nameTranslation.Add(name);
+                }
 
                 NameValueInfo type = new NameValueInfo();
-                if (type.Line(id, new string[] { nameEn, nameJp, nameCn }))
+                if (type.Line(id, nameTranslation))
                 {
                     Class.Add(type);
                 }
             }
+            Class.Sort();
 
             //Handle item data
             for (int row = 2; row <= itemSheet.Dimension.End.Row; row++)
@@ -59,19 +72,23 @@ namespace UnicornOverlord
                 var id = Convert.ToUInt32(itemSheet.Cells[row, 1].Value.ToString());
                 if (id == 0)
                     continue;
-                var nameEn = itemSheet.Cells[row, 2].Value.ToString();
-                var nameJp = itemSheet.Cells[row, 3].Value.ToString();
-                var nameCn = itemSheet.Cells[row, 4].Value.ToString();
+
+                List<string> nameTranslation = new List<string>();
+                for (int i = 2; i < Languages.Count + 2; i++)
+                {
+                    if (itemSheet.Cells[row, i].Value == null)
+                        break;
+                    var name = itemSheet.Cells[row, i].Value.ToString();
+                    nameTranslation.Add(name);
+                }
 
                 NameValueInfo type = new NameValueInfo();
-                if (type.Line(id, new string[] { nameEn, nameJp, nameCn }))
+                if (type.Line(id, nameTranslation))
                 {
                     Item.Add(type);
                 }
             }
-
-            //AppendList("info\\item.txt", Item);
-            //AppendList("info\\class.txt", Class);
+            Item.Sort();
         }
 
         public NameValueInfo? Search<Type>(List<Type> list, uint id)
@@ -87,30 +104,6 @@ namespace UnicornOverlord
                 else min = mid + 1;
             }
             return null;
-        }
-
-        private void AppendList<Type>(String filename, List<Type> items) where Type : NameValueInfo, new()
-        {
-            if (!System.IO.File.Exists(filename)) return;
-            String[] lines = System.IO.File.ReadAllLines(filename);
-
-            foreach (String line in lines)
-            {
-                if (line.Length < 3) continue;
-                if (line[0] == '#') continue;
-                String[] values = line.Split('\t');
-                if (values.Length < 2) continue;
-                if (String.IsNullOrEmpty(values[0])) continue;
-                if (String.IsNullOrEmpty(values[1])) continue;
-
-                Type type = new Type();
-                if (type.Line(values))
-                {
-                    items.Add(type);
-                }
-            }
-
-            items.Sort();
         }
     }
 }

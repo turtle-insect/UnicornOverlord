@@ -27,7 +27,11 @@ namespace UnicornOverlord
         public ICommand ChoiceItemCommand { get; set; }
         public ICommand ChoiceClassCommand { get; set; }
         public ICommand AppendItemCommand { get; set; }
+        public ICommand EditItemCommand { get; set; }
+        public ICommand DeleteItemCommand { get; set; }
         public ICommand AppendEquipmentCommand { get; set; }
+        public ICommand EditEquipmentCommand { get; set; }
+        public ICommand DeleteEquipmentCommand { get; set; }
         public ICommand ImportCharacterCommand { get; set; }
         public ICommand ExportCharacterCommand { get; set; }
         public ICommand InsertCharacterCommand { get; set; }
@@ -38,6 +42,7 @@ namespace UnicornOverlord
         public ObservableCollection<Item> Items { get; set; } = new ObservableCollection<Item>();
         public ObservableCollection<Item> Equipments { get; set; } = new ObservableCollection<Item>();
         public ObservableCollection<Unit> Units { get; set; } = new ObservableCollection<Unit>();
+        public ObservableCollection<string> Languages { get; set; } = new ObservableCollection<string>();
 
         public ViewModel()
         {
@@ -46,6 +51,10 @@ namespace UnicornOverlord
             ChoiceItemCommand = new ActionCommand(ChoiceItem);
             ChoiceClassCommand = new ActionCommand(ChoiceClass);
             AppendItemCommand = new ActionCommand(AppendItem);
+            EditItemCommand = new ActionCommand(EditItem);
+            DeleteItemCommand = new ActionCommand(DeleteItem);
+            EditEquipmentCommand = new ActionCommand(EditEquipment);
+            DeleteEquipmentCommand = new ActionCommand(DeleteEquipment);
             AppendEquipmentCommand = new ActionCommand(AppendEquipment);
             ImportCharacterCommand = new ActionCommand(ImportCharacter);
             ExportCharacterCommand = new ActionCommand(ExportCharacter);
@@ -59,6 +68,7 @@ namespace UnicornOverlord
             Items.Clear();
             Equipments.Clear();
             Units.Clear();
+            Languages.Clear();
 
             // create bond
             var bondDictionary = new Dictionary<uint, ObservableCollection<Bond>>();
@@ -111,7 +121,18 @@ namespace UnicornOverlord
                 Units.Add(unit);
             }
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Basic)));
+            readLanguage();
+
+            OnPropertyChanged(nameof(Basic));
+            OnPropertyChanged(nameof(Languages));
+        }
+
+        private void readLanguage()
+        {
+            foreach (var languageOption in Info.Instance().Languages)
+            {
+                Languages.Add(languageOption);
+            }
         }
 
         private void OpenFile(object? parameter)
@@ -137,6 +158,8 @@ namespace UnicornOverlord
             var dlg = new ChoiceWindow();
             dlg.ID = item.ID;
             dlg.ShowDialog();
+            if (!dlg.Confirmed)
+                return;
             item.ID = dlg.ID;
         }
 
@@ -149,12 +172,153 @@ namespace UnicornOverlord
             dlg.Type = ChoiceWindow.eType.eClass;
             dlg.ID = ch.Class;
             dlg.ShowDialog();
+            if (!dlg.Confirmed)
+                return;
             ch.Class = dlg.ID;
         }
 
         private void AppendItem(object? parameter)
         {
             AppendItem(0);
+        }
+
+        private void EditItem(object? parameter)
+        {
+            if (parameter == null)
+                return;
+            List<Item> itemsToEdit = null;
+            if (parameter is Item)
+            {
+                itemsToEdit = new List<Item> { parameter as Item };
+            }
+            else
+            {
+                itemsToEdit = (parameter as IEnumerable<object>).Select(item => item as Item).ToList();
+            }
+            if (itemsToEdit != null && itemsToEdit.Count > 0)
+            {
+                Item? item = itemsToEdit[0];
+                if (item == null) return;
+
+                var dlg = new ChoiceWindow();
+                dlg.ID = item.ID;
+                dlg.ShowDialog();
+                if (!dlg.Confirmed)
+                    return;
+                foreach (Item selectedItem in itemsToEdit)
+                {
+                    selectedItem.ID = dlg.ID;
+                    selectedItem.Count = dlg.Count;
+                }
+            }
+        }
+
+        private void DeleteItem(object? parameter)
+        {
+            if (parameter == null)
+                return;
+            List<Item> itemsToDelete = null;
+            if (parameter is Item)
+            {
+                itemsToDelete = new List<Item> { parameter as Item };
+            }
+            else
+            {
+                itemsToDelete = (parameter as IEnumerable<object>).Select(item => item as Item).ToList();
+            }
+
+            if (itemsToDelete != null && itemsToDelete.Count > 0)
+            {
+                List<Item> temp = new List<Item>();
+                foreach (Item selectedItem in itemsToDelete)
+                {
+                    temp.Add(selectedItem);
+                }
+
+                for (int i = 0; i < temp.Count; i++)
+                {
+                    temp[i].Empty();
+                    Items.Remove(temp[i]);
+                }
+
+                var reOrderList = new ObservableCollection<Item>(Items.OrderBy(item => item.Index));
+                var newList = new ObservableCollection<Item>();
+                for (int i = 0; i < reOrderList.Count; i++)
+                {
+                    reOrderList[i].Index = (uint)(newList.Count + Equipments.Count + 1);
+                    newList.Add(reOrderList[i]);
+                }
+                Items = newList;
+                OnPropertyChanged("Items");
+            }
+        }
+
+        private void DeleteEquipment(object? parameter)
+        {
+            if (parameter == null)
+                return;
+            List<Item> itemsToDelete = null;
+            if (parameter is Item)
+            {
+                itemsToDelete = new List<Item> { parameter as Item };
+            }
+            else
+            {
+                itemsToDelete = (parameter as IEnumerable<object>).Select(item => item as Item).ToList();
+            }
+
+            if (itemsToDelete != null && itemsToDelete.Count > 0)
+            {
+                List<Item> temp = new List<Item>();
+                foreach (Item selectedItem in itemsToDelete)
+                {
+                    temp.Add(selectedItem);
+                }
+
+                for (int i = 0; i < temp.Count; i++)
+                {
+                    temp[i].Empty();
+                    Equipments.Remove(temp[i]);
+                }
+
+                var reOrderList = new ObservableCollection<Item>(Equipments.OrderBy(item => item.Index));
+                var newList = new ObservableCollection<Item>();
+                // 更新每个元素的Index属性值
+                for (int i = 0; i < reOrderList.Count; i++)
+                {
+                    reOrderList[i].Index = (uint)(newList.Count + Equipments.Count + 1);
+                    newList.Add(reOrderList[i]);
+                }
+                Equipments = newList;
+                OnPropertyChanged("Equipments");
+            }
+        }
+
+        private void EditEquipment(object? parameter)
+        {
+            if (parameter == null)
+                return;
+            List<Item> itemsToEdit = null;
+            if (parameter is Item)
+            {
+                itemsToEdit = new List<Item> { parameter as Item };
+            }
+            else
+            {
+                itemsToEdit = (parameter as IEnumerable<object>).Select(item => item as Item).ToList();
+            }
+            if (itemsToEdit == null || itemsToEdit.Count == 0)
+                return;
+            Item? item = itemsToEdit[0];
+            var dlg = new ChoiceWindow();
+            dlg.ID = item.ID;
+            dlg.ShowDialog();
+            if (!dlg.Confirmed)
+                return;
+            foreach (Item selectedItem in itemsToEdit)
+            {
+                selectedItem.ID = dlg.ID;
+            }
         }
 
         private void AppendEquipment(object? parameter)
@@ -169,7 +333,8 @@ namespace UnicornOverlord
 
             var dlg = new ChoiceWindow();
             dlg.ShowDialog();
-            if (dlg.ID == 0) return;
+            if (dlg.ID == 0)
+                return;
             var selectedItems = dlg.ListBoxItem.SelectedItems.Count == 1 ? new List<NameValueInfo> { dlg.ListBoxItem.SelectedItem as NameValueInfo } : dlg.ListBoxItem.SelectedItems;
 
             uint count = dlg.Count;
@@ -199,6 +364,8 @@ namespace UnicornOverlord
                             itemtemp.Status = 3;
                             itemtemp.ID = ((NameValueInfo)selectedItems[i]).Value;
                             itemtemp.Index = index + 1;
+                            itemtemp.Equipment1 = 255;
+                            itemtemp.Equipment2 = 255;
                             Equipments.Add(itemtemp);
                         }
                     }
@@ -340,6 +507,23 @@ namespace UnicornOverlord
                     }
                 }
             }
+        }
+
+        public void ChangeLanguage(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            var selectedItem = comboBox.SelectedItem.ToString();
+            if (Languages.Contains(selectedItem))
+            {
+                Info.Instance().CurrentSelectedLanguage = Languages.IndexOf(selectedItem);
+            }
+            OnPropertyChanged(nameof(Items));
+            OnPropertyChanged(nameof(Equipments));
+        }
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

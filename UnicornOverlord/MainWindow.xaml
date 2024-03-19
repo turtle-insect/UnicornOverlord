@@ -24,10 +24,10 @@
         </Menu>
         <ToolBar DockPanel.Dock="Top">
             <Label Content="Language"/>
-            <ComboBox Width="50" SelectedIndex="{Binding Source={x:Static prop:Settings.Default}, Path=Language}">
-                <ComboBoxItem Content="en"/>
-                <ComboBoxItem Content="jp"/>
-                <ComboBoxItem Content="cn"/>
+            <ComboBox Width="50" 
+                      SelectedIndex="{Binding Source={x:Static prop:Settings.Default}, Path=Language}"
+                      ItemsSource="{Binding Languages}"
+                      SelectionChanged="ChangeLanguage">
             </ComboBox>
         </ToolBar>
         <TabControl>
@@ -156,10 +156,14 @@
                     <ListBox x:Name="ListBoxItem" ItemsSource="{Binding Items}" SelectionMode="Extended">
                         <ListBox.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="EditItem" 
-                                          Click="EditItem"/>
-                                <MenuItem Header="DeleteItem" 
-                                          Click="DeleteItem"/>
+                                <MenuItem Header="Edit" 
+                                          Command="{Binding EditItemCommand}" 
+                                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},
+                                                            Path=PlacementTarget.SelectedItems}"/>
+                                <MenuItem Header="Delete" 
+                                          Command="{Binding DeleteItemCommand}" 
+                                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},
+                                                            Path=PlacementTarget.SelectedItems}"/>
                             </ContextMenu>
                         </ListBox.ContextMenu>
                         <ListBox.ItemTemplate>
@@ -183,10 +187,14 @@
                     <ListBox x:Name="ListBoxEquipment" ItemsSource="{Binding Equipments}" SelectionMode="Extended">
                         <ListBox.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="EditEquipment" 
-                                          Click="EditEquipment"/>
-                                <MenuItem Header="DeleteEquipment" 
-                                          Click="DeleteEquipment"/>
+                                <MenuItem Header="Edit" 
+                                          Command="{Binding EditEquipmentCommand}" 
+                                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},
+                                                            Path=PlacementTarget.SelectedItems}"/>
+                                <MenuItem Header="Delete" 
+                                          Command="{Binding DeleteEquipmentCommand}" 
+                                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},
+                                                            Path=PlacementTarget.SelectedItems}"/>
                             </ContextMenu>
                         </ListBox.ContextMenu>
                         <ListBox.ItemTemplate>
