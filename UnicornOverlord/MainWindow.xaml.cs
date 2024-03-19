@@ -22,7 +22,6 @@ namespace UnicornOverlord
         public MainWindow()
         {
             InitializeComponent();
-            (DataContext as ViewModel).OpenFileCommand.Execute(this);
             (DataContext as ViewModel).ReadLanguageSetting();
         }
 
