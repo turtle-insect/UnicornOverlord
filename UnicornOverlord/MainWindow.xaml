@@ -8,6 +8,11 @@
         mc:Ignorable="d"
 		WindowStartupLocation="CenterScreen"
         Title="Unicorn Overlord(Nintendo Switch)" Height="500" Width="700">
+	<Window.InputBindings>
+		<KeyBinding Modifiers="Ctrl" Key="O" Command="{Binding OpenFileCommand}"/>
+		<KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding SaveFileCommand}"/>
+		<KeyBinding Modifiers="Ctrl+Shift" Key="S" Command="{Binding SaveAsFileCommand}"/>
+	</Window.InputBindings>
 	<Window.Resources>
 		<local:ClassIDConverter x:Key="ClassIDConverter"/>
 		<local:ItemIDConverter x:Key="ItemIDConverter"/>
@@ -18,9 +23,10 @@
 	</Window.DataContext>
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
-			<MenuItem Header="File">
-				<MenuItem Header="Open" Command="{Binding OpenFileCommand}"/>
-				<MenuItem Header="Save" Command="{Binding SaveFileCommand}"/>
+			<MenuItem Header="File(_F)">
+				<MenuItem Header="Open(_O)" Command="{Binding OpenFileCommand}" InputGestureText="Ctrl+O"/>
+				<MenuItem Header="Save(_S)" Command="{Binding SaveFileCommand}" InputGestureText="Ctrl+S"/>
+				<MenuItem Header="SaveAs(_A)" Command="{Binding SaveFileCommand}" InputGestureText="Ctrl+Shift+S"/>
 			</MenuItem>
 		</Menu>
 		<ToolBar DockPanel.Dock="Top">
@@ -143,18 +149,23 @@
 					</Grid>
 					<TabControl Grid.Column="2">
 						<TabItem Header="Bond">
-							<ListBox ItemsSource="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Bonds}">
-								<ListBox.ItemTemplate>
-									<DataTemplate>
-										<StackPanel Orientation="Horizontal">
-											<Label Content="ID"/>
-											<Label Content="{Binding ID}"/>
-											<Label Content="Value"/>
-											<TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-										</StackPanel>
-									</DataTemplate>
-								</ListBox.ItemTemplate>
-							</ListBox>
+							<DockPanel>
+								<Button DockPanel.Dock="Bottom" Content="Count Max"
+										Command="{Binding ChangeCharacterBondMaxCommand}"
+										CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedItem}"/>
+								<ListBox ItemsSource="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Bonds}">
+									<ListBox.ItemTemplate>
+										<DataTemplate>
+											<StackPanel Orientation="Horizontal">
+												<Label Content="ID"/>
+												<Label Content="{Binding ID}"/>
+												<Label Content="Value"/>
+												<TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
+											</StackPanel>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</DockPanel>
 						</TabItem>
 					</TabControl>
 				</Grid>

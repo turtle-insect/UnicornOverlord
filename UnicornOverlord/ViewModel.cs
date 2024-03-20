@@ -20,6 +20,7 @@ namespace UnicornOverlord
 		private readonly Info Info = Info.Instance();
 		public ICommand OpenFileCommand { get; set; }
 		public ICommand SaveFileCommand { get; set; }
+		public ICommand SaveAsFileCommand { get; set; }
 		public ICommand ChoiceItemCommand { get; set; }
 		public ICommand ChoiceClassCommand { get; set; }
 		public ICommand AppendItemCommand { get; set; }
@@ -28,6 +29,7 @@ namespace UnicornOverlord
 		public ICommand ExportCharacterCommand { get; set; }
 		public ICommand InsertCharacterCommand { get; set; }
 		public ICommand ChangeItemCountMaxCommand { get; set; }
+		public ICommand ChangeCharacterBondMaxCommand { get; set; }
 
 		public Basic Basic { get; set; } = new Basic();
 		public ObservableCollection<Character> Characters { get; set; } = new ObservableCollection<Character>();
@@ -39,6 +41,7 @@ namespace UnicornOverlord
 		{
 			OpenFileCommand = new ActionCommand(OpenFile);
 			SaveFileCommand = new ActionCommand(SaveFile);
+			SaveAsFileCommand = new ActionCommand(SaveAsFile);
 			ChoiceItemCommand = new ActionCommand(ChoiceItem);
 			ChoiceClassCommand = new ActionCommand(ChoiceClass);
 			AppendItemCommand = new ActionCommand(AppendItem);
@@ -47,6 +50,7 @@ namespace UnicornOverlord
 			ExportCharacterCommand = new ActionCommand(ExportCharacter);
 			InsertCharacterCommand = new ActionCommand(InsertCharacter);
 			ChangeItemCountMaxCommand = new ActionCommand(ChangeItemCountMax);
+			ChangeCharacterBondMaxCommand = new ActionCommand(ChangeCharacterBondMax);
 		}
 
 		private void Initialize()
@@ -123,6 +127,15 @@ namespace UnicornOverlord
 		private void SaveFile(object? parameter)
 		{
 			SaveData.Instance().Save();
+		}
+
+		private void SaveAsFile(object? parameter)
+		{
+			var dlg = new SaveFileDialog();
+			dlg.Filter = "UCSAVEFILE|UCSAVEFILE*.DAT";
+			if (dlg.ShowDialog() == false) return;
+
+			SaveData.Instance().SaveAs(dlg.FileName);
 		}
 
 		private void ChoiceItem(object? parameter)
@@ -254,6 +267,18 @@ namespace UnicornOverlord
 			{
 				if (item.ID <= 4) continue;
 				item.Count = 99;
+			}
+		}
+
+		private void ChangeCharacterBondMax(object? parameter)
+		{
+			Character? ch = parameter as Character;
+			if (ch == null) return;
+			if (ch.Bonds == null) return;
+
+			foreach (var bond in ch.Bonds)
+			{
+				bond.Value = 1000;
 			}
 		}
 
