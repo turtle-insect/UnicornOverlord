@@ -1,0 +1,23 @@
+﻿<Window x:Class="UnicornOverlord.InputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UnicornOverlord"
+        mc:Ignorable="d"
+        Title="InputWindow" Height="68" Width="300" ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Label Content="Count"/>
+            <TextBox x:Name="TextBoxCount" TabIndex="1" Text="1"/>
+        </DockPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="ButtonDecision" Content="OK" IsEnabled="True" Click="ButtonDecision_Click" Height="28" VerticalAlignment="Bottom"/>
+            <Button Content="Cancel" Grid.Column="1" IsCancel="True" Click="ButtonCancel_Click" Height="28" VerticalAlignment="Bottom"/>
+        </Grid>
+    </DockPanel>
+</Window>

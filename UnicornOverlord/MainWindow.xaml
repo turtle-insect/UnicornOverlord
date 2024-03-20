@@ -78,7 +78,17 @@
                             <Button Grid.Column="2" Content="Insert"
 									Command="{Binding InsertCharacterCommand}"/>
                         </Grid>
-                        <ListBox Name="ListBoxCharacter" ItemsSource="{Binding Characters, Mode=TwoWay}" >
+                        <ListBox Name="ListBoxCharacter" 
+                                 ItemsSource="{Binding Characters, Mode=TwoWay}"
+                                 SelectionMode="Extended">
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Edit All Bond" 
+                                              Command="{Binding ChangeCharacterBondCommand}" 
+                                              CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},
+                                                                Path=PlacementTarget.SelectedItems}"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Label Content="{Binding Name, Converter={StaticResource NameIDConverter}}"/>
@@ -143,7 +153,7 @@
                     </Grid>
                     <TabControl Grid.Column="2">
                         <TabItem Header="Bond">
-                            <ListBox ItemsSource="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Bonds}">
+                            <ListBox ItemsSource="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Bonds, Mode=TwoWay}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -162,7 +172,6 @@
             <TabItem Header="Item">
                 <DockPanel>
                     <Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendItemCommand}"/>
-                    <Button DockPanel.Dock="Top" Content="Count Max" Command="{Binding ChangeItemCountMaxCommand}"/>
                     <ListBox x:Name="ListBoxItem" ItemsSource="{Binding Items, Mode=TwoWay}" SelectionMode="Extended">
                         <ListBox.ContextMenu>
                             <ContextMenu>

@@ -35,7 +35,7 @@ namespace UnicornOverlord
         public ICommand ImportCharacterCommand { get; set; }
         public ICommand ExportCharacterCommand { get; set; }
         public ICommand InsertCharacterCommand { get; set; }
-        public ICommand ChangeItemCountMaxCommand { get; set; }
+        public ICommand ChangeCharacterBondCommand { get; set; }
 
         public Basic Basic { get; set; } = new Basic();
         public ObservableCollection<Character> Characters { get; set; } = new ObservableCollection<Character>();
@@ -59,7 +59,7 @@ namespace UnicornOverlord
             ImportCharacterCommand = new ActionCommand(ImportCharacter);
             ExportCharacterCommand = new ActionCommand(ExportCharacter);
             InsertCharacterCommand = new ActionCommand(InsertCharacter);
-            ChangeItemCountMaxCommand = new ActionCommand(ChangeItemCountMax);
+            ChangeCharacterBondCommand = new ActionCommand(ChangeCharacterBond);
         }
 
         private void Initialize()
@@ -442,13 +442,37 @@ namespace UnicornOverlord
             Initialize();
         }
 
-        private void ChangeItemCountMax(object? parameter)
+        private void ChangeCharacterBond(object? parameter)
         {
-            foreach (var item in Items)
+            if (parameter == null)
+                return;
+            List<Character> charactersToEdit = null;
+            if (parameter is Character)
             {
-                if (item.ID <= 4) continue;
-                item.Count = 99;
+                charactersToEdit = new List<Character> { parameter as Character };
             }
+            else
+            {
+                charactersToEdit = (parameter as IEnumerable<object>).Select(item => item as Character).ToList();
+            }
+
+            var dlg = new InputWindow();
+            dlg.ShowDialog();
+            if (!dlg.Confirmed)
+                return;
+            var bondCount = dlg.Count;
+
+            if (charactersToEdit != null && charactersToEdit.Count > 0)
+            {
+                foreach (var character in charactersToEdit)
+                {
+                    foreach (var bond in character.Bonds)
+                    {
+                        bond.Value = bondCount;
+                    }
+                }
+            }
+            OnPropertyChanged(nameof(Characters));
         }
 
         private Byte[] ProcessingCharacter(Byte[] buffer)
