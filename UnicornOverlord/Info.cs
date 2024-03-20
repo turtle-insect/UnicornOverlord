@@ -9,6 +9,7 @@ namespace UnicornOverlord
         private static Info mThis = new Info();
         public List<NameValueInfo> Item { get; private set; } = new List<NameValueInfo>();
         public List<NameValueInfo> Class { get; private set; } = new List<NameValueInfo>();
+		public List<NameValueInfo> Name { get; private set; } = new List<NameValueInfo>();
         public List<string> Languages { get; private set; } = new List<string>();
         public int CurrentSelectedLanguage { get; internal set; }
 
@@ -28,6 +29,7 @@ namespace UnicornOverlord
             using var package = new ExcelPackage(new FileInfo("info\\data.xlsx"));
             var classSheet = package.Workbook.Worksheets["class"];
             var itemSheet = package.Workbook.Worksheets["item"];
+            var nameSheet = package.Workbook.Worksheets["name"];
 
             int totalColumns = itemSheet.Columns.Count();
 
@@ -41,8 +43,8 @@ namespace UnicornOverlord
                     Languages.Add(cellValue.ToString());
                 }
             }
-            //Handle class data
 
+            //Handle class data
             for (int row = 2; row <= classSheet.Dimension.End.Row; row++)
             {
                 var id = Convert.ToUInt32(classSheet.Cells[row, 1].Value.ToString());
@@ -89,6 +91,30 @@ namespace UnicornOverlord
                 }
             }
             Item.Sort();
+
+            //Handle Name data
+            for (int row = 2; row <= nameSheet.Dimension.End.Row; row++)
+            {
+                var id = Convert.ToUInt32(nameSheet.Cells[row, 1].Value.ToString());
+                if (id == 0)
+                    continue;
+
+                List<string> nameTranslation = new List<string>();
+                for (int i = 2; i < Languages.Count + 2; i++)
+                {
+                    if (nameSheet.Cells[row, i].Value == null)
+                        break;
+                    var name = nameSheet.Cells[row, i].Value.ToString();
+                    nameTranslation.Add(name);
+                }
+
+                NameValueInfo type = new NameValueInfo();
+                if (type.Line(id, nameTranslation))
+                {
+                    Name.Add(type);
+                }
+            }
+            Name.Sort();
         }
 
         public NameValueInfo? Search<Type>(List<Type> list, uint id)
