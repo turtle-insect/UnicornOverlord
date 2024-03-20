@@ -16,11 +16,15 @@
     <Window.DataContext>
         <local:ViewModel/>
     </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding OpenFileCommand}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveFileCommand}"/>
+    </Window.InputBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Open" Command="{Binding OpenFileCommand}"/>
-                <MenuItem Header="Save" Command="{Binding SaveFileCommand}"/>
+                <MenuItem Header="Open (Ctrl+O)" Command="{Binding OpenFileCommand}"/>
+                <MenuItem Header="Save (Ctrl+S)" Command="{Binding SaveFileCommand}"/>
             </MenuItem>
         </Menu>
         <ToolBar DockPanel.Dock="Top">
@@ -83,8 +87,20 @@
                                  SelectionMode="Extended">
                             <ListBox.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Edit All Bond" 
+                                    <MenuItem Header="Edit Lv" 
+                                              Command="{Binding ChangeCharacterLvCommand}" 
+                                              CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},
+                                                                Path=PlacementTarget.SelectedItems}"/>
+                                    <MenuItem Header="Edit Plus" 
+                                              Command="{Binding ChangeCharacterPlusCommand}" 
+                                              CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},
+                                                                Path=PlacementTarget.SelectedItems}"/>
+                                    <MenuItem Header="Edit Bond" 
                                               Command="{Binding ChangeCharacterBondCommand}" 
+                                              CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},
+                                                                Path=PlacementTarget.SelectedItems}"/>
+                                    <MenuItem Header="Max All" 
+                                              Command="{Binding MaxAllStatusCommand}" 
                                               CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},
                                                                 Path=PlacementTarget.SelectedItems}"/>
                                 </ContextMenu>
@@ -175,8 +191,12 @@
                     <ListBox x:Name="ListBoxItem" ItemsSource="{Binding Items, Mode=TwoWay}" SelectionMode="Extended">
                         <ListBox.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Edit" 
-                                          Command="{Binding EditItemCommand}" 
+                                <MenuItem Header="Change Item" 
+                                          Command="{Binding ChangeItemCommand}" 
+                                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},
+                                                            Path=PlacementTarget.SelectedItems}"/>
+                                <MenuItem Header="Edit Item Count" 
+                                          Command="{Binding EditItemCountCommand}" 
                                           CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},
                                                             Path=PlacementTarget.SelectedItems}"/>
                                 <MenuItem Header="Delete" 
@@ -206,8 +226,8 @@
                     <ListBox x:Name="ListBoxEquipment" ItemsSource="{Binding Equipments, Mode=TwoWay}" SelectionMode="Extended">
                         <ListBox.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Edit" 
-                                          Command="{Binding EditEquipmentCommand}" 
+                                <MenuItem Header="Change" 
+                                          Command="{Binding ChangeEquipmentCommand}" 
                                           CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}},
                                                             Path=PlacementTarget.SelectedItems}"/>
                                 <MenuItem Header="Delete" 

@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnicornOverlord"
         mc:Ignorable="d"
-        Title="InputWindow" Height="68" Width="300" ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
+        Title="InputWindow" Height="100" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
-            <Label Content="Count"/>
+            <Label Name ="CountHint" Content="Count"/>
             <TextBox x:Name="TextBoxCount" TabIndex="1" Text="1"/>
         </DockPanel>
         <Grid DockPanel.Dock="Bottom">

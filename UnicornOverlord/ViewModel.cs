@@ -27,15 +27,19 @@ namespace UnicornOverlord
         public ICommand ChoiceItemCommand { get; set; }
         public ICommand ChoiceClassCommand { get; set; }
         public ICommand AppendItemCommand { get; set; }
-        public ICommand EditItemCommand { get; set; }
+        public ICommand ChangeItemCommand { get; set; }
+        public ICommand EditItemCountCommand { get; set; }
         public ICommand DeleteItemCommand { get; set; }
         public ICommand AppendEquipmentCommand { get; set; }
-        public ICommand EditEquipmentCommand { get; set; }
+        public ICommand ChangeEquipmentCommand { get; set; }
         public ICommand DeleteEquipmentCommand { get; set; }
         public ICommand ImportCharacterCommand { get; set; }
         public ICommand ExportCharacterCommand { get; set; }
         public ICommand InsertCharacterCommand { get; set; }
+        public ICommand ChangeCharacterLvCommand { get; set; }
+        public ICommand ChangeCharacterPlusCommand { get; set; }
         public ICommand ChangeCharacterBondCommand { get; set; }
+        public ICommand MaxAllStatusCommand { get; set; }
 
         public Basic Basic { get; set; } = new Basic();
         public ObservableCollection<Character> Characters { get; set; } = new ObservableCollection<Character>();
@@ -51,15 +55,19 @@ namespace UnicornOverlord
             ChoiceItemCommand = new ActionCommand(ChoiceItem);
             ChoiceClassCommand = new ActionCommand(ChoiceClass);
             AppendItemCommand = new ActionCommand(AppendItem);
-            EditItemCommand = new ActionCommand(EditItem);
+            ChangeItemCommand = new ActionCommand(ChangeItem);
+            EditItemCountCommand = new ActionCommand(EditItemCount);
             DeleteItemCommand = new ActionCommand(DeleteItem);
-            EditEquipmentCommand = new ActionCommand(EditEquipment);
+            ChangeEquipmentCommand = new ActionCommand(ChangeEquipment);
             DeleteEquipmentCommand = new ActionCommand(DeleteEquipment);
             AppendEquipmentCommand = new ActionCommand(AppendEquipment);
             ImportCharacterCommand = new ActionCommand(ImportCharacter);
             ExportCharacterCommand = new ActionCommand(ExportCharacter);
             InsertCharacterCommand = new ActionCommand(InsertCharacter);
+            ChangeCharacterLvCommand = new ActionCommand(ChangeCharacterLv);
+            ChangeCharacterPlusCommand = new ActionCommand(ChangeCharacterPlus);
             ChangeCharacterBondCommand = new ActionCommand(ChangeCharacterBond);
+            MaxAllStatusCommand = new ActionCommand(MaxAllStatus);
         }
 
         private void Initialize()
@@ -181,7 +189,7 @@ namespace UnicornOverlord
             AppendItem(0);
         }
 
-        private void EditItem(object? parameter)
+        private void ChangeItem(object? parameter)
         {
             if (parameter == null)
                 return;
@@ -207,6 +215,35 @@ namespace UnicornOverlord
                 foreach (Item selectedItem in itemsToEdit)
                 {
                     selectedItem.ID = dlg.ID;
+                    selectedItem.Count = dlg.Count;
+                }
+            }
+        }
+
+        private void EditItemCount(object? parameter)
+        {
+            if (parameter == null)
+                return;
+            List<Item> itemsToEdit = null;
+            if (parameter is Item)
+            {
+                itemsToEdit = new List<Item> { parameter as Item };
+            }
+            else
+            {
+                itemsToEdit = (parameter as IEnumerable<object>).Select(item => item as Item).ToList();
+            }
+            if (itemsToEdit != null && itemsToEdit.Count > 0)
+            {
+                Item? item = itemsToEdit[0];
+                if (item == null) return;
+
+                var dlg = new InputWindow("Input the item count you want", "Count");
+                dlg.ShowDialog();
+                if (!dlg.Confirmed)
+                    return;
+                foreach (Item selectedItem in itemsToEdit)
+                {
                     selectedItem.Count = dlg.Count;
                 }
             }
@@ -293,7 +330,7 @@ namespace UnicornOverlord
             }
         }
 
-        private void EditEquipment(object? parameter)
+        private void ChangeEquipment(object? parameter)
         {
             if (parameter == null)
                 return;
@@ -442,6 +479,75 @@ namespace UnicornOverlord
             Initialize();
         }
 
+        private void ChangeCharacterLv(object? parameter)
+        {
+            if (parameter == null)
+                return;
+            List<Character> charactersToEdit = null;
+            if (parameter is Character)
+            {
+                charactersToEdit = new List<Character> { parameter as Character };
+            }
+            else
+            {
+                charactersToEdit = (parameter as IEnumerable<object>).Select(item => item as Character).ToList();
+            }
+
+            var dlg = new InputWindow("Input the Lv you want (max 50)", "Lv  ");
+            dlg.Count = 50;
+            dlg.ShowDialog();
+            if (!dlg.Confirmed)
+                return;
+            var lv = dlg.Count;
+
+            if (charactersToEdit != null && charactersToEdit.Count > 0)
+            {
+                foreach (var character in charactersToEdit)
+                {
+                    character.Lv = lv > 50 ? 50 : lv;
+                }
+            }
+        }
+
+        private void ChangeCharacterPlus(object? parameter)
+        {
+            if (parameter == null)
+                return;
+            List<Character> charactersToEdit = null;
+            if (parameter is Character)
+            {
+                charactersToEdit = new List<Character> { parameter as Character };
+            }
+            else
+            {
+                charactersToEdit = (parameter as IEnumerable<object>).Select(item => item as Character).ToList();
+            }
+
+            var dlg = new InputWindow("Input the plus count you want(max 5)", "Plus Count");
+            dlg.Count = 5;
+            dlg.ShowDialog();
+            if (!dlg.Confirmed)
+                return;
+            var plusCount = dlg.Count;
+
+            if (charactersToEdit != null && charactersToEdit.Count > 0)
+            {
+                foreach (var character in charactersToEdit)
+                {
+                    character.HPPlus = 5;
+                    character.AttackPlus = 5;
+                    character.DefensePlus = 5;
+                    character.MagicAttackPlus = 5;
+                    character.MagicDefensePlus = 5;
+                    character.HitRatePlus = 5;
+                    character.AVoidPlus = 5;
+                    character.CriticalPlus = 5;
+                    character.GuardPlus = 5;
+                    character.SpeedPlus = 5;
+                }
+            }
+        }
+
         private void ChangeCharacterBond(object? parameter)
         {
             if (parameter == null)
@@ -456,7 +562,7 @@ namespace UnicornOverlord
                 charactersToEdit = (parameter as IEnumerable<object>).Select(item => item as Character).ToList();
             }
 
-            var dlg = new InputWindow();
+            var dlg = new InputWindow("Input the bond you want (max 1000)", "Count");
             dlg.ShowDialog();
             if (!dlg.Confirmed)
                 return;
@@ -473,6 +579,45 @@ namespace UnicornOverlord
                 }
             }
         }
+
+        private void MaxAllStatus(object? parameter)
+        {
+            if (parameter == null)
+                return;
+            List<Character> charactersToEdit = null;
+            if (parameter is Character)
+            {
+                charactersToEdit = new List<Character> { parameter as Character };
+            }
+            else
+            {
+                charactersToEdit = (parameter as IEnumerable<object>).Select(item => item as Character).ToList();
+            }
+
+            if (charactersToEdit != null && charactersToEdit.Count > 0)
+            {
+                foreach (var character in charactersToEdit)
+                {
+                    character.Lv = 50;
+                    character.HPPlus = 5;
+                    character.AttackPlus = 5;
+                    character.DefensePlus = 5;
+                    character.MagicAttackPlus = 5;
+                    character.MagicDefensePlus = 5;
+                    character.HitRatePlus = 5;
+                    character.AVoidPlus = 5;
+                    character.CriticalPlus = 5;
+                    character.GuardPlus = 5;
+                    character.SpeedPlus = 5;
+
+                    foreach (var bond in character.Bonds)
+                    {
+                        bond.Value = 1000;
+                    }
+                }
+            }
+        }
+
 
         private Byte[] ProcessingCharacter(Byte[] buffer)
         {

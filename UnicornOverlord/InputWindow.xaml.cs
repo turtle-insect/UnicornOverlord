@@ -19,12 +19,14 @@ namespace UnicornOverlord
     /// </summary>
     public partial class InputWindow : Window
     {
-        public uint Count { get; private set; }
+        public uint Count { get; internal set; }
         public bool Confirmed { get; private set; }
 
-        public InputWindow()
+        public InputWindow(string title = "Input the Count", string countName= "Count")
         {
             InitializeComponent();
+            Title = title;
+            CountHint.Content = countName;
         }
 
         private void ButtonDecision_Click(object sender, RoutedEventArgs e)
