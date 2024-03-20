@@ -472,7 +472,6 @@ namespace UnicornOverlord
                     }
                 }
             }
-            OnPropertyChanged(nameof(Characters));
         }
 
         private Byte[] ProcessingCharacter(Byte[] buffer)

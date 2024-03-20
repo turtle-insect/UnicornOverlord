@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.SymbolStore;
 using System.Linq;
 using System.Text;
@@ -7,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace UnicornOverlord
 {
-	internal class Bond
-	{
+	internal class Bond : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
 		private readonly uint mAddress;
 		public Bond(uint address)
 		{
@@ -23,7 +26,16 @@ namespace UnicornOverlord
 		public uint Value
 		{
 			get => SaveData.Instance().ReadNumber(mAddress + 4, 4);
-			set => Util.WriteNumber(mAddress + 4, 4, value, 0, 1000);
+			set
+			{
+				Util.WriteNumber(mAddress + 4, 4, value, 0, 1000);
+                OnPropertyChanged("Value");
+            }
 		}
-	}
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }

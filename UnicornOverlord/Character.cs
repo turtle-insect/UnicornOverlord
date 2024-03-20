@@ -119,5 +119,10 @@ namespace UnicornOverlord
 			get => !SaveData.Instance().ReadBit(mAddress + 460, 5);
 			set => SaveData.Instance().WriteBit(mAddress + 460, 5, !value);
 		}
-	}
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }
