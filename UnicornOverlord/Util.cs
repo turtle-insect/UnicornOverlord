@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace UnicornOverlord
 {
@@ -20,6 +21,16 @@ namespace UnicornOverlord
 			if (value < min) value = min;
 			if (value > max) value = max;
 			SaveData.Instance().WriteNumber(address, size, value);
+		}
+
+		public static uint calcCharacterAddress(uint index)
+		{
+			return 0x2AF40 + index * 464;
+		}
+
+		public static uint calcBondAddress(uint index)
+		{
+			return 0x1B5830 + index * 1316;
 		}
 	}
 }
