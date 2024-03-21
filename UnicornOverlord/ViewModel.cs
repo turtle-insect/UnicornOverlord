@@ -97,10 +97,11 @@ namespace UnicornOverlord
                 }
             }
 
+            // create character
             // counter ??
             for (uint i = 0; i < 500; i++)
             {
-                var ch = new Character(0x2AF40 + i * 464);
+                var ch = new Character(Util.calcCharacterAddress(i));
                 if (ch.ID == 0xFFFFFFFF) break;
 
                 if (bondDictionary.ContainsKey(ch.ID))
@@ -111,6 +112,7 @@ namespace UnicornOverlord
                 Characters.Add(ch);
             }
 
+            // create item
             for (uint i = 0; i < 3800; i++)
             {
                 var item = new Item(0xA0 + i * 20);
@@ -122,6 +124,7 @@ namespace UnicornOverlord
                     Items.Add(item);
             }
 
+            // create unit
             for (uint i = 0; i < 10; i++)
             {
                 var unit = new Unit(0x10D89A + i * 1720);
@@ -428,11 +431,17 @@ namespace UnicornOverlord
             if (buffer.Length != 464) return;
             buffer = ProcessingCharacter(buffer);
 
-            uint address = 0x2AF40 + (uint)index * 464;
+            uint address = Util.calcCharacterAddress((uint)index);
 
+            // use original id
             uint id = SaveData.Instance().ReadNumber(address, 4);
             Array.Copy(BitConverter.GetBytes(id), buffer, 4);
+
             SaveData.Instance().WriteValue(address, buffer);
+
+            // swap
+            Characters.RemoveAt(index);
+            Characters.Insert(index, new Character(address));
         }
 
         private void ExportCharacter(object? parameter)
@@ -446,7 +455,7 @@ namespace UnicornOverlord
             dlg.Filter = "Unicorn Overlord Character's Dump|*.uocd";
             if (dlg.ShowDialog() == false) return;
 
-            uint address = 0x2AF40 + (uint)index * 464;
+            uint address = Util.calcCharacterAddress((uint)index);
             Byte[] buffer = SaveData.Instance().ReadValue(address, 464);
 
             System.IO.File.WriteAllBytes(dlg.FileName, buffer);
@@ -458,25 +467,34 @@ namespace UnicornOverlord
             if (count >= 500) return;
 
             var dlg = new OpenFileDialog();
+            dlg.Multiselect = true;
             dlg.Filter = "Unicorn Overlord Character's Dump|*.uocd";
             if (dlg.ShowDialog() == false) return;
 
-            Byte[] buffer = System.IO.File.ReadAllBytes(dlg.FileName);
-            if (buffer.Length != 464) return;
+            foreach (String filename in dlg.FileNames)
+            {
+                count = (uint)Characters.Count;
+                if (count >= 500) break;
 
-            buffer = ProcessingCharacter(buffer);
-            uint id = SaveData.Instance().ReadNumber(0x63980, 4) + 1;
-            Array.Copy(BitConverter.GetBytes(id), buffer, 4);
-            uint address = 0x2AF40 + count * 464;
-            SaveData.Instance().WriteValue(address, buffer);
+                Byte[] buffer = System.IO.File.ReadAllBytes(filename);
+                if (buffer.Length != 464) continue;
 
-            SaveData.Instance().WriteNumber(0x63980, 4, id);
-            count = SaveData.Instance().ReadNumber(0x63984, 4);
-            SaveData.Instance().WriteNumber(0x63984, 4, count + 1);
+                buffer = ProcessingCharacter(buffer);
+                uint id = SaveData.Instance().ReadNumber(0x63980, 4) + 1;
+                Array.Copy(BitConverter.GetBytes(id), buffer, 4);
+                uint address = Util.calcCharacterAddress(count);
+                SaveData.Instance().WriteValue(address, buffer);
 
-            InsertFriendship(id);
+                SaveData.Instance().WriteNumber(0x63980, 4, id);
+                count = SaveData.Instance().ReadNumber(0x63984, 4);
+                SaveData.Instance().WriteNumber(0x63984, 4, count + 1);
 
-            Initialize();
+                InsertFriendship(id);
+
+                var ch = new Character(Util.calcCharacterAddress((uint)Characters.Count));
+                if (ch.ID == 0xFFFFFFFF) continue;
+                Characters.Add(ch);
+            }
         }
 
         private void ChangeCharacterLv(object? parameter)
