@@ -150,7 +150,7 @@
 					<TabControl Grid.Column="2">
 						<TabItem Header="Bond">
 							<DockPanel>
-								<Button DockPanel.Dock="Bottom" Content="Count Max"
+								<Button DockPanel.Dock="Top" Content="Count Max"
 										Command="{Binding ChangeCharacterBondMaxCommand}"
 										CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedItem}"/>
 								<ListBox ItemsSource="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Bonds}">
@@ -202,7 +202,7 @@
 									<Label Content="???2"/>
 									<Label Content="{Binding Equipment2}" Width="50"/>
 									<Button Content=" ... "
-									Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceItemCommand}"
+									Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceEquipmentCommand}"
 									CommandParameter="{Binding}"/>
 									<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
 								</StackPanel>

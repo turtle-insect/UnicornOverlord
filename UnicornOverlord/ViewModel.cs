@@ -22,6 +22,7 @@ namespace UnicornOverlord
 		public ICommand SaveFileCommand { get; set; }
 		public ICommand SaveAsFileCommand { get; set; }
 		public ICommand ChoiceItemCommand { get; set; }
+		public ICommand ChoiceEquipmentCommand { get; set; }
 		public ICommand ChoiceClassCommand { get; set; }
 		public ICommand AppendItemCommand { get; set; }
 		public ICommand AppendEquipmentCommand { get; set; }
@@ -43,6 +44,7 @@ namespace UnicornOverlord
 			SaveFileCommand = new ActionCommand(SaveFile);
 			SaveAsFileCommand = new ActionCommand(SaveAsFile);
 			ChoiceItemCommand = new ActionCommand(ChoiceItem);
+			ChoiceEquipmentCommand = new ActionCommand(ChoiceEquipment);
 			ChoiceClassCommand = new ActionCommand(ChoiceClass);
 			AppendItemCommand = new ActionCommand(AppendItem);
 			AppendEquipmentCommand = new ActionCommand(AppendEquipment);
@@ -146,10 +148,30 @@ namespace UnicornOverlord
 			Item? item = parameter as Item;
 			if(item == null) return;
 
+			ChoiceItem(ChoiceWindow.eType.eItem, item);
+		}
+
+		private void ChoiceEquipment(object? parameter)
+		{
+			Item? item = parameter as Item;
+			if (item == null) return;
+
+			ChoiceItem(ChoiceWindow.eType.eEquipment, item);
+			var info = Info.Search(Info.Kind, item.ID);
+			if (info != null)
+			{
+				item.Status = uint.Parse(info.Name);
+			}
+		}
+
+		private void ChoiceItem(ChoiceWindow.eType type, Item item)
+		{
 			var dlg = new ChoiceWindow();
+			dlg.Type = type;
 			dlg.ID = item.ID;
 			dlg.ShowDialog();
 			item.ID = dlg.ID;
+			item.Status = 2;
 		}
 
 		private void ChoiceClass(object? parameter)
@@ -166,36 +188,43 @@ namespace UnicornOverlord
 
 		private void AppendItem(object? parameter)
 		{
-			var item = AppendItem();
+			var item = AppendItem(ChoiceWindow.eType.eItem);
 			if (item == null) return;
 
-			item.Status = 2;
 			item.Count = 1;
 			Items.Add(item);
 		}
 
 		private void AppendEquipment(object? parameter)
 		{
-			var item = AppendItem();
+			var item = AppendItem(ChoiceWindow.eType.eEquipment);
 			if (item == null) return;
 
-			item.Status = 3;
 			Equipments.Add(item);
 		}
 
-		private Item? AppendItem()
+		private Item? AppendItem(ChoiceWindow.eType type)
 		{
 			uint index = (uint)(Items.Count + Equipments.Count);
 			if (index >= 3800) return null;
 
 			var dlg = new ChoiceWindow();
+			dlg.Type = type;
 			dlg.ShowDialog();
 			if (dlg.ID == 0) return null;
 
 			var item = new Item(0xA0 + index * 20);
 			item.ID = dlg.ID;
 			item.Index = index + 1;
-			return item;
+
+			item.Status = 2;
+			var info = Info.Search(Info.Kind, item.ID);
+			if (info != null)
+            {
+				item.Status = uint.Parse(info.Name);
+            }
+
+            return item;
 		}
 
 		private void ExportCharacter(object? parameter)

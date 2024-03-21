@@ -10,6 +10,7 @@ namespace UnicornOverlord
 	{
 		private static Info mThis = new Info();
 		public List<NameValueInfo> Item { get; private set; } = new List<NameValueInfo>();
+		public List<NameValueInfo> Kind { get; private set; } = new List<NameValueInfo>();
 		public List<NameValueInfo> Class { get; private set; } = new List<NameValueInfo>();
 		public List<NameValueInfo> Name { get; private set; } = new List<NameValueInfo>();
 
@@ -28,6 +29,7 @@ namespace UnicornOverlord
 		private void Initialize()
 		{
 			AppendList("info\\item.txt", Item);
+			AppendList("info\\kind.txt", Kind);
 			AppendList("info\\class.txt", Class);
 			AppendList("info\\name.txt", Name);
 		}
