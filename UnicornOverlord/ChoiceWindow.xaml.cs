@@ -68,29 +68,33 @@ namespace UnicornOverlord
 		private void CreateItemList(String filter)
 		{
 			ListBoxItem.Items.Clear();
-			List<NameValueInfo> items = Info.Instance().Class;
-			if(Type == eType.eItem || Type == eType.eEquipment)
-			{
-				items.Clear();
-				foreach (var info in Info.Instance().Item)
-				{
-					var kind = Info.Instance().Search(Info.Instance().Kind, info.Value);
-					if (Type == eType.eItem && kind == null)
-					{
-						items.Add(info);
-					}
-					if (Type == eType.eEquipment && kind != null)
-					{
-						items.Add(info);
-					}
-				}
-			}
+			List<NameValueInfo> items = Info.Instance().Item;
+			if (Type == eType.eClass) items = Info.Instance().Class;
 
 			foreach (var item in items)
 			{
 				if (String.IsNullOrEmpty(filter) || item.Name.IndexOf(filter) >= 0)
 				{
-					ListBoxItem.Items.Add(item);
+					if (Type == eType.eItem)
+					{
+						var kind = Info.Instance().Search(Info.Instance().Kind, item.Value);
+						if (kind == null)
+						{
+							ListBoxItem.Items.Add(item);
+						}
+					}
+					else if (Type == eType.eEquipment)
+					{
+						var kind = Info.Instance().Search(Info.Instance().Kind, item.Value);
+						if (kind != null)
+						{
+							ListBoxItem.Items.Add(item);
+						}
+					}
+					else
+					{
+						ListBoxItem.Items.Add(item);
+					}
 				}
 			}
 		}
