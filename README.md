@@ -26,3 +26,8 @@ https://store-jp.nintendo.com/list/software/70010000058315.html
 * Edit SavaData
 * Save SaveData
 * SaveData Import
+
+# Special Thanks
+* [pauljames80](https://gbatemp.net/members/pj1980.378437/)
+* [GBAtemp](https://gbatemp.net/threads/unicorn-overlord-save-editing.650584/)
+* [DataSheet](https://docs.google.com/spreadsheets/d/1UXe4nEloKlv14P4H4cOKeJc8R2P1fZW_HaLAuQG96BQ)
