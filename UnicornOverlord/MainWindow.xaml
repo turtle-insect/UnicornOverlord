@@ -1,13 +1,13 @@
-﻿<Window x:Class="UnicornOverlord.MainWindow"
+<Window x:Class="UnicornOverlord.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnicornOverlord"
-		xmlns:prop="clr-namespace:UnicornOverlord.Properties"
+        xmlns:prop="clr-namespace:UnicornOverlord.Properties"
         mc:Ignorable="d"
-		WindowStartupLocation="CenterScreen"
-        Title="Unicorn Overlord(Nintendo Switch)" Height="500" Width="700">
+        WindowStartupLocation="CenterScreen"
+        Title="{Binding WindowTitle}" Height="670" Width="1020" MinHeight="550" MinWidth="850">
 	<Window.InputBindings>
 		<KeyBinding Modifiers="Ctrl" Key="O" Command="{Binding OpenFileCommand}"/>
 		<KeyBinding Modifiers="Ctrl" Key="S" Command="{Binding SaveFileCommand}"/>
@@ -17,213 +17,766 @@
 		<local:ClassIDConverter x:Key="ClassIDConverter"/>
 		<local:ItemIDConverter x:Key="ItemIDConverter"/>
 		<local:NameIDConverter x:Key="NameIDConverter"/>
+		<BooleanToVisibilityConverter x:Key="BoolToVis"/>
+		
+		<Style x:Key="CardPanel" TargetType="Border">
+			<Setter Property="Background" Value="#FFFBFBFB"/>
+			<Setter Property="BorderBrush" Value="#FFE0E0E0"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="CornerRadius" Value="6"/>
+			<Setter Property="Padding" Value="12"/>
+			<Setter Property="Margin" Value="6"/>
+		</Style>
+
+		<Style x:Key="SectionHeader" TargetType="TextBlock">
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="Foreground" Value="#FF222222"/>
+			<Setter Property="Margin" Value="0,0,0,10"/>
+		</Style>
+
+		<Style TargetType="TextBox">
+			<Setter Property="Padding" Value="4,2"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
 	</Window.Resources>
 	<Window.DataContext>
 		<local:ViewModel/>
 	</Window.DataContext>
+
 	<DockPanel>
-		<Menu DockPanel.Dock="Top">
+		<!-- Menu Bar -->
+		<Menu DockPanel.Dock="Top" Background="#FFF5F5F5" Padding="2">
 			<MenuItem Header="File(_F)">
-				<MenuItem Header="Open(_O)" Command="{Binding OpenFileCommand}" InputGestureText="Ctrl+O"/>
+				<MenuItem Header="Open...(_O)" Command="{Binding OpenFileCommand}" InputGestureText="Ctrl+O"/>
 				<MenuItem Header="Save(_S)" Command="{Binding SaveFileCommand}" InputGestureText="Ctrl+S"/>
-				<MenuItem Header="SaveAs(_A)" Command="{Binding SaveFileCommand}" InputGestureText="Ctrl+Shift+S"/>
+				<MenuItem Header="Save As...(_A)" Command="{Binding SaveAsFileCommand}" InputGestureText="Ctrl+Shift+S"/>
+				<Separator/>
+				<MenuItem Header="Close File" Command="{Binding CloseFileCommand}"/>
+				<Separator/>
+				<MenuItem Header="Exit(_X)" Click="MenuItemExit_Click"/>
+			</MenuItem>
+			<MenuItem Header="Quick Cheats(_C)">
+				<MenuItem Header="Max All Currencies &amp; Tokens" Command="{Binding MaxAllCurrenciesCommand}"/>
+				<MenuItem Header="Max All Characters to Lv. 50" Command="{Binding SetMaxLevelAllCommand}"/>
+				<MenuItem Header="Max All Characters' Dew Stats (5 Legit)" Command="{Binding MaxDewsAllCommand}"/>
+				<MenuItem Header="Max All Rapport Bonds Across Army (1000)" Command="{Binding MaxBondsAllCommand}"/>
+				<Separator/>
+				<MenuItem Header="Upgrade All Equipment (Max Tier ★)" Command="{Binding UpgradeAllEquipmentCommand}"/>
+				<MenuItem Header="Unlock All 10 Units (Max Capacity 5)" Command="{Binding UnlockAllUnitsCommand}"/>
+			</MenuItem>
+			<MenuItem Header="Inventory(_I)">
+				<MenuItem Header="Add All Weapons" Command="{Binding AddAllWeaponsCommand}"/>
+				<MenuItem Header="Add All Shields" Command="{Binding AddAllShieldsCommand}"/>
+				<MenuItem Header="Add All Accessories" Command="{Binding AddAllAccessoriesCommand}"/>
+				<MenuItem Header="Upgrade All Equipment (Max Tier ★)" Command="{Binding UpgradeAllEquipmentCommand}"/>
+				<Separator/>
+				<MenuItem Header="Add All Consumables (x99)" Command="{Binding AddAllConsumablesCommand}"/>
+				<MenuItem Header="Add All Materials &amp; Valuables (x99)" Command="{Binding AddAllMaterialsCommand}"/>
+				<Separator/>
+				<MenuItem Header="Set All Consumable Quantities to 99" Command="{Binding ChangeItemCount99Command}"/>
+				<MenuItem Header="Set All Consumable Quantities to 999" Command="{Binding ChangeItemCount999Command}"/>
+			</MenuItem>
+			<MenuItem Header="Help(_H)">
+				<MenuItem Header="About Save Editor" Click="MenuItemAbout_Click"/>
 			</MenuItem>
 		</Menu>
-		<ToolBar DockPanel.Dock="Top">
-			<Label Content="Language"/>
-			<ComboBox Width="50" SelectedIndex="{Binding Source={x:Static prop:Settings.Default}, Path=Language}">
-				<ComboBoxItem Content="en"/>
-				<ComboBoxItem Content="jp"/>
-				<ComboBoxItem Content="cn"/>
-			</ComboBox>
-		</ToolBar>
-		<TabControl>
-			<TabItem Header="Basic">
-				<Grid>
+
+		<!-- ToolBar / Header Controls -->
+		<Border DockPanel.Dock="Top" Background="#FFF9F9F9" BorderBrush="#FFE5E5E5" BorderThickness="0,0,0,1" Padding="8,5">
+			<DockPanel>
+				<StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+					<Button Content="📂 Open" Command="{Binding OpenFileCommand}" Padding="8,3" Margin="0,0,6,0"/>
+					<Button Content="💾 Save" Command="{Binding SaveFileCommand}" Padding="8,3" Margin="0,0,12,0"/>
+					<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0"/>
+					<Button Content="✨ Max All Currencies" Command="{Binding MaxAllCurrenciesCommand}" Padding="8,3" Margin="0,0,6,0"/>
+					<Button Content="⚔️ Unlock All Units" Command="{Binding UnlockAllUnitsCommand}" Padding="8,3" Margin="0,0,6,0"/>
+				</StackPanel>
+
+				<StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+					<Label Content="Language:" VerticalAlignment="Center" Margin="0,0,4,0"/>
+					<ComboBox x:Name="ComboBoxLanguage" Width="75" SelectedIndex="{Binding Source={x:Static prop:Settings.Default}, Path=Language}" SelectionChanged="ComboBoxLanguage_SelectionChanged">
+						<ComboBoxItem Content="en (English)"/>
+						<ComboBoxItem Content="jp (日本語)"/>
+						<ComboBoxItem Content="cn (中文)"/>
+					</ComboBox>
+				</StackPanel>
+
+				<!-- Summary info in middle -->
+				<TextBlock Text="{Binding SummaryInfo}" Foreground="#FF666666" VerticalAlignment="Center" Margin="15,0" TextTrimming="CharacterEllipsis"/>
+			</DockPanel>
+		</Border>
+
+		<!-- Status Bar -->
+		<StatusBar DockPanel.Dock="Bottom" Background="#FFF5F5F5" BorderBrush="#FFE0E0E0" BorderThickness="0,1,0,0">
+			<StatusBarItem>
+				<TextBlock Text="{Binding StatusMessage}" Foreground="#FF333333"/>
+			</StatusBarItem>
+			<StatusBarItem HorizontalAlignment="Right">
+				<TextBlock Text="{Binding LoadedFilePath}" Foreground="#FF888888" MaxWidth="400" TextTrimming="CharacterEllipsis"/>
+			</StatusBarItem>
+		</StatusBar>
+
+		<!-- Main Tab Control -->
+		<TabControl Margin="4">
+			<!-- TAB 1: BASIC -->
+			<TabItem Header="Basic &amp; Campaign">
+				<ScrollViewer VerticalScrollBarVisibility="Auto">
+					<Grid Margin="10">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+
+						<!-- Left Card: Currencies & Resources -->
+						<Border Grid.Column="0" Style="{StaticResource CardPanel}">
+							<StackPanel>
+								<TextBlock Text="Currencies &amp; Key Resources" Style="{StaticResource SectionHeader}"/>
+
+								<!-- Gold -->
+								<Grid Margin="0,3">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="130"/>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="65"/>
+									</Grid.ColumnDefinitions>
+									<Label Content="Gold (Money):" VerticalAlignment="Center"/>
+									<TextBox Grid.Column="1" Text="{Binding Basic.Money, UpdateSourceTrigger=PropertyChanged}"/>
+									<Button Grid.Column="2" Content="Max" Command="{Binding MaxGoldCommand}" Margin="4,0,0,0"/>
+								</Grid>
+
+								<!-- Renown -->
+								<Grid Margin="0,3">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="130"/>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="65"/>
+									</Grid.ColumnDefinitions>
+									<Label Content="Renown (Fame):" VerticalAlignment="Center"/>
+									<TextBox Grid.Column="1" Text="{Binding Basic.Fame, UpdateSourceTrigger=PropertyChanged}"/>
+									<Button Grid.Column="2" Content="Max (S)" Command="{Binding MaxRenownCommand}" Margin="4,0,0,0"/>
+								</Grid>
+
+								<!-- Renown Rank -->
+								<Grid Margin="0,3">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="130"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<Label Content="Renown Rank:" VerticalAlignment="Center"/>
+									<ComboBox Grid.Column="1" SelectedIndex="{Binding Basic.RenownRank}">
+										<ComboBoxItem Content="Rank E (0)"/>
+										<ComboBoxItem Content="Rank D (1)"/>
+										<ComboBoxItem Content="Rank C (2)"/>
+										<ComboBoxItem Content="Rank B (3)"/>
+										<ComboBoxItem Content="Rank A (4)"/>
+										<ComboBoxItem Content="Rank S (5 - Max)"/>
+									</ComboBox>
+								</Grid>
+
+								<Separator Margin="0,8"/>
+
+								<!-- Medals / Honors -->
+								<Grid Margin="0,3">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="130"/>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="65"/>
+									</Grid.ColumnDefinitions>
+									<Label Content="Honors (Medals):" VerticalAlignment="Center"/>
+									<TextBox Grid.Column="1" Text="{Binding Basic.Medals, UpdateSourceTrigger=PropertyChanged}"/>
+									<Button Grid.Column="2" Content="Max" Command="{Binding MaxMedalsCommand}" Margin="4,0,0,0"/>
+								</Grid>
+
+								<!-- Coliseum Coins -->
+								<Grid Margin="0,3">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="130"/>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="65"/>
+									</Grid.ColumnDefinitions>
+									<Label Content="Coliseum Coins:" VerticalAlignment="Center"/>
+									<TextBox Grid.Column="1" Text="{Binding Basic.ColiseumCoins, UpdateSourceTrigger=PropertyChanged}"/>
+									<Button Grid.Column="2" Content="Max" Command="{Binding MaxCoinsCommand}" Margin="4,0,0,0"/>
+								</Grid>
+
+								<!-- Divine Shards -->
+								<Grid Margin="0,3">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="130"/>
+										<ColumnDefinition Width="*"/>
+										<ColumnDefinition Width="65"/>
+									</Grid.ColumnDefinitions>
+									<Label Content="Divine Shards:" VerticalAlignment="Center"/>
+									<TextBox Grid.Column="1" Text="{Binding Basic.DivineShards, UpdateSourceTrigger=PropertyChanged}"/>
+									<Button Grid.Column="2" Content="Max" Command="{Binding MaxDivineShardsCommand}" Margin="4,0,0,0"/>
+								</Grid>
+
+								<!-- Hallowed Corne Ash -->
+								<Grid Margin="0,3">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="130"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<Label Content="Hallowed Corne Ash:" VerticalAlignment="Center"/>
+									<TextBox Grid.Column="1" Text="{Binding Basic.HallowedAsh, UpdateSourceTrigger=PropertyChanged}"/>
+								</Grid>
+
+								<!-- Luminous Corne Ash -->
+								<Grid Margin="0,3">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="130"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<Label Content="Luminous Corne Ash:" VerticalAlignment="Center"/>
+									<TextBox Grid.Column="1" Text="{Binding Basic.LuminousAsh, UpdateSourceTrigger=PropertyChanged}"/>
+								</Grid>
+
+								<Button Content="✨ Max All Currencies &amp; Tokens" Command="{Binding MaxAllCurrenciesCommand}" Height="34" Margin="0,15,0,0" FontWeight="SemiBold"/>
+							</StackPanel>
+						</Border>
+
+						<!-- Right Card: Save Settings & Difficulty -->
+						<Border Grid.Column="1" Style="{StaticResource CardPanel}">
+							<StackPanel>
+								<TextBlock Text="Save Settings &amp; Difficulty" Style="{StaticResource SectionHeader}"/>
+
+								<!-- Save Slot -->
+								<Grid Margin="0,3">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="130"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<Label Content="Save Slot Number:" VerticalAlignment="Center"/>
+									<TextBox Grid.Column="1" Text="{Binding Basic.SaveSlot, UpdateSourceTrigger=PropertyChanged}"/>
+								</Grid>
+
+								<!-- Play Time Display & Edit -->
+								<Grid Margin="0,3">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="130"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<Label Content="Play Time (HH:MM:SS):" VerticalAlignment="Center"/>
+									<StackPanel Grid.Column="1" Orientation="Horizontal">
+										<TextBox Text="{Binding Basic.PlayTimeHours, UpdateSourceTrigger=PropertyChanged}" Width="45" TextAlignment="Center"/>
+										<TextBlock Text=" h " VerticalAlignment="Center"/>
+										<TextBox Text="{Binding Basic.PlayTimeMinutes, UpdateSourceTrigger=PropertyChanged}" Width="35" TextAlignment="Center"/>
+										<TextBlock Text=" m " VerticalAlignment="Center"/>
+										<TextBox Text="{Binding Basic.PlayTimeSecondsPart, UpdateSourceTrigger=PropertyChanged}" Width="35" TextAlignment="Center"/>
+										<TextBlock Text=" s" VerticalAlignment="Center"/>
+									</StackPanel>
+								</Grid>
+
+								<Separator Margin="0,8"/>
+
+								<!-- True Zenoiran Mode -->
+								<Grid Margin="0,5">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="130"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<Label Content="True Zenoiran Mode:" VerticalAlignment="Center"/>
+									<CheckBox Grid.Column="1" IsChecked="{Binding Basic.ZENOIRA}" Content="Enable True Zenoiran Difficulty (0x4DA39E)" VerticalAlignment="Center"/>
+								</Grid>
+
+								<Border Background="#FFFFFDE7" BorderBrush="#FFFFE082" BorderThickness="1" CornerRadius="4" Padding="10" Margin="0,10,0,0">
+									<TextBlock TextWrapping="Wrap" Foreground="#FF5D4037" FontSize="11" LineHeight="16">
+										ℹ️ <Bold>Note on True Zenoiran Difficulty:</Bold><LineBreak/>
+										True Zenoiran is the highest difficulty unlocked after beating the game. In normal gameplay, starting in this mode locks the difficulty permanently. This toggle allows you to freely switch it on or off on any save file.
+									</TextBlock>
+								</Border>
+							</StackPanel>
+						</Border>
+					</Grid>
+				</ScrollViewer>
+			</TabItem>
+
+			<!-- TAB 2: CHARACTERS -->
+			<TabItem Header="Characters">
+				<Grid Margin="6">
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition/>
-						<ColumnDefinition/>
-						<ColumnDefinition Width="5"/>
-						<ColumnDefinition/>
-						<ColumnDefinition/>
+						<ColumnDefinition Width="280" MinWidth="220"/>
+						<ColumnDefinition Width="4"/>
+						<ColumnDefinition Width="*" MinWidth="400"/>
 					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition/>
-						<RowDefinition/>
-						<RowDefinition/>
-						<RowDefinition Height="11*"/>
-					</Grid.RowDefinitions>
-					<Label Content="Money"/>
-					<TextBox Grid.Column="1" Text="{Binding Basic.Money, UpdateSourceTrigger=PropertyChanged}"/>
-					<Label Grid.Row="1" Content="Fame"/>
-					<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Basic.Fame, UpdateSourceTrigger=PropertyChanged}"/>
-					<Label Grid.Row="2" Content="ZENOIRA"/>
-					<CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding Basic.ZENOIRA}" VerticalAlignment="Center"/>
+
+					<!-- Left Column: Character List & Actions -->
+					<DockPanel Grid.Column="0">
+						<!-- Search Filter & Capacity Header -->
+						<DockPanel DockPanel.Dock="Top" Margin="0,0,0,6">
+							<TextBlock DockPanel.Dock="Right" Text="{Binding Characters.Count, StringFormat='{}Army: {0}/500'}" FontSize="11" Foreground="#FF666666" VerticalAlignment="Center" Margin="6,0,0,0"/>
+							<Label Content="🔍" VerticalAlignment="Center"/>
+							<TextBox Text="{Binding CharacterFilterText, UpdateSourceTrigger=PropertyChanged}" Padding="3" VerticalContentAlignment="Center" Margin="2,0,0,0"/>
+						</DockPanel>
+
+						<!-- Bottom Import/Export/Clone Buttons -->
+						<Grid DockPanel.Dock="Bottom" Margin="0,6,0,0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Button Content="Clone" Command="{Binding CloneCharacterCommand}" ToolTip="Clone selected character into a new recruit (up to 500 capacity)" Margin="0,0,2,0" Padding="0,4"/>
+							<Button Grid.Column="1" Content="Export" Command="{Binding ExportCharacterCommand}" Margin="2,0,2,0" Padding="0,4"/>
+							<Button Grid.Column="2" Content="Import" Command="{Binding ImportCharacterCommand}" Margin="2,0,2,0" Padding="0,4"/>
+							<Button Grid.Column="3" Content="Insert" Command="{Binding InsertCharacterCommand}" Margin="2,0,0,0" Padding="0,4"/>
+						</Grid>
+
+						<!-- List of Characters -->
+						<Border BorderBrush="#FFCCCCCC" BorderThickness="1" CornerRadius="4">
+							<ListBox x:Name="ListBoxCharacter" ItemsSource="{Binding FilteredCharacters}" SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<Grid Margin="2,3">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="Auto"/>
+												<ColumnDefinition Width="*"/>
+												<ColumnDefinition Width="Auto"/>
+											</Grid.ColumnDefinitions>
+											<Border Background="#FFE8E8E8" CornerRadius="3" Padding="4,1" Margin="0,0,6,0">
+												<TextBlock Text="{Binding SlotIndex, StringFormat='{}#{0:D2}'}" FontSize="10" Foreground="#FF555555" VerticalAlignment="Center"/>
+											</Border>
+											<StackPanel Grid.Column="1">
+												<TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+												<TextBlock Text="{Binding ClassName}" FontSize="11" Foreground="#FF666666"/>
+											</StackPanel>
+											<Border Grid.Column="2" Background="#FFEBF5FB" CornerRadius="3" Padding="5,1" VerticalAlignment="Center">
+												<TextBlock Text="{Binding Lv, StringFormat='{}Lv. {0}'}" FontSize="11" FontWeight="Medium" Foreground="#FF2980B9"/>
+											</Border>
+										</Grid>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</Border>
+					</DockPanel>
+
+					<!-- Splitter -->
+					<GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Stretch" Background="#FFE0E0E0"/>
+
+					<!-- Right Column: Character Details Editor -->
+					<DockPanel Grid.Column="2" Margin="6,0,0,0">
+						<!-- Top Header: Name, Class, Status -->
+						<Border DockPanel.Dock="Top" Style="{StaticResource CardPanel}" Margin="0,0,0,8" Padding="10">
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+								</Grid.ColumnDefinitions>
+
+								<StackPanel>
+									<StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+										<TextBlock Text="{Binding SelectedCharacter.DisplayName}" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+										<Border Background="#FFF0F0F0" CornerRadius="3" Padding="5,2" Margin="8,0,0,0" VerticalAlignment="Center">
+											<TextBlock Text="{Binding SelectedCharacter.UnitName}" FontSize="11" Foreground="#FF555555"/>
+										</Border>
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<Label Content="Class:" Padding="0,0,6,0" VerticalAlignment="Center"/>
+										<Button Content="{Binding SelectedCharacter.ClassName, TargetNullValue='Select Class'}" Command="{Binding ChoiceClassCommand}" Padding="8,2" FontWeight="SemiBold"/>
+										<Button Content="Change..." Command="{Binding ChoiceClassCommand}" Margin="4,0,0,0" Padding="6,2"/>
+									</StackPanel>
+								</StackPanel>
+
+								<!-- Status Flags -->
+								<StackPanel Grid.Column="1" VerticalAlignment="Center">
+									<CheckBox IsChecked="{Binding SelectedCharacter.Use}" Content="Available / Active" Margin="0,2"/>
+									<CheckBox IsChecked="{Binding SelectedCharacter.IsInFormation}" Content="In Formation" Margin="0,2"/>
+									<CheckBox IsChecked="{Binding SelectedCharacter.IsJoined}" Content="Joined Party" Margin="0,2"/>
+								</StackPanel>
+							</Grid>
+						</Border>
+
+						<!-- Character Detail Tabs -->
+						<TabControl>
+							<!-- SUB-TAB 1: Stats & Level -->
+							<TabItem Header="Combat Stats &amp; Level">
+								<ScrollViewer VerticalScrollBarVisibility="Auto">
+									<StackPanel Margin="10">
+										<!-- Level & Exp -->
+										<Grid Margin="0,0,0,10">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="80"/>
+												<ColumnDefinition Width="100"/>
+												<ColumnDefinition Width="70"/>
+												<ColumnDefinition Width="120"/>
+												<ColumnDefinition Width="*"/>
+											</Grid.ColumnDefinitions>
+											<Label Content="Level (1-50):" VerticalAlignment="Center"/>
+											<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.Lv, UpdateSourceTrigger=PropertyChanged}"/>
+											<Label Grid.Column="2" Content="Experience:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+											<TextBox Grid.Column="3" Text="{Binding SelectedCharacter.Exp, UpdateSourceTrigger=PropertyChanged}"/>
+											<Button Grid.Column="4" Content="⚡ Set Level 50 (Max)" Command="{Binding SetMaxLevelCommand}" Margin="8,0,0,0" Padding="8,3"/>
+										</Grid>
+
+										<Separator Margin="0,4,0,10"/>
+
+										<!-- Dew Bonuses -->
+										<DockPanel Margin="0,0,0,8">
+											<TextBlock Text="Permanent Stat Dew Bonuses (Dews Used)" FontWeight="SemiBold" FontSize="13" VerticalAlignment="Center"/>
+											<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+												<Button Content="Max (5 Legit)" Command="{Binding MaxDewsCommand}" Margin="4,0" Padding="8,2"/>
+												<Button Content="Max (255 Uncapped)" Command="{Binding MaxDewsUncappedCommand}" Margin="4,0" Padding="8,2"/>
+												<Button Content="Reset (0)" Command="{Binding ResetDewsCommand}" Margin="4,0" Padding="8,2"/>
+											</StackPanel>
+										</DockPanel>
+
+										<!-- Dew Stats 2-Column Grid -->
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*"/>
+												<ColumnDefinition Width="20"/>
+												<ColumnDefinition Width="*"/>
+											</Grid.ColumnDefinitions>
+
+											<!-- Left Column -->
+											<StackPanel Grid.Column="0">
+												<Grid Margin="0,3">
+													<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+													<Label Content="Vitality (HP+):"/>
+													<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.HPPlus, UpdateSourceTrigger=PropertyChanged}"/>
+												</Grid>
+												<Grid Margin="0,3">
+													<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+													<Label Content="Strength (Phys ATK+):"/>
+													<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.AttackPlus, UpdateSourceTrigger=PropertyChanged}"/>
+												</Grid>
+												<Grid Margin="0,3">
+													<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+													<Label Content="Protection (Phys DEF+):"/>
+													<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.DefensePlus, UpdateSourceTrigger=PropertyChanged}"/>
+												</Grid>
+												<Grid Margin="0,3">
+													<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+													<Label Content="Knowledge (Mag ATK+):"/>
+													<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.MagicAttackPlus, UpdateSourceTrigger=PropertyChanged}"/>
+												</Grid>
+												<Grid Margin="0,3">
+													<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+													<Label Content="Warding (Mag DEF+):"/>
+													<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.MagicDefensePlus, UpdateSourceTrigger=PropertyChanged}"/>
+												</Grid>
+											</StackPanel>
+
+											<!-- Right Column -->
+											<StackPanel Grid.Column="2">
+												<Grid Margin="0,3">
+													<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+													<Label Content="Skill (Hit Rate+):"/>
+													<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.HitRatePlus, UpdateSourceTrigger=PropertyChanged}"/>
+												</Grid>
+												<Grid Margin="0,3">
+													<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+													<Label Content="Acuity (Evasion+):"/>
+													<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.AVoidPlus, UpdateSourceTrigger=PropertyChanged}"/>
+												</Grid>
+												<Grid Margin="0,3">
+													<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+													<Label Content="Keenness (Crit Rate+):"/>
+													<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.CriticalPlus, UpdateSourceTrigger=PropertyChanged}"/>
+												</Grid>
+												<Grid Margin="0,3">
+													<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+													<Label Content="Parry (Guard Rate+):"/>
+													<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.GuardPlus, UpdateSourceTrigger=PropertyChanged}"/>
+												</Grid>
+												<Grid Margin="0,3">
+													<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+													<Label Content="Agility (Speed+):"/>
+													<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.SpeedPlus, UpdateSourceTrigger=PropertyChanged}"/>
+												</Grid>
+												<Grid Margin="0,3">
+													<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+													<Label Content="Illusion (Stat Reset):"/>
+													<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.IllusionPlus, UpdateSourceTrigger=PropertyChanged}"/>
+												</Grid>
+											</StackPanel>
+										</Grid>
+									</StackPanel>
+								</ScrollViewer>
+							</TabItem>
+
+							<!-- SUB-TAB 2: Growth Traits -->
+							<TabItem Header="Growth Types">
+								<ScrollViewer VerticalScrollBarVisibility="Auto">
+									<StackPanel Margin="12">
+										<TextBlock Text="Character Growth Profiles" Style="{StaticResource SectionHeader}"/>
+										<TextBlock Text="Growth Types define stat point gains on level up. Setting growth types modifies stat progression without risking save integrity." TextWrapping="Wrap" Foreground="#FF666666" Margin="0,0,0,12"/>
+
+										<!-- Growth Type 1 -->
+										<Grid Margin="0,5">
+											<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+											<Label Content="Growth Type 1:" FontWeight="Medium" VerticalAlignment="Center"/>
+											<ComboBox Grid.Column="1" ItemsSource="{Binding GrowthTypes}" SelectedValuePath="ID" SelectedValue="{Binding SelectedCharacter.GrowthType1, Mode=TwoWay}" DisplayMemberPath="DisplayText"/>
+										</Grid>
+
+										<!-- Growth Type 2 -->
+										<Grid Margin="0,5">
+											<Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+											<Label Content="Growth Type 2:" FontWeight="Medium" VerticalAlignment="Center"/>
+											<ComboBox Grid.Column="1" ItemsSource="{Binding GrowthTypes}" SelectedValuePath="ID" SelectedValue="{Binding SelectedCharacter.GrowthType2, Mode=TwoWay}" DisplayMemberPath="DisplayText"/>
+										</Grid>
+
+										<!-- Growth Info Box -->
+										<Border Background="#FFF0F7FB" BorderBrush="#FFBEE3F8" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,15,0,0">
+											<StackPanel>
+												<TextBlock Text="💡 Growth Type Guide &amp; Super Growth Tip" FontWeight="Bold" Foreground="#FF2B6CB0" Margin="0,0,0,6"/>
+												<TextBlock TextWrapping="Wrap" FontSize="11" Foreground="#FF2D3748" LineHeight="16">
+													• <Bold>01 Hardy:</Bold> +HP  |  <Bold>02 Offensive:</Bold> +Phys ATK  |  <Bold>03 Defensive:</Bold> +Phys DEF<LineBreak/>
+													• <Bold>04 Precise:</Bold> +Accuracy  |  <Bold>05 Lucky:</Bold> +Evasion  |  <Bold>06 Keen:</Bold> +Critical Rate<LineBreak/>
+													• <Bold>07 Guardian:</Bold> +Guard Rate  |  <Bold>08 Go-Getter:</Bold> +Initiative / Speed  |  <Bold>09 All-Rounder:</Bold> Balanced<LineBreak/>
+													• <Bold>10 (0x0A) All-Rounder+ / Super Growth:</Bold> Setting growth type to 10 gives +100 points in ALL stats at Lv. 50 (1,000 extra points total)!
+												</TextBlock>
+											</StackPanel>
+										</Border>
+									</StackPanel>
+								</ScrollViewer>
+							</TabItem>
+
+							<!-- SUB-TAB 3: Appearance & Unit -->
+							<TabItem Header="Appearance &amp; Unit">
+								<ScrollViewer VerticalScrollBarVisibility="Auto">
+									<StackPanel Margin="12">
+										<TextBlock Text="Visual Customization &amp; Unit Assignment" Style="{StaticResource SectionHeader}"/>
+
+										<!-- Unit Assignment -->
+										<Grid Margin="0,4">
+											<Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+											<Label Content="Assigned Unit:"/>
+											<ComboBox Grid.Column="1" SelectedIndex="{Binding SelectedCharacter.Unit}">
+												<ComboBoxItem Content="Unit 1 (Index 0)"/>
+												<ComboBoxItem Content="Unit 2 (Index 1)"/>
+												<ComboBoxItem Content="Unit 3 (Index 2)"/>
+												<ComboBoxItem Content="Unit 4 (Index 3)"/>
+												<ComboBoxItem Content="Unit 5 (Index 4)"/>
+												<ComboBoxItem Content="Unit 6 (Index 5)"/>
+												<ComboBoxItem Content="Unit 7 (Index 6)"/>
+												<ComboBoxItem Content="Unit 8 (Index 7)"/>
+												<ComboBoxItem Content="Unit 9 (Index 8)"/>
+												<ComboBoxItem Content="Unit 10 (Index 9)"/>
+												<ComboBoxItem Content="Unassigned (255)"/>
+											</ComboBox>
+										</Grid>
+
+										<Separator Margin="0,8"/>
+
+										<!-- Color Properties -->
+										<Grid Margin="0,4">
+											<Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+											<Label Content="Base Color Palette:"/>
+											<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.BaseColor, UpdateSourceTrigger=PropertyChanged}"/>
+										</Grid>
+										<Grid Margin="0,4">
+											<Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+											<Label Content="Hair Color:"/>
+											<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.HairColor, UpdateSourceTrigger=PropertyChanged}"/>
+										</Grid>
+										<Grid Margin="0,4">
+											<Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+											<Label Content="Accent Color 1:"/>
+											<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.AccentColor1, UpdateSourceTrigger=PropertyChanged}"/>
+										</Grid>
+										<Grid Margin="0,4">
+											<Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+											<Label Content="Accent Color 2:"/>
+											<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.AccentColor2, UpdateSourceTrigger=PropertyChanged}"/>
+										</Grid>
+										<Grid Margin="0,4">
+											<Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+											<Label Content="Promotion Sprite:"/>
+											<TextBox Grid.Column="1" Text="{Binding SelectedCharacter.PromotionSprite, UpdateSourceTrigger=PropertyChanged}"/>
+										</Grid>
+									</StackPanel>
+								</ScrollViewer>
+							</TabItem>
+
+							<!-- SUB-TAB 4: Rapport / Bonds -->
+							<TabItem Header="Bonds / Rapport">
+								<DockPanel Margin="10">
+									<!-- Actions -->
+									<DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+										<TextBlock Text="Character Rapport Relationships" FontWeight="SemiBold" VerticalAlignment="Center"/>
+										<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+											<Button Content="Max Bonds (This Character)" Command="{Binding MaxBondsSelectedCommand}" Padding="8,3" Margin="0,0,6,0"/>
+											<Button Content="Max ALL Bonds (Entire Army)" Command="{Binding MaxBondsAllCommand}" Padding="8,3"/>
+										</StackPanel>
+									</DockPanel>
+
+									<!-- Bond List -->
+									<Border BorderBrush="#FFCCCCCC" BorderThickness="1" CornerRadius="4">
+										<ListBox ItemsSource="{Binding SelectedCharacter.Bonds}">
+											<ListBox.ItemTemplate>
+												<DataTemplate>
+													<Grid Margin="4,2">
+														<Grid.ColumnDefinitions>
+															<ColumnDefinition Width="*"/>
+															<ColumnDefinition Width="Auto"/>
+															<ColumnDefinition Width="80"/>
+															<ColumnDefinition Width="Auto"/>
+															<ColumnDefinition Width="50"/>
+														</Grid.ColumnDefinitions>
+														<TextBlock Text="{Binding PartnerName}" FontWeight="Medium" VerticalAlignment="Center"/>
+														<Label Grid.Column="1" Content="Points (0-1000):" VerticalAlignment="Center"/>
+														<TextBox Grid.Column="2" Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
+														<Label Grid.Column="3" Content="Hearts (0-3):" VerticalAlignment="Center" Margin="6,0,0,0"/>
+														<TextBox Grid.Column="4" Text="{Binding HeartLevel, UpdateSourceTrigger=PropertyChanged}" Width="40" TextAlignment="Center"/>
+													</Grid>
+												</DataTemplate>
+											</ListBox.ItemTemplate>
+										</ListBox>
+									</Border>
+								</DockPanel>
+							</TabItem>
+						</TabControl>
+					</DockPanel>
 				</Grid>
 			</TabItem>
-			<TabItem Header="Character">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition/>
-						<ColumnDefinition/>
-						<ColumnDefinition/>
-					</Grid.ColumnDefinitions>
-					<DockPanel>
-						<Grid DockPanel.Dock="Bottom">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition/>
-								<ColumnDefinition/>
-								<ColumnDefinition/>
-							</Grid.ColumnDefinitions>
-							<Button Content="Export"
-									Command="{Binding ExportCharacterCommand}"
-									CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedIndex}"/>
-							<Button Grid.Column="1" Content="Import"
-									Command="{Binding ImportCharacterCommand}"
-									CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedIndex}"/>
-							<Button Grid.Column="2" Content="Insert"
-									Command="{Binding InsertCharacterCommand}"/>
-						</Grid>
-						<ListBox Name="ListBoxCharacter" ItemsSource="{Binding Characters}">
+
+			<!-- TAB 3: ITEMS (INVENTORY) -->
+			<TabItem Header="Items">
+				<DockPanel Margin="8">
+					<!-- Top Actions Bar -->
+					<Border DockPanel.Dock="Top" Background="#FFF5F5F5" Padding="6" CornerRadius="4" Margin="0,0,0,8">
+						<DockPanel>
+							<StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+								<Button Content="➕ Add Item..." Command="{Binding AppendItemCommand}" Padding="8,3" Margin="4,0"/>
+								<Button Content="Set All to 99" Command="{Binding ChangeItemCount99Command}" Padding="8,3" Margin="4,0"/>
+								<Button Content="Set All to 999" Command="{Binding ChangeItemCount999Command}" Padding="8,3" Margin="4,0"/>
+								<Button Content="Add Consumables (x99)" Command="{Binding AddAllConsumablesCommand}" Padding="8,3" Margin="4,0"/>
+								<Button Content="Add Materials (x99)" Command="{Binding AddAllMaterialsCommand}" Padding="8,3" Margin="4,0"/>
+								<Button Content="❌ Delete" Command="{Binding DeleteItemCommand}" Padding="8,3" Margin="4,0"/>
+							</StackPanel>
+							<StackPanel Orientation="Horizontal">
+								<Label Content="🔍 Search:" VerticalAlignment="Center"/>
+								<TextBox Text="{Binding ItemFilterText, UpdateSourceTrigger=PropertyChanged}" Width="160" VerticalContentAlignment="Center"/>
+							</StackPanel>
+						</DockPanel>
+					</Border>
+
+					<!-- Items List -->
+					<Border BorderBrush="#FFCCCCCC" BorderThickness="1" CornerRadius="4">
+						<ListBox ItemsSource="{Binding FilteredItems}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
 							<ListBox.ItemTemplate>
 								<DataTemplate>
-									<Label Content="{Binding Name, Converter={StaticResource NameIDConverter}}"/>
+									<Grid Margin="4,2">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="65"/>
+											<ColumnDefinition Width="220"/>
+											<ColumnDefinition Width="140"/>
+											<ColumnDefinition Width="Auto"/>
+											<ColumnDefinition Width="70"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<TextBlock Text="{Binding ID, StringFormat='ID: {0:D3}'}" Foreground="#FF666666" FontSize="11" VerticalAlignment="Center"/>
+										<TextBlock Grid.Column="1" Text="{Binding Name}" FontWeight="Medium" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+										<Border Grid.Column="2" Background="#FFF0F0F0" CornerRadius="3" Padding="4,1" HorizontalAlignment="Left" VerticalAlignment="Center">
+											<TextBlock Text="{Binding CategoryName}" FontSize="10" Foreground="#FF555555"/>
+										</Border>
+										<Label Grid.Column="3" Content="Count:" VerticalAlignment="Center"/>
+										<TextBox Grid.Column="4" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="60" TextAlignment="Right"/>
+										<StackPanel Grid.Column="5" Orientation="Horizontal" Margin="8,0,0,0">
+											<Button Content="Change..." Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceItemCommand}" CommandParameter="{Binding}" Padding="6,1" Margin="2,0"/>
+											<Button Content="Delete" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.DeleteItemCommand}" CommandParameter="{Binding}" Padding="6,1" Margin="2,0"/>
+										</StackPanel>
+									</Grid>
 								</DataTemplate>
 							</ListBox.ItemTemplate>
 						</ListBox>
-					</DockPanel>
-					<Grid Grid.Column="1">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition/>
-							<ColumnDefinition/>
-						</Grid.ColumnDefinitions>
-						<Grid.RowDefinitions>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-							<RowDefinition/>
-						</Grid.RowDefinitions>
-						<Label Content="Use"/>
-						<CheckBox Grid.Column="1" IsChecked="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Use}" VerticalAlignment="Center"/>
-						<Label Grid.Row="1" Content="Class"/>
-						<StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-							<Button Content=" ... "
-									Command="{Binding ChoiceClassCommand}"
-									CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedItem}"/>
-							<Label Content="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Class, Converter={StaticResource ClassIDConverter}}"/>
-						</StackPanel>
-						<Label Grid.Row="2" Content="Lv"/>
-						<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Lv, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="3" Content="Exp"/>
-						<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Exp, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="4" Content="HPPlus"/>
-						<TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.HPPlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="5" Content="AttackPlus"/>
-						<TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.AttackPlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="6" Content="DefensePlus"/>
-						<TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.DefensePlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="7" Content="MagicAttackPlus"/>
-						<TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.MagicAttackPlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="8" Content="MagicDefensePlus"/>
-						<TextBox Grid.Row="8" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.MagicDefensePlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="9" Content="HitRatePlus"/>
-						<TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.HitRatePlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="10" Content="AVoidPlus"/>
-						<TextBox Grid.Row="10" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.AVoidPlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="11" Content="CriticalPlus"/>
-						<TextBox Grid.Row="11" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.CriticalPlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="12" Content="GuardPlus"/>
-						<TextBox Grid.Row="12" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.GuardPlus, UpdateSourceTrigger=PropertyChanged}"/>
-						<Label Grid.Row="13" Content="SpeedPlus"/>
-						<TextBox Grid.Row="13" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.SpeedPlus, UpdateSourceTrigger=PropertyChanged}"/>
-					</Grid>
-					<TabControl Grid.Column="2">
-						<TabItem Header="Bond">
-							<DockPanel>
-								<Button DockPanel.Dock="Top" Content="Count Max"
-										Command="{Binding ChangeCharacterBondMaxCommand}"
-										CommandParameter="{Binding ElementName=ListBoxCharacter, Path=SelectedItem}"/>
-								<ListBox ItemsSource="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Bonds}">
-									<ListBox.ItemTemplate>
-										<DataTemplate>
-											<StackPanel Orientation="Horizontal">
-												<Label Content="ID"/>
-												<Label Content="{Binding ID}"/>
-												<Label Content="Value"/>
-												<TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-											</StackPanel>
-										</DataTemplate>
-									</ListBox.ItemTemplate>
-								</ListBox>
-							</DockPanel>
-						</TabItem>
-					</TabControl>
-				</Grid>
-			</TabItem>
-			<TabItem Header="Item">
-				<DockPanel>
-					<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendItemCommand}"/>
-					<Button DockPanel.Dock="Top" Content="Count Max" Command="{Binding ChangeItemCountMaxCommand}"/>
-					<ListBox ItemsSource="{Binding Items}">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<StackPanel Orientation="Horizontal">
-									<Label Content="Count"/>
-									<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-									<Button Content=" ... "
-									Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceItemCommand}"
-									CommandParameter="{Binding}"/>
-									<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
-								</StackPanel>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
+					</Border>
 				</DockPanel>
 			</TabItem>
+
+			<!-- TAB 4: EQUIPMENT -->
 			<TabItem Header="Equipment">
-				<DockPanel>
-					<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendEquipmentCommand}"/>
-					<ListBox ItemsSource="{Binding Equipments}">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<StackPanel Orientation="Horizontal">
-									<Label Content="???1"/>
-									<Label Content="{Binding Equipment1}" Width="50"/>
-									<Label Content="???2"/>
-									<Label Content="{Binding Equipment2}" Width="50"/>
-									<Button Content=" ... "
-									Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceEquipmentCommand}"
-									CommandParameter="{Binding}"/>
-									<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
-								</StackPanel>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
+				<DockPanel Margin="8">
+					<!-- Top Actions Bar -->
+					<Border DockPanel.Dock="Top" Background="#FFF5F5F5" Padding="6" CornerRadius="4" Margin="0,0,0,8">
+						<DockPanel>
+							<StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+								<Button Content="➕ Add Equipment..." Command="{Binding AppendEquipmentCommand}" Padding="8,3" Margin="4,0"/>
+								<Button Content="Add All Weapons" Command="{Binding AddAllWeaponsCommand}" Padding="8,3" Margin="4,0"/>
+								<Button Content="Add All Shields" Command="{Binding AddAllShieldsCommand}" Padding="8,3" Margin="4,0"/>
+								<Button Content="Add All Accessories" Command="{Binding AddAllAccessoriesCommand}" Padding="8,3" Margin="4,0"/>
+								<Button Content="⭐ Upgrade All Equipment" Command="{Binding UpgradeAllEquipmentCommand}" ToolTip="Upgrade all equipment (weapons, shields, accessories) in inventory and equipped to maximum tier (★)" Padding="8,3" Margin="4,0" FontWeight="SemiBold"/>
+								<Button Content="❌ Delete" Command="{Binding DeleteEquipmentCommand}" Padding="8,3" Margin="4,0"/>
+							</StackPanel>
+							<StackPanel Orientation="Horizontal">
+								<Label Content="🔍 Search:" VerticalAlignment="Center"/>
+								<TextBox Text="{Binding EquipmentFilterText, UpdateSourceTrigger=PropertyChanged}" Width="160" VerticalContentAlignment="Center"/>
+							</StackPanel>
+						</DockPanel>
+					</Border>
+
+					<!-- Equipment List -->
+					<Border BorderBrush="#FFCCCCCC" BorderThickness="1" CornerRadius="4">
+						<ListBox ItemsSource="{Binding FilteredEquipments}" SelectedItem="{Binding SelectedEquipment, Mode=TwoWay}">
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<Grid Margin="4,2">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="65"/>
+											<ColumnDefinition Width="220"/>
+											<ColumnDefinition Width="110"/>
+											<ColumnDefinition Width="Auto"/>
+											<ColumnDefinition Width="160"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<TextBlock Text="{Binding ID, StringFormat='ID: {0:D3}'}" Foreground="#FF666666" FontSize="11" VerticalAlignment="Center"/>
+										<TextBlock Grid.Column="1" Text="{Binding Name}" FontWeight="Medium" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+										<Border Grid.Column="2" Background="#FFEBF5FB" CornerRadius="3" Padding="4,1" HorizontalAlignment="Left" VerticalAlignment="Center">
+											<TextBlock Text="{Binding CategoryName}" FontSize="10" Foreground="#FF2980B9"/>
+										</Border>
+										<CheckBox Grid.Column="3" IsChecked="{Binding Upgraded}" Content="Upgraded" VerticalAlignment="Center" Margin="6,0,12,0"/>
+										<TextBlock Grid.Column="4" Text="{Binding EquippedCharacterName}" FontSize="11" Foreground="#FF444444" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+										<StackPanel Grid.Column="5" Orientation="Horizontal" Margin="6,0,0,0">
+											<Button Content="Unequip" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.UnequipItemCommand}" CommandParameter="{Binding}" Padding="6,1" Margin="2,0" IsEnabled="{Binding IsEquipped}"/>
+											<Button Content="Change..." Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceEquipmentCommand}" CommandParameter="{Binding}" Padding="6,1" Margin="2,0"/>
+											<Button Content="Delete" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.DeleteEquipmentCommand}" CommandParameter="{Binding}" Padding="6,1" Margin="2,0"/>
+										</StackPanel>
+									</Grid>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</Border>
 				</DockPanel>
 			</TabItem>
-			<TabItem Header="Unit">
-				<ListBox ItemsSource="{Binding Units}" d:ItemsSource="{d:SampleData}">
-					<ListBox.ItemTemplate>
-						<DataTemplate>
-							<StackPanel Orientation="Horizontal">
-								<Label Content="Valid"/>
-								<CheckBox IsChecked="{Binding Valid}" VerticalAlignment="Center"/>
-								<Label Content="Count"/>
-								<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="50"/>
-							</StackPanel>
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
+
+			<!-- TAB 5: UNITS -->
+			<TabItem Header="Units (Formations)">
+				<DockPanel Margin="10">
+					<!-- Top Action -->
+					<Border DockPanel.Dock="Top" Background="#FFF5F5F5" Padding="8" CornerRadius="4" Margin="0,0,0,10">
+						<DockPanel>
+							<Button Content="⚔️ Unlock All 10 Units &amp; Maximize Capacity (5 Members Each)" Command="{Binding UnlockAllUnitsCommand}" Padding="12,5" FontWeight="SemiBold" DockPanel.Dock="Left"/>
+							<TextBlock Text="Configure unit unlocks and active member capacity for each combat unit." Foreground="#FF666666" VerticalAlignment="Center" Margin="15,0,0,0"/>
+						</DockPanel>
+					</Border>
+
+					<!-- Unit List -->
+					<Border BorderBrush="#FFCCCCCC" BorderThickness="1" CornerRadius="4">
+						<ListBox ItemsSource="{Binding Units}">
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<Grid Margin="8,6">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="100"/>
+											<ColumnDefinition Width="130"/>
+											<ColumnDefinition Width="Auto"/>
+											<ColumnDefinition Width="80"/>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="13" VerticalAlignment="Center"/>
+										<CheckBox Grid.Column="1" IsChecked="{Binding Valid}" Content="Unlocked / Valid" VerticalAlignment="Center"/>
+										<Label Grid.Column="2" Content="Member Capacity (1-5):" VerticalAlignment="Center"/>
+										<TextBox Grid.Column="3" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="50" TextAlignment="Center"/>
+										<TextBlock Grid.Column="4" Text="{Binding DisplayText}" Foreground="#FF777777" VerticalAlignment="Center" Margin="15,0,0,0"/>
+									</Grid>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</Border>
+				</DockPanel>
 			</TabItem>
 		</TabControl>
 	</DockPanel>

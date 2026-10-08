@@ -1,46 +1,68 @@
-﻿namespace UnicornOverlord
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+
+namespace UnicornOverlord
 {
 	internal class NameValueInfo : IComparable
 	{
 		public uint Value { get; private set; }
-		private List<String> mNames = new List<String>();
-		
-		public String Name
+		private readonly List<string> mNames = new List<string>();
+		public string Category { get; set; } = string.Empty;
+
+		public string Name
 		{
 			get
 			{
+				if (mNames.Count == 0) return Value.ToString();
+
 				var index = Properties.Settings.Default.Language;
 				if (index >= mNames.Count) index = 0;
 
 				var value = mNames[index];
-				if(String.IsNullOrEmpty(value))
+				if (string.IsNullOrEmpty(value))
 				{
 					value = mNames[0];
 				}
-				return value;
+				return string.IsNullOrEmpty(value) ? Value.ToString() : value;
 			}
 		}
 
-		public int CompareTo(Object? obj)
-		{
-			var dist = obj as NameValueInfo;
-			if (dist == null) return 0;
+		public string DisplayNameWithId => $"[{Value:D3}] {Name}";
 
-			if (Value < dist.Value) return -1;
-			else if (Value > dist.Value) return 1;
-			else return 0;
+		public int CompareTo(object? obj)
+		{
+			if (obj is not NameValueInfo dist) return 0;
+			return Value.CompareTo(dist.Value);
 		}
 
-		public virtual bool Line(String[] oneLine)
+		public virtual bool Line(string[] oneLine)
 		{
-			if (oneLine[0].Length > 1 && oneLine[0][1] == 'x') Value = Convert.ToUInt32(oneLine[0], 16);
-			else Value = Convert.ToUInt32(oneLine[0]);
+			if (oneLine.Length == 0) return false;
 
+			string idStr = oneLine[0].Trim();
+			if (string.IsNullOrEmpty(idStr)) return false;
+
+			try
+			{
+				if (idStr.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+					Value = Convert.ToUInt32(idStr, 16);
+				else
+					Value = Convert.ToUInt32(idStr, 10);
+			}
+			catch
+			{
+				return false;
+			}
+
+			mNames.Clear();
 			for (int index = 1; index < oneLine.Length; index++)
 			{
-				mNames.Add(oneLine[index]);
+				mNames.Add(oneLine[index].Trim());
 			}
 			return true;
 		}
+
+		public override string ToString() => Name;
 	}
 }

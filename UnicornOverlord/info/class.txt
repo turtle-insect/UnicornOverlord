@@ -1,0 +1,76 @@
+# File Format is TSV(Tab Separated Value)			
+# If you want to add more languages, add elements separated by tabs.			
+# ID	Name(en)	Name(jp)	Name(cn)
+1	Lord		领主
+2	High Lord		君主
+3	Fighter		战士
+4	Vanguard		前锋
+5	Soldier		士兵
+6	Sergeant		兵士
+7	Housecarl		侍卫
+8	Viking		维京
+9	Sword Fighter		剑士
+10	Swordmaster		剑豪
+11	Sellsword		佣兵
+12	Landsknecht		国王佣仆
+13	Hoplite		重装步兵
+14	Legionnaire		军团士兵
+15	Gladiator		角斗士
+16	Berserker		狂战士
+17	Warrior		勇士
+18	Breaker		破坏者
+19	Hunter		猎人
+20	Sniper		狙击手
+21	Arbalist		弩手
+22	Shield Shooter		盾射手
+23	Thief		盗贼
+24	Rogue		流氓
+25	Knight		骑士
+26	Great Knight		重骑士
+27	Radiant Knight		白骑士
+28	Sainted Knight		圣骑士
+29	Dark Knight		黑暗骑士
+30	Doom Knight		厄运骑士
+31	Cleric		牧师
+32	Bishop		主教
+33	Wizard		巫师
+34	Warlock		术士
+35	Witch		女巫
+36	Sorceress		魔女
+37	Shaman		萨满
+38	Druid		德鲁伊
+39	Wyvern Knight		飞龙骑士
+40	Wyvern Master		飞龙大师
+41	Gryphon Knight		狮鹫骑士
+42	Gryphon Master		狮鹫大师
+43	Elven Fencer		精灵剑士
+44	Elven Archer		精灵弓手
+45	Werewolf		狼人
+46	Werefox		狐妖
+47	Werebear		熊人
+48	Wereowl		枭人
+49	Feathersword		羽剑士
+50	Featherbow		羽弓手
+51	Featherstaff		羽杖师
+52	Feathershield		羽盾卫士
+53	Priestess		女祭司
+54	High Priestess		高级女祭
+55	Crusader		圣战士
+56	Valkyria		女武神
+57	Elven Sibyl		精灵女祭
+58	Elven Augur		精灵占卜
+59	Snow Ranger		雪地游侠
+60	Werelion		狮族战士
+61	Paladin		圣骑士
+62	Prince		王子
+63	Dreadnought		战舰
+64	Possessed Dreadnought		附魔战舰
+65	Necromancer		死灵法师
+66	Necromancer		死灵法师
+67	Dark Lord		黑暗领主
+68	Overlord		霸主
+69	Dark Marquess		黑暗侯爵
+70	Dark Marquess		黑暗侯爵
+71	Dark Marquess		黑暗侯爵
+72	Dark Marquess		黑暗侯爵
+73	Dark Marquess		黑暗侯爵

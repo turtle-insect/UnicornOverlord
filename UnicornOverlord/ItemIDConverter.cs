@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+using System;
+using System.Globalization;
 using System.Windows.Data;
 
 namespace UnicornOverlord
@@ -7,10 +8,13 @@ namespace UnicornOverlord
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			uint id = (uint)value;
-			var item = Info.Instance().Search(Info.Instance().Item, id);
-			if (item == null) return id.ToString();
-			return item.Name;
+			if (value == null) return string.Empty;
+			uint id;
+			if (value is uint u) id = u;
+			else if (uint.TryParse(value.ToString(), out uint parsed)) id = parsed;
+			else return value.ToString() ?? string.Empty;
+
+			return Info.Instance().GetItemName(id);
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

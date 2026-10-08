@@ -1,0 +1,703 @@
+# File Format is TSV(Tab Separated Value)			
+# If you want to add more languages, add elements separated by tabs.			
+# ID	Name(en)	Name(jp)	Name(cn)
+1	Player Start		
+2	Alain		
+3	Gerard		
+4	Scarlett		
+5	Lex		
+6	Chloe		
+7	Josef		
+8	Josef		
+9	Zenoiran Solder		
+10	Zenoiran Solder		
+11	Zenoiran Solder		
+12	Hodrick		
+13	Clive		
+14	Clive		
+15	Travis		
+16	Aubin		
+17	Travis		
+18	Mercenary		
+19	Beregaria		
+20	Bruno		
+21	Ochlys		
+22	Heavensing Knight		
+23	Sharon		
+24	Black Talon Bandit		
+25	Black Talon Bandit		
+26	Black Talon Bandit		
+27	Mordon		
+28	Iron Helm Mercenary		
+29	Yahna		
+30	Ostara		
+31	Mia		
+32	Adel		
+33	Adel		
+34	Aide		
+35	Gastons'soldier		
+36	Kitra		
+37	Miriam		
+38	Fran		
+39	Renault's Soldier		
+40	Zenoiran Solder		
+41	Berenice		
+42	Berenice		
+43	Nina		
+44	Mille		
+45	Bryce		
+46	Bryce		
+47	Sven		
+48	Kurt		
+49	Rock Rat Grunt		
+50	Rock Rat Grunt		
+51	Rock Rat Grunt		
+52	Rolf		
+53	Lionel		
+54	Andre		
+55	Knight		
+56	Town Watchman		
+57	Town Watchman		
+58	Black Talon Bandit		
+59	Black Talon Bandit		
+60	Mellisandre		
+61	Colm		
+62	Mellisandre's Soldier		
+63	Monica		
+64	Monica's Soldier		
+65	Mattias		
+66	Hans		
+67	Laike		
+68	Outlaw		
+69	Outlaw		
+70	Outlaw		
+71	Cleric		
+72	Tatiana		
+73	Auch		
+74	Auch's Soldier		
+75	Selvie		
+76	Virginia		
+77	Leah		
+78	Primm		
+79	Aramis		
+80	Selvie		
+81	Virginia		
+82	Magellan		
+83	Jeremy		
+84	Hilda		
+85	Gilbert		
+86	Gilbert		
+87	Amelia		
+88	Hermann		
+89	Hermann		
+90	Hermann		
+91	Elma		
+92	Elma		
+93	Elma		
+94	Lothar		
+95	Lothar		
+96	Lothar		
+97	Clara		
+98	Leonie		
+99	Fabian		
+100	Beregaria		
+101	Drakenhold Soldier		
+102	Zenoiran Solder		
+103	Knight Of The Rose		
+104	Knight Of The Rose		
+105	Knight Of The Rose		
+106	Giethe's Solder		
+107	Giethe's Solder		
+108	Gloucester		
+109	Liza		
+110	Sand Scopion Grunt		
+111	Sand Scopion Grunt		
+112	Sand Scopion Grunt		
+113	Zenoiran Solder		
+114	Aide		
+115	Rosalinde		
+116	Lhinalagos		
+117	Favio		
+118	Elheim Soldier		
+119	Elheim Soldier		
+120	Elheim Soldier		
+121	Ithillion		
+122	Gilthniel		
+123	Kalandir		
+124	Keledin		
+125	Elheim Soldier		
+126	Elheim Soldier		
+127	Zenoiran Solder		
+128	Zenoiran Solder		
+129	Celeste		
+130	Gammel		
+131	Mandrin		
+132	Black Talon Bandit		
+133	Eltolinde		
+134	Alcina		
+135	Alcina		
+136	Yahna		
+137	Yahna		
+138	Zenoiran Solder		
+139	Elheim Solder		
+140	Zenoiran Solder		
+141	Zenoiran Solder		
+142	Galadmir		
+143	Railanor		
+144	Ridiel		
+145	Yunifi		
+146	Morad		
+147	Wolf Bestial		
+148	Dinah		
+149	Rui		
+150	Snowpetal Soldier		
+151	Snowpetal Soldier		
+152	Zenoiran Solder		
+153	Ramona		
+154	Zenoiran Solder		
+155	Lion Bestial		
+156	Govil		
+157	Bertrand		
+158	Zenoiran Solder		
+159	Mercenary		
+160	Mercenary		
+161	Zenoiran Solder		
+162	Zenoiran Solder		
+163	Raenys		
+164	Umerus		
+165	Albion Soldier		
+166	Albion Soldier		
+167	Nigel		
+168	Santio		
+169	Jerome		
+170	Lotti		
+171	Fodoquia		
+172	Renault		
+173	Laurent		
+174	Maurice		
+175	Nikola		
+176	Ilenia		
+177	Hodrick		
+178	Renault		
+179	Gailey		
+180	Alcina		
+181	Zenoiran Solder		
+182	Zenoiran Solder		
+183	Zenoiran Solder		
+184	Bastoias Soldier		
+185	Bastoias Soldier		
+186	Bastoias Soldier		
+187	Bastoias Soldier		
+188	Petro		
+189	Paulo		
+190	Helen		
+191	Beumont		
+192	Ilenia		
+193	Gailey		
+194	Alcina		
+195	Eigor		
+196	Mille		
+197	Hodel		
+198	Alain		
+199	Cornia Soldier		
+200	Cornia Soldier		
+201	Cornia Soldier		
+202	Cornia Soldier		
+203	Cornia Soldier		
+204	Cornia Soldier		
+205	Cornia Soldier		
+206	Cornia Soldier		
+207	Cornia Soldier		
+208	Cornia Soldier		
+209	Cornia Soldier		
+210	Cornia Soldier		
+211	Cornia Soldier		
+212	Cornia Soldier		
+213	Cornia Soldier		
+214	Cornia Soldier		
+215	Cornia Soldier		
+216	Cornia Soldier		
+217	Cornia Soldier		
+218	Cornia Soldier		
+219	Cornia Soldier		
+220	Cornia Soldier		
+221	Cornia Soldier		
+222	Cornia Soldier		
+223	Cornia Soldier		
+224	Cornia Soldier		
+225	Cornia Soldier		
+226	Cornia Soldier		
+227	Cornia Soldier		
+228	Cornia Soldier		
+229	Cornia Soldier		
+230	Outlaw		
+231	Outlaw		
+232	Drakenhold Soldier		
+233	Drakenhold Soldier		
+234	Drakenhold Soldier		
+235	Drakenhold Soldier		
+236	Drakenhold Soldier		
+237	Drakenhold Soldier		
+238	Drakenhold Soldier		
+239	Drakenhold Soldier		
+240	Drakenhold Soldier		
+241	Drakenhold Soldier		
+242	Drakenhold Soldier		
+243	Drakenhold Soldier		
+244	Drakenhold Soldier		
+245	Drakenhold Soldier		
+246	Drakenhold Soldier		
+247	Drakenhold Soldier		
+248	Drakenhold Soldier		
+249	Drakenhold Soldier		
+250	Drakenhold Soldier		
+251	Drakenhold Soldier		
+252	Drakenhold Soldier		
+253	Drakenhold Soldier		
+254	Drakenhold Soldier		
+255	Elheim Solder		
+256	Elheim Solder		
+257	Elheim Solder		
+258	Elheim Solder		
+259	Elheim Solder		
+260	Elheim Solder		
+261	Elheim Solder		
+262	Elheim Solder		
+263	Elheim Solder		
+264	Elheim Solder		
+265	Elheim Solder		
+266	Elheim Solder		
+267	Elheim Solder		
+268	Elheim Solder		
+269	Elheim Solder		
+270	Elheim Solder		
+271	Elheim Solder		
+272	Elheim Solder		
+273	Elheim Solder		
+274	Elheim Solder		
+275	Elheim Solder		
+276	Elheim Solder		
+277	Elheim Solder		
+278	Elheim Solder		
+279	Elheim Solder		
+280	Elheim Solder		
+281	Elheim Solder		
+282	Elheim Solder		
+283	Elheim Solder		
+284	Elheim Solder		
+285	Blank		
+286	Blank		
+287	Blank		
+288	Blank		
+289	Blank		
+290	Blank		
+291	Blank		
+292	Blank		
+293	Blank		
+294	Blank		
+295	Blank		
+296	Blank		
+297	Blank		
+298	Blank		
+299	Blank		
+300	Blank		
+301	Albion Soldier		
+302	Albion Soldier		
+303	Albion Soldier		
+304	Albion Soldier		
+305	Mercenary		
+306	Soldier		
+307	Soldier		
+308	Mercenary		
+309	Knight		
+310	Archer		
+311	Arbalist		
+312	Mercenary		
+313	Mercenary		
+314	Mercenary		
+315	Mercenary		
+316	Mercenary		
+317	Swordfighter		
+318	Swordfighter		
+319	Cleric		
+320	Witch		
+321	Sorcerer		
+322	Knight		
+323	Knight		
+324	Knight		
+325	Gryphon Knight		
+326	Wyvern Knight		
+327	Dark Elf Fencer		
+328	Dark Elf Fencer		
+329	Elven Archer		
+330	Elven Archer		
+331	Bear Bestial		
+332	Wolf Bestial		
+333	Fox Bestial		
+334	Owl Bestial		
+335	Angel		
+336	Angel		
+337	Angel		
+338	Angel		
+339	Liberation Mercenary		
+340	Liberation Soldier		
+341	Liberation Soldier		
+342	Liberation Mercenary		
+343	Liberation Mercenary		
+344	Liberation Mercenary		
+345	Liberation Knight		
+346	Liberation Archer		
+347	Liberation Arbalist		
+348	Liberation Mercenary		
+349	Liberation Mercenary		
+350	Liberation Mercenary		
+351	Liberation Mercenary		
+352	Liberation Mercenary		
+353	Liberation Mercenary		
+354	Liberation Mercenary		
+355	Liberation Swordfighter		
+356	Liberation Swordfighter		
+357	Liberation Cleric		
+358	Liberation Cleric		
+359	Liberation Witch		
+360	Liberation Sorcerer		
+361	Liberation Witch		
+362	Liberation Knight		
+363	Liberation Knight		
+364	Liberation Knight		
+365	Liberation Gryphon Knight		
+366	Liberation Wyvern Knight		
+367	Liberation Swordfighter		
+368	Liberation Swordfighter		
+369	Liberation Archer		
+370	Liberation Archer		
+371	Liberation Soldier		
+372	Liberation Soldier		
+373	Liberation Soldier		
+374	Liberation Soldier		
+375	Liberation Knight		
+376	Liberation Archer		
+377	Liberation Cleric		
+378	Liberation Knight		
+379	Liberation Knight		
+380	Liberation Knight		
+381	Zenoiran Solder		
+382	Zenoiran Solder		
+383	Zenoiran Solder		
+384	Zenoiran Solder		
+385	Zenoiran Solder		
+386	Zenoiran Solder		
+387	Zenoiran Solder		
+388	Zenoiran Solder		
+389	Zenoiran Solder		
+390	Zenoiran Solder		
+391	Zenoiran Solder		
+392	Zenoiran Solder		
+393	Zenoiran Solder		
+394	Zenoiran Solder		
+395	Zenoiran Solder		
+396	Zenoiran Solder		
+397	Zenoiran Solder		
+398	Zenoiran Solder		
+399	Zenoiran Solder		
+400	Zenoiran Solder		
+401	Zenoiran Solder		
+402	Zenoiran Solder		
+403	Zenoiran Solder		
+404	Zenoiran Solder		
+405	Zenoiran Solder		
+406	Zenoiran Solder		
+407	Zenoiran Solder		
+408	Zenoiran Solder		
+409	Zenoiran Solder		
+410	Zenoiran Solder		
+411	Zenoiran Solder		
+412	Zenoiran Solder		
+413	Zenoiran Solder		
+414	Zenoiran Solder		
+415	Zenoiran Solder		
+416	Zenoiran Solder		
+417	Zenoiran Solder		
+418	Zenoiran Solder		
+419	Zenoiran Solder		
+420	Zenoiran Solder		
+421	Zenoiran Solder		
+422	Zenoiran Solder		
+423	Zenoiran Solder		
+424	Zenoiran Solder		
+425	Zenoiran Solder		
+426	Zenoiran Solder		
+427	Zenoiran Solder		
+428	Zenoiran Solder		
+429	Zenoiran Solder		
+430	Zenoiran Solder		
+431	Zenoiran Solder		
+432	Zenoiran Solder		
+433	Zenoiran Solder		
+434	Zenoiran Solder		
+435	Zenoiran Solder		
+436	Zenoiran Solder		
+437	Zenoiran Solder		
+438	Zenoiran Solder		
+439	Zenoiran Solder		
+440	Zenoiran Solder		
+441	Zenoiran Solder		
+442	Zenoiran Solder		
+443	Zenoiran Solder		
+444	Zenoiran Solder		
+445	Zenoiran Solder		
+446	Mercenary		
+447	Mercenary		
+448	Mercenary		
+449	Mercenary		
+450	Mercenary		
+451	Mercenary		
+452	Mercenary		
+453	Mercenary		
+454	Mercenary		
+455	Mercenary		
+456	Mercenary		
+457	Mercenary		
+458	Mercenary		
+459	Mercenary		
+460	Mercenary		
+461	Mercenary		
+462	Mercenary		
+463	Mercenary		
+464	Mercenary		
+465	Mercenary		
+466	Mercenary		
+467	Mercenary		
+468	Mercenary		
+469	Mercenary		
+470	Mercenary		
+471	Mercenary		
+472	Mercenary		
+473	Mercenary		
+474	Mercenary		
+475	Mercenary		
+476	Mercenary		
+477	Mercenary		
+478	Mercenary		
+479	Mercenary		
+480	Mercenary		
+481	Mercenary		
+482	Mercenary		
+483	Mercenary		
+484	Mercenary		
+485	Mercenary		
+486	Mercenary		
+487	Mercenary		
+488	Mercenary		
+489	Mercenary		
+490	Mercenary		
+491	Mercenary		
+492	Mercenary		
+493	Mercenary		
+494	Mercenary		
+495	Mercenary		
+496	Mercenary		
+497	Mercenary		
+498	Mercenary		
+499	Mercenary		
+500	Debug Use Hot-Blooded 2		
+501	Liberation Mercenary		
+502	Liberation Mercenary		
+503	Liberation Mercenary		
+504	Liberation Mercenary		
+505	Liberation Swordfighter		
+506	Liberation Swordfighter		
+507	Liberation Cleric		
+508	Liberation Cleric		
+509	Liberation Witch		
+510	Liberation Sorcerer		
+511	Liberation Witch		
+512	Liberation Knight		
+513	Liberation Knight		
+514	Liberation Knight		
+515	Liberation Gryphon Knight		
+516	Liberation Wyvern Knight		
+517	Liberation Swordfighter		
+518	Liberation Swordfighter		
+519	Liberation Archer		
+520	Liberation Archer		
+521	Liberation Soldier		
+522	Liberation Soldier		
+523	Liberation Soldier		
+524	Liberation Soldier		
+525	Liberation Knight		
+526	Liberation Archer		
+527	Liberation Cleric		
+528	Liberation Knight		
+529	Liberation Knight		
+530	Liberation Knight		
+531	Zenoiran Solder		
+532	Zenoiran Solder		
+533	Zenoiran Solder		
+534	Zenoiran Solder		
+535	Zenoiran Solder		
+536	Zenoiran Solder		
+537	Zenoiran Solder		
+538	Zenoiran Solder		
+539	Zenoiran Solder		
+540	Zenoiran Solder		
+541	Zenoiran Solder		
+542	Zenoiran Solder		
+543	Zenoiran Solder		
+544	Zenoiran Solder		
+545	Zenoiran Solder		
+546	Zenoiran Solder		
+547	Zenoiran Solder		
+548	Zenoiran Solder		
+549	Zenoiran Solder		
+550	Zenoiran Solder		
+551	Zenoiran Solder		
+552	Zenoiran Solder		
+553	Zenoiran Solder		
+554	Zenoiran Solder		
+555	Zenoiran Solder		
+556	Zenoiran Solder		
+557	Zenoiran Solder		
+558	Zenoiran Solder		
+559	Zenoiran Solder		
+560	Zenoiran Solder		
+561	Zenoiran Solder		
+562	Zenoiran Solder		
+563	Zenoiran Solder		
+564	Zenoiran Solder		
+565	Zenoiran Solder		
+566	Zenoiran Solder		
+567	Zenoiran Solder		
+568	Zenoiran Solder		
+569	Zenoiran Solder		
+570	Zenoiran Solder		
+571	Zenoiran Solder		
+572	Zenoiran Solder		
+573	Zenoiran Solder		
+574	Zenoiran Solder		
+575	Zenoiran Solder		
+576	Zenoiran Solder		
+577	Zenoiran Solder		
+578	Zenoiran Solder		
+579	Zenoiran Solder		
+580	Zenoiran Solder		
+581	Zenoiran Solder		
+582	Zenoiran Solder		
+583	Zenoiran Solder		
+584	Zenoiran Solder		
+585	Zenoiran Solder		
+586	Zenoiran Solder		
+587	Zenoiran Solder		
+588	Zenoiran Solder		
+589	Zenoiran Solder		
+590	Zenoiran Solder		
+591	Zenoiran Solder		
+592	Zenoiran Solder		
+593	Zenoiran Solder		
+594	Zenoiran Solder		
+595	Zenoiran Solder		
+596	Zenoiran Solder		
+597	Zenoiran Solder		
+598	Zenoiran Solder		
+599	Zenoiran Solder		
+600	Zenoiran Solder		
+601	Blank		
+602	Blank		
+603	Blank		
+604	Blank		
+605	Blank		
+606	Blank		
+607	Blank		
+608	Blank		
+609	Blank		
+610	Blank		
+611	Blank		
+612	Blank		
+613	Blank		
+614	Blank		
+615	Blank		
+616	Blank		
+617	Blank		
+618	Blank		
+619	Blank		
+620	Blank		
+621	Blank		
+622	Blank		
+623	Blank		
+624	Blank		
+625	Blank		
+626	Jude		
+627	Mardie		
+628	Edvald		
+629	Collinson		
+630	Marvwell		
+631	Balamor		
+632	Legor		
+633	Lumone		
+634	Dalvid		
+635	Culloran		
+636	Adon		
+637	Elmont		
+638	Flotina		
+639	Edemont		
+640	Albert		
+641	Bernolt		
+642	Adelina		
+643	Ava		
+644	Bernadette		
+645	Randall		
+646	Valestian		
+647	Andaria		
+648	Medeleine		
+649	Lagorith		
+650	Ogritte		
+651	Manon		
+652	Lydia		
+653	Auran		
+654	Ginessa		
+655	Alexia		
+656	Erick		
+657	Trianna		
+658	Innes		
+659	Clenna		
+660	Flick		
+661	Bresolle		
+662	Flotina		
+663	Damian		
+664	Barthelemi		
+665	Mathilde		
+666	Mordon		
+667	Jeremy		
+668	Darver		
+669	Inhannes		
+670	Railanor		
+671	Jerome		
+672	Lotti		
+673	Fodoquia		
+674	Bryce		
+675	Valmore		
+676	Hordrick		
+677	Aubin		
+678	Bruno		
+679	Beumont		
+680	Batiste		
+681	Gaston		
+682	Ravel		
+683	Lazare		
+684	Lock		
+685	Louison		
+686	Corneille		
+687	Cyryil		
+688	Casimir		
+689	Corentin		
+690	Renault		
+691	Galerius		
+692	Mandrin		
+693	Berenice		
+694	Nina		
+695	Bryce		
+696	Sven		
+697	Kurt		
+698	Gammel		
+699	Blank		
+700	Mellisandre		
